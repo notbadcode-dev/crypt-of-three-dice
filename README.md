@@ -14,7 +14,7 @@
   <img src="https://img.shields.io/badge/HTML-5-e34f26?logo=html5&logoColor=e34f26" alt="HTML5" />
   <img src="https://img.shields.io/badge/CSS-3-1572b6?logo=css3&logoColor=1572b6" alt="CSS3" />
   <img src="https://img.shields.io/badge/JavaScript-ESM-f7df1e?logo=javascript&logoColor=f7df1e" alt="JavaScript" />
-  <img src="https://img.shields.io/badge/Playwright-1.62-2ead33?logo=playwright&logoColor=2ead33" alt="Playwright" />
+  <img src="https://img.shields.io/badge/Playwright-1.62-2ead33?logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0iIzJFQUQzMyIgZD0iTTMuMiA1LjZjMi42IDEuMSA1IDEuMSA3LjYgMCAxLjIgMy44LjQgOC40LTIgMTAuNC0xLjggMS41LTQuMiAxLjItNS41LS41LTEuOC0yLjQtMS40LTYuNi0uMS05LjlaIi8%2BPHBhdGggZmlsbD0iI0Q2NTM0OCIgZD0iTTEzLjIgNS42YzIuNiAxLjEgNSAxLjEgNy42IDAgMS4yIDMuOC40IDguNC0yIDEwLjQtMS44IDEuNS00LjIgMS4yLTUuNS0uNS0xLjgtMi40LTEuNC02LjYtLjEtOS45WiIvPjxjaXJjbGUgY3g9IjYuMSIgY3k9IjEwLjgiIHI9IjEiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSI4LjgiIGN5PSIxMC44IiByPSIxIiBmaWxsPSIjZmZmIi8%2BPGNpcmNsZSBjeD0iMTYuMSIgY3k9IjEwLjgiIHI9IjEiIGZpbGw9IiNmZmYiLz48Y2lyY2xlIGN4PSIxOC44IiBjeT0iMTAuOCIgcj0iMSIgZmlsbD0iI2ZmZiIvPjxwYXRoIGQ9Ik01LjYgMTMuOWMxLjIuOCAyLjUuOCAzLjggME0xNS42IDEzLjljMS4yLjggMi41LjggMy44IDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLXdpZHRoPSIxLjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjwvc3ZnPg%3D%3D&logoWidth=18" alt="Playwright" />
 </p>
 
 ---
