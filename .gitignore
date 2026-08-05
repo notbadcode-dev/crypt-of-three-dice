@@ -1,0 +1,8 @@
+.DS_Store
+.playwright-cli/
+node_modules/
+output/
+playwright-report/
+test-results/
+tests/e2e/results/
+tests/unit/results/

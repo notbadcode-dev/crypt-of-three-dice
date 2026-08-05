@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1b251f">
+<title>Umbral de los Tres Dados</title>
+<link rel="icon" type="image/svg+xml" href="assets/icons/crypt-icon.svg">
+<link rel="stylesheet" href="styles/app.css">
+</head>
+<body>
+<div class="page">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true"></div>
+      <div>
+        <h1>Umbral de los Tres Dados</h1>
+        <p>Asigna dados, limpia la cripta y sobrevive a 12 niveles.</p>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button class="icon-btn" id="helpBtn" title="Instrucciones" aria-label="Abrir instrucciones">?</button>
+      <button class="icon-btn kid-toggle" id="kidModeBtn" title="Modo niño" aria-label="Activar modo niño" aria-pressed="false">Niño OFF</button>
+      <button class="icon-btn" id="soundBtn" title="Sonido" aria-label="Activar o desactivar sonido" aria-pressed="true">🔊</button>
+      <button class="icon-btn" id="saveBtn" title="Guardar" aria-label="Guardar partida">💾</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel main-panel">
+      <div class="card-shell">
+        <div class="game-card-wrap">
+          <div class="game-card" id="gameCard">
+            <div class="card-frame" aria-hidden="true"></div>
+            <div class="top-stat-row">
+              <div class="top-slot stat-slot-hp">
+                <div class="slot-inner">
+                  <img class="slot-icon" src="assets/images/icon-speed.png" alt="">
+                  <div class="slot-value ui-number" id="topSpeed">1</div>
+                  <div class="slot-label">MOV</div>
+                </div>
+              </div>
+              <div class="top-slot stat-slot-mov">
+                <div class="slot-inner">
+                  <img class="slot-icon" src="assets/images/icon-defense.png" alt="">
+                  <div class="slot-value ui-number" id="topDefense">1</div>
+                  <div class="slot-label">Def</div>
+                </div>
+              </div>
+              <div class="top-slot stat-slot-atk">
+                <div class="slot-inner">
+                  <img class="slot-icon" src="assets/images/icon-attack.png" alt="">
+                  <div class="slot-value ui-number" id="topAttack">1</div>
+                  <div class="slot-label">ATQ</div>
+                </div>
+              </div>
+              <div class="top-slot stat-slot-def">
+                <div class="slot-inner">
+                  <img class="slot-icon" src="assets/images/icon-range.png" alt="">
+                  <div class="slot-value ui-number" id="topRange">2</div>
+                  <div class="slot-label">ALC</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="board-frame">
+              <div class="board-grid overlay-grid" id="board"></div>
+            </div>
+
+            <div class="combat-dashboard" aria-label="Estado de combate">
+              <section class="hud-panel enemy-card enemy-panel" aria-label="Enemigo actual">
+                <h2 class="hud-panel-title" id="enemyPanelName">Arañas de ceniza</h2>
+                <div class="enemy-portrait-frame">
+                  <img class="enemy-portrait" src="assets/images/enemy-portrait.png" alt="Criatura enemiga">
+                </div>
+                <div class="enemy-panel-stats" aria-label="Atributos enemigos">
+                  <span class="panel-stat panel-stat-hp" aria-label="Vida enemiga">
+                    <img src="assets/images/icon-hp.png" alt="">
+                    <span class="panel-stat-value ui-number" id="enemyHpMeta">2</span>
+                    <span class="panel-stat-label">Vida</span>
+                  </span>
+                  <span class="panel-stat panel-stat-atk" aria-label="Ataque enemigo">
+                    <img src="assets/images/icon-attack.png" alt="">
+                    <span class="panel-stat-value ui-number" id="enemyAtkMeta">1</span>
+                    <span class="panel-stat-label">ATQ</span>
+                  </span>
+                  <span class="hidden" id="enemyDefMeta">1</span>
+                  <span class="hidden" id="enemyRngMeta">2</span>
+                </div>
+              </section>
+
+              <section class="hud-panel hero-panel" aria-label="Estado del héroe">
+                <h2 class="hud-panel-title">Héroe</h2>
+                <div class="hero-panel-body">
+                  <img class="hero-panel-portrait" id="heroHudPortrait" src="assets/images/hero-portrait.png" alt="Guardián">
+                  <div class="hero-health-block">
+                    <div class="slot-value ui-number" id="hpHud"><span class="current-value">6</span><span class="max-value">/6</span></div>
+                    <div class="hero-health-label">Vida</div>
+                  </div>
+                </div>
+              </section>
+
+              <section class="hud-panel turn-panel" aria-label="Recursos del turno">
+                <h2 class="hud-panel-title">Turno</h2>
+                <div class="turn-resource-grid">
+                  <div class="bottom-slot action-meter action-meter-move" aria-label="Movimiento disponible">
+                    <img class="action-meter-icon" src="assets/images/icon-speed.png" alt="">
+                    <div class="action-meter-value ui-number" id="movePoints">0</div>
+                    <div class="action-meter-label">Mov</div>
+                  </div>
+                  <div class="bottom-slot action-meter action-meter-attack" aria-label="Ataque disponible">
+                    <img class="action-meter-icon" src="assets/images/icon-attack.png" alt="">
+                    <div class="action-meter-value ui-number" id="attackPoints">0</div>
+                    <div class="action-meter-label">ATQ</div>
+                  </div>
+                  <div class="bottom-slot action-meter action-meter-defense" aria-label="Defensa disponible">
+                    <img class="action-meter-icon" src="assets/images/icon-defense.png" alt="">
+                    <div class="action-meter-value ui-number" id="defensePoints">0</div>
+                    <div class="action-meter-label">Def</div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+
+        <div class="board-side-info">
+          <div class="block">
+            <div class="phase-box"><span id="turnLabel">Turno 1</span><strong id="phaseLabel"><span class="phase-main">Preparación</span><span class="phase-separator">·</span><span class="phase-action">Lanzar dados</span></strong></div>
+            <div class="turn-flow" aria-label="Progreso del turno">
+              <div class="turn-step" data-flow-step="energy"><span>Lanzar</span></div>
+              <div class="turn-step" data-flow-step="assign"><span>Asignar</span></div>
+              <div class="turn-step" data-flow-step="adventure"><span>Actuar</span></div>
+              <div class="turn-step" data-flow-step="finish"><span>Terminar</span></div>
+            </div>
+            <div class="phase-hint" id="phaseHint">Lanza los dados para preparar el turno.</div>
+            <div class="run-summary">
+              <div><span>Nivel</span><b class="ui-number" id="levelHud">1 / 12</b></div>
+              <div><span>Clase</span><b id="classHud">—</b></div>
+              <div class="objective-row"><span>Objetivo</span><b id="objectiveHud">Derrota a 0 enemigos</b></div>
+              <small id="enemyTypeHud">—</small>
+              <span class="hidden" id="turnHud">1</span>
+              <span class="hidden" id="enemyCountHud">0</span>
+            </div>
+          </div>
+
+          <div class="block">
+            <h3>Dados de energía</h3>
+            <div class="dice-pool" id="dicePool"></div>
+            <div class="skills">
+              <div class="skill-group-title">Atributos con dado</div>
+              <div class="skill">
+                <div class="skill-name">Movimiento</div>
+                <div class="skill-base ui-number" id="speedBase">1</div>
+                <div class="slot" data-slot="speed">Suelta dado</div>
+                <div class="skill-total"><small>Total</small><b class="ui-number" id="speedTotalSide">1</b></div>
+              </div>
+              <div class="skill">
+                <div class="skill-name">Ataque</div>
+                <div class="skill-base ui-number" id="attackBase">1</div>
+                <div class="slot" data-slot="attack">Suelta dado</div>
+                <div class="skill-total"><small>Total</small><b class="ui-number" id="attackTotalSide">1</b></div>
+              </div>
+              <div class="skill">
+                <div class="skill-name">Defensa</div>
+                <div class="skill-base ui-number" id="defenseBase">1</div>
+                <div class="slot" data-slot="defense">Suelta dado</div>
+                <div class="skill-total"><small>Total</small><b class="ui-number" id="defenseTotalSide">1</b></div>
+              </div>
+              <div class="skill-group-title fixed-title">Atributo fijo</div>
+              <div class="skill skill-fixed">
+                <div class="skill-name">Alcance</div>
+                <div class="skill-base ui-number" id="rangeBase">2</div>
+                <div class="slot fixed" id="rangeSlot" data-slot="range">No consume dado</div>
+                <div class="skill-total"><small>Fijo</small><b class="ui-number" id="rangeTotalSide">2</b></div>
+              </div>
+            </div>
+            <div class="resources">
+              <div class="resource"><small>MOV</small><b class="ui-number" id="movePointsSide">0</b></div>
+              <div class="resource"><small>ATQ</small><b class="ui-number" id="attackPointsSide">0</b></div>
+              <div class="resource"><small>DEF</small><b class="ui-number" id="defensePointsSide">0</b></div>
+            </div>
+            <div class="mini-actions">
+              <button class="btn blue" id="powerBtn" disabled aria-label="Usar talento de clase">Talento</button>
+            </div>
+            <small class="action-note" id="powerHint">Asigna primero los dados.</small>
+          </div>
+
+          <div class="logbar">
+            <div class="log" id="log" aria-live="polite">Selecciona una clase para comenzar.</div>
+            <button class="btn secondary" id="secondaryAction" disabled aria-label="Acción secundaria">Nueva partida</button>
+            <button class="btn primary" id="phaseBtn" disabled aria-label="Botón principal de fase">Comenzar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="sidebar">
+      <section class="panel block">
+        <h3>Controles</h3>
+        <div class="legend-grid">
+          <div class="legend-item">MOV<small>Casilla alcanzable.</small></div>
+          <div class="legend-item">ATQ<small>Enemigo en alcance.</small></div>
+          <div class="legend-item">DADO<small>Arrastra a una ranura.</small></div>
+          <div class="legend-item">FASE<small>Usa el botón principal.</small></div>
+        </div>
+      </section>
+
+      <section class="panel block">
+        <h3>Reglas rápidas</h3>
+        <div class="rules-grid">
+          <div><strong>👢 Movimiento</strong><span>Recto 2 · Diagonal 3</span></div>
+          <div><strong>⚔ Ataque</strong><span>ATQ >= DEF enemiga</span></div>
+          <div><strong>🏹 Alcance</strong><span>Requiere línea de visión</span></div>
+          <div><strong>🛡 Defensa</strong><span>Reduce daño recibido</span></div>
+        </div>
+      </section>
+    </aside>
+  </main>
+</div>
+
+<div class="scrim" id="startModal">
+  <div class="panel modal">
+    <div class="modal-grid">
+      <div class="poster">
+        <div class="poster-inner">
+          <div class="poster-copy">
+            <h3>Umbral de los Tres Dados</h3>
+            <p>Una mazmorra táctica de una sola carta. Asigna tres dados, abre camino entre criaturas y aguanta hasta el último umbral.</p>
+          </div>
+          <div class="poster-char"><img id="startPosterImage" src="assets/images/class_warden.png" alt="Guardián"></div>
+        </div>
+      </div>
+      <div class="start-column">
+        <div class="intro-block">
+          <span class="section-kicker">Preparación</span>
+          <h2 class="section-title">Elige a tu aventurero</h2>
+          <p>Cada clase altera tu margen de error. Escoge una ventaja y decide cuándo gastar tu talento de nivel.</p>
+        </div>
+
+        <div class="class-block">
+          <div>
+            <span class="section-kicker">Clases</span>
+            <p>Primero selecciona una clase. Después puedes continuar una partida guardada o empezar una nueva expedición.</p>
+          </div>
+          <div class="choice-grid" id="classGrid">
+            <button class="choice-card selected" data-class="warden">
+              <span class="choice-card-media" aria-hidden="true">
+                <img src="assets/images/class_warden.png" alt="Guardián">
+              </span>
+              <strong>Guardián</strong>
+              <span>Una vez por nivel conserva un dado asignado para el siguiente turno.</span>
+            </button>
+            <button class="choice-card" data-class="berserker">
+              <span class="choice-card-media" aria-hidden="true">
+                <img src="assets/images/class_berserker.png" alt="Berserker">
+              </span>
+              <strong>Berserker</strong>
+              <span>Con 1 de vida puede repetir una tirada completa.</span>
+            </button>
+            <button class="choice-card" data-class="scout">
+              <span class="choice-card-media" aria-hidden="true">
+                <img src="assets/images/class_explorer.png" alt="Exploradora">
+              </span>
+              <strong>Exploradora</strong>
+              <span>Una vez por nivel puede asignar un dado a Alcance.</span>
+            </button>
+            <button class="choice-card" data-class="arcanist">
+              <span class="choice-card-media" aria-hidden="true">
+                <img src="assets/images/class_arcanist.png" alt="Arcanista">
+              </span>
+              <strong>Arcanista</strong>
+              <span>Una vez por nivel puede volver a tirar los tres dados.</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="action-block">
+          <span class="section-kicker">Siguiente paso</span>
+          <p>Continúa una expedición guardada o entra de nuevo al umbral desde el primer nivel.</p>
+          <button class="icon-btn kid-toggle" id="kidModeStartBtn" title="Modo niño" aria-label="Activar modo niño" aria-pressed="false">Niño OFF</button>
+          <div class="modal-actions">
+            <button class="btn" id="continueBtn">Cargar partida</button>
+            <button class="btn primary" id="startBtn">Entrar en la cripta</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="scrim hidden" id="helpModal">
+  <div class="panel modal">
+    <div class="tutorial-page active" data-page="0">
+      <h2>1. Asigna energía</h2>
+      <p>Lanza tres dados y arrástralos o tócalos para asignarlos a Movimiento, Ataque y Defensa. El valor del dado se suma al atributo base durante el turno.</p>
+      <div class="legend-grid">
+        <div class="legend-item">Movimiento<small>Puntos para moverte.</small></div>
+        <div class="legend-item">Ataque<small>Puntos para herir enemigos.</small></div>
+        <div class="legend-item">Defensa<small>Absorbe daño del turno.</small></div>
+        <div class="legend-item">Alcance<small>Distancia máxima de ataque.</small></div>
+      </div>
+    </div>
+    <div class="tutorial-page" data-page="1">
+      <h2>2. Muévete y ataca</h2>
+      <p>Arrastra al héroe o toca las casillas verdes. Los enemigos atacables se marcan en rojo y puedes pulsar su casilla para atacar. Mientras tengas puntos puedes combinar varios movimientos y ataques.</p>
+    </div>
+    <div class="tutorial-page" data-page="2">
+      <h2>3. Resiste la fase enemiga</h2>
+      <p>Al terminar tu fase, los monstruos se recolocan y atacan. Cuando limpies un nivel, podrás curarte o mejorar un atributo permanente.</p>
+    </div>
+    <div class="modal-actions">
+      <button class="btn" id="helpPrev">Anterior</button>
+      <button class="btn primary" id="helpNext">Siguiente</button>
+      <button class="btn green hidden" id="helpClose">Cerrar</button>
+    </div>
+  </div>
+</div>
+
+<div class="scrim hidden" id="upgradeModal">
+  <div class="panel modal">
+    <h2>Nivel superado</h2>
+    <p>Elige una recompensa antes de continuar.</p>
+    <div class="choice-grid">
+      <button class="choice-card" data-upgrade="heal"><strong>Curación total</strong><span>Restaura toda la salud.</span></button>
+      <button class="choice-card" data-upgrade="speed"><strong>+1 Movimiento</strong><span>Más movilidad permanente.</span></button>
+      <button class="choice-card" data-upgrade="attack"><strong>+1 Ataque</strong><span>Más potencia ofensiva.</span></button>
+      <button class="choice-card" data-upgrade="defense"><strong>+1 Defensa</strong><span>Más protección.</span></button>
+      <button class="choice-card" data-upgrade="range"><strong>+1 Alcance</strong><span>Golpea desde más lejos.</span></button>
+    </div>
+  </div>
+</div>
+
+<div class="scrim hidden" id="saveModal">
+  <div class="panel modal">
+    <h2>Guardar partida</h2>
+    <p>Elige una de las cinco ranuras y el nombre con el que quieres guardar esta expedición.</p>
+    <label class="save-name-field" for="saveNameInput">
+      <span>Nombre de la partida</span>
+      <input id="saveNameInput" maxlength="40" placeholder="Ej. Guardián nivel 4">
+    </label>
+    <div class="choice-grid save-slot-grid" id="saveSlotPicker" aria-label="Ranuras de guardado"></div>
+    <div class="modal-actions">
+      <button class="btn" id="saveCancelBtn">Cancelar</button>
+      <button class="btn danger" id="saveDeleteBtn">Eliminar</button>
+      <button class="btn primary" id="saveConfirmBtn">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<div class="scrim hidden" id="loadModal">
+  <div class="panel modal">
+    <h2>Cargar partida</h2>
+    <p>Elige una de las partidas guardadas para retomarla.</p>
+    <div class="choice-grid save-slot-grid" id="loadSlotsList" aria-label="Ranuras de carga"></div>
+    <div class="modal-actions">
+      <button class="btn" id="loadCancelBtn">Cancelar</button>
+      <button class="btn danger" id="loadDeleteBtn">Eliminar</button>
+      <button class="btn primary" id="loadConfirmBtn">Cargar</button>
+    </div>
+  </div>
+</div>
+
+<div class="scrim hidden" id="deleteConfirmModal">
+  <div class="panel modal">
+    <h2>Eliminar partida</h2>
+    <p id="deleteConfirmText">Esta acción no se puede deshacer.</p>
+    <div class="modal-actions">
+      <button class="btn" id="deleteConfirmCancelBtn">Cancelar</button>
+      <button class="btn danger" id="deleteConfirmAcceptBtn">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<div class="scrim hidden" id="endModal">
+  <div class="panel modal">
+    <h2 id="endTitle">Fin de la expedición</h2>
+    <p id="endText"></p>
+    <div class="modal-actions">
+      <button class="btn primary" id="endRestart">Nueva partida</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" aria-live="assertive"></div>
+
+<script src="scripts/app.js"></script>
+</body>
+</html>

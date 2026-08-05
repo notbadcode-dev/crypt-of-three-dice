@@ -1,0 +1,21 @@
+{
+  "name": "umbral-de-los-tres-dados",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Infraestructura de tests Playwright para Umbral de los Tres Dados.",
+  "scripts": {
+    "build:runtime": "node scripts/build-runtime.mjs",
+    "test": "playwright test",
+    "test:e2e": "playwright test",
+    "test:unit": "mkdir -p tests/unit/results && node --test --experimental-default-type=module --test-reporter=spec --test-reporter-destination=stdout --test-reporter=tap --test-reporter-destination=tests/unit/results/results.tap tests/unit/*.test.mjs",
+    "test:install": "playwright install chromium webkit",
+    "test:chromium": "playwright test --project=chromium",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report",
+    "serve": "node tests/e2e/serve-static.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.0"
+  }
+}

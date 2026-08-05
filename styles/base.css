@@ -1,0 +1,179 @@
+/* Umbral de los Tres Dados */
+/* Tokens, reset y estructura base */
+
+
+:root {
+  --bg-wood-1:#0d1719;
+  --bg-wood-2:#122024;
+  --bg-wood-3:#091114;
+  --felt:#122325;
+  --felt-2:#1a2f31;
+  --felt-3:#081113;
+  --ink:#edf0df;
+  --muted:#a6b1a6;
+  --accent:#c9a85b;
+  --danger:#d95c54;
+  --success:#66c56c;
+  --blue:#63b8de;
+  --steel:#75838c;
+  --steel-dark:#263238;
+  --stone:#8f8a75;
+  --stone-2:#6f6b59;
+  --ui-border:#59666f;
+  --shadow:0 18px 42px rgba(0,0,0,.48);
+}
+
+* { box-sizing:border-box; }
+html,
+body {
+  margin:0;
+  min-height:100%;
+  color:var(--ink);
+  font-family: "Courier New", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background:
+    linear-gradient(rgba(3,8,10,.72), rgba(3,8,10,.72)),
+    url("../assets/images/intro-illustration.png") center top / cover no-repeat fixed,
+    linear-gradient(180deg, #071013, #152326 68%, #0b1418);
+}
+
+body.kid-mode,
+body.kid-mode button,
+body.kid-mode input {
+  text-transform:uppercase;
+}
+body::after {
+  content:"";
+  position:fixed; inset:0; pointer-events:none;
+  background:radial-gradient(circle at center, transparent 38%, rgba(0,0,0,.45) 100%);
+}
+button, input { font:inherit; }
+img { max-width:100%; display:block; }
+.ui-number {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:0;
+  font-family:"Courier New", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-variant-numeric:tabular-nums lining-nums;
+  font-weight:900;
+  line-height:1;
+  letter-spacing:.02em;
+  text-align:center;
+  text-shadow:2px 2px 0 #000;
+}
+.hidden { display:none !important; }
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline:3px solid var(--accent);
+  outline-offset:2px;
+}
+
+.page {
+  width:min(1380px, calc(100% - 18px));
+  margin:0 auto;
+  padding:14px 0 max(24px, env(safe-area-inset-bottom));
+  position:relative;
+  z-index:1;
+}
+
+.topbar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+  padding:10px 12px;
+  background:linear-gradient(180deg, rgba(22,35,40,.94), rgba(10,18,21,.96));
+  border:3px solid #04090a;
+  box-shadow:var(--shadow), inset 0 0 0 2px #2f474d, inset 0 0 0 5px rgba(0,0,0,.34);
+  border-radius:8px;
+}
+.brand {
+  display:flex; align-items:center; gap:10px; min-width:0;
+}
+.brand-mark {
+  width:46px; height:46px; flex:0 0 auto;
+  display:grid; place-items:center;
+  border:3px solid #67798d;
+  box-shadow:inset 0 0 0 2px #293a46;
+  background:#0f1a1e url("../assets/icons/crypt-icon.svg") center / 82% 82% no-repeat;
+  image-rendering:pixelated;
+  font-size:0;
+}
+.brand h1 {
+  margin:0;
+  line-height:1;
+  font-size:clamp(1rem, 2vw, 1.55rem);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  text-shadow:2px 2px 0 #000;
+}
+.brand p {
+  margin:4px 0 0;
+  color:var(--muted);
+  font-size:.8rem;
+}
+.top-actions { display:flex; gap:7px; flex-wrap:wrap; }
+.btn, .icon-btn {
+  border:3px solid #08120f;
+  border-radius:4px;
+  background:linear-gradient(180deg, #25353c, #121c21);
+  color:#fff;
+  padding:9px 12px;
+  box-shadow:inset 0 0 0 2px #46555b, 3px 3px 0 #07100e;
+  cursor:pointer;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+.btn:hover, .icon-btn:hover { filter:brightness(1.08); }
+.btn:active, .icon-btn:active {
+  transform:translate(2px,2px);
+  box-shadow:inset 0 0 0 2px #4b6b61, 1px 1px 0 #07100e;
+}
+.btn:disabled { opacity:.45; cursor:not-allowed; transform:none; }
+.btn.primary { background:linear-gradient(180deg, #ebdc69, #a48a2b); color:#121212; }
+.btn.red { background:linear-gradient(180deg, #d86a63, #8f3631); }
+.btn.blue { background:linear-gradient(180deg, #63b8de, #2e6b8d); }
+.btn.green { background:linear-gradient(180deg, #79d186, #3d8247); }
+.icon-btn { min-width:44px; }
+.kid-toggle {
+  min-width:72px;
+  padding-inline:10px;
+}
+.kid-toggle[aria-pressed="true"] {
+  background:linear-gradient(180deg, #ebdc69, #a48a2b);
+  color:#121212;
+}
+
+.layout {
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) 350px;
+  gap:12px;
+  align-items:start;
+  min-width:0;
+}
+
+.panel {
+  background:linear-gradient(180deg, rgba(22,35,40,.96), rgba(8,16,20,.96));
+  border:4px solid #050a0b;
+  box-shadow:var(--shadow), inset 0 0 0 2px #33484e, inset 0 0 0 6px rgba(0,0,0,.22);
+  border-radius:6px;
+}
+
+.main-panel { padding:12px; }
+.sidebar { display:grid; gap:10px; }
+
+.card-shell {
+  display:grid;
+  grid-template-columns: minmax(0, 760px) 1fr;
+  gap:12px;
+  align-items:start;
+  min-width:0;
+}
+
+.game-card-wrap {
+  display:flex;
+  justify-content:center;
+  min-width:0;
+}
