@@ -9,12 +9,12 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/HTML5-e34f26?logo=html5&logoColor=white" alt="HTML5" />
-  <img src="https://img.shields.io/badge/CSS3-1572b6?logo=css3&logoColor=white" alt="CSS3" />
-  <img src="https://img.shields.io/badge/JavaScript-f7df1e?logo=javascript&logoColor=111111" alt="JavaScript" />
-  <img src="https://img.shields.io/badge/Node.js-LTS-5fa04e?logo=node.js&logoColor=white" alt="Node.js LTS" />
-  <img src="https://img.shields.io/badge/npm-required-cb3837?logo=npm&logoColor=white" alt="npm" />
-  <img src="https://img.shields.io/badge/Playwright-1.54-2ead33?logo=playwright&logoColor=white" alt="Playwright" />
+  <img src="https://img.shields.io/badge/node-22-brightgreen?logo=node.js" alt="Node Version" />
+  <img src="https://img.shields.io/badge/npm-10-red?logo=npm&logoColor=red" alt="npm Version" />
+  <img src="https://img.shields.io/badge/HTML-5-e34f26?logo=html5&logoColor=e34f26" alt="HTML5" />
+  <img src="https://img.shields.io/badge/CSS-3-1572b6?logo=css3&logoColor=1572b6" alt="CSS3" />
+  <img src="https://img.shields.io/badge/JavaScript-ESM-f7df1e?logo=javascript&logoColor=f7df1e" alt="JavaScript" />
+  <img src="https://img.shields.io/badge/Playwright-1.62-2ead33?logo=playwright&logoColor=2ead33" alt="Playwright" />
 </p>
 
 ---
