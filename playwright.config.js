@@ -3,6 +3,10 @@ const { defineConfig, devices } = require("@playwright/test");
 
 module.exports = defineConfig({
   testDir: "./tests/e2e",
+  // Los snapshots de visual-regression.spec.js se generaron en macOS (-darwin.png);
+  // el runner de CI es ubuntu-latest y necesitaría baselines -linux.png, así que la
+  // suite se excluye solo ahí (CI define process.env.CI automáticamente).
+  testIgnore: process.env.CI ? "**/visual-regression.spec.js" : undefined,
   outputDir: "./tests/e2e/results/test-results",
   timeout: 30_000,
   expect: {
