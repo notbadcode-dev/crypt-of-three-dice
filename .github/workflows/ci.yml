@@ -32,8 +32,8 @@ jobs:
       - name: Lint
         run: npm run lint
 
-  test:
-    name: Typecheck + tests unitarios + e2e
+  typecheck:
+    name: Typecheck
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -48,11 +48,54 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
-      - name: Typecheck y compilar TypeScript
+      - name: Typecheck
+        run: npm run typecheck
+
+  unit:
+    name: Tests unitarios
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Compilar TypeScript
         run: npx tsc --project tsconfig.json
 
       - name: Tests unitarios
         run: npm run test:unit
+
+      - name: Subir resultados de tests unitarios
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-test-results
+          path: tests/unit/results
+          retention-days: 7
+
+  e2e:
+    name: Tests e2e
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
 
       - name: Instalar navegadores de Playwright
         run: npx playwright install --with-deps chromium webkit
@@ -68,17 +111,9 @@ jobs:
           path: tests/e2e/results/html-report
           retention-days: 7
 
-      - name: Subir resultados de tests unitarios
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: unit-test-results
-          path: tests/unit/results
-          retention-days: 7
-
   deploy:
     name: Publicar en GitHub Pages
-    needs: [lint, test]
+    needs: [lint, typecheck, unit, e2e]
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
