@@ -1,5 +1,14 @@
 # Umbral de los Tres Dados
 
+<p align="center">
+  <img alt="HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
+  <img alt="CSS3" src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+  <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=111111">
+  <img alt="Node.js" src="https://img.shields.io/badge/Node.js-5FA04E?style=for-the-badge&logo=nodedotjs&logoColor=white">
+  <img alt="npm" src="https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white">
+  <img alt="Playwright" src="https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white">
+</p>
+
 Juego táctico retro de una sola página en el que asignas tres dados de energía para mover, atacar y defenderte dentro de una cripta de 12 niveles.
 
 El proyecto está construido con HTML, CSS y JavaScript modular, sin framework de frontend ni bundler. La versión que carga la página se genera concatenando los módulos de `scripts/` en `scripts/app.js`.
