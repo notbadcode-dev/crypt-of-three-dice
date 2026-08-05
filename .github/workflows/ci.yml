@@ -48,8 +48,8 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
-      - name: Typecheck
-        run: npm run typecheck
+      - name: Typecheck y compilar TypeScript
+        run: npx tsc --project tsconfig.json
 
       - name: Tests unitarios
         run: npm run test:unit
