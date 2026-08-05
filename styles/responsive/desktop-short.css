@@ -1,0 +1,261 @@
+/* Escritorio grande con poca altura de viewport: compacta el HUD y el modal inicial */
+
+@media (width >= 1101px) and (height <= 850px) {
+  .page {
+    padding-top: 6px;
+    padding-bottom: max(30px, env(safe-area-inset-bottom));
+  }
+
+  .topbar {
+    margin-bottom: 6px;
+    padding: 5px 9px;
+  }
+
+  .main-panel {
+    padding: 6px;
+  }
+
+  .card-shell {
+    gap: 8px;
+    grid-template-columns: minmax(0, max-content) minmax(260px, 312px);
+  }
+
+  .game-card {
+    height: min(1013px, calc(100dvh - 96px));
+  }
+
+  .board-side-info {
+    gap: 6px;
+  }
+
+  .phase-box {
+    padding: 6px 8px;
+    margin-bottom: 5px;
+    gap: 3px;
+
+    span {
+      font-size: 0.56rem;
+    }
+
+    strong {
+      font-size: 0.78rem;
+      line-height: 1.15;
+    }
+  }
+
+  .phase-hint {
+    height: 46px;
+    padding: 5px 7px;
+    margin-bottom: 6px;
+    min-height: 46px;
+    font-size: 0.62rem;
+    line-height: 1.28;
+  }
+
+  .run-summary {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    .objective-row,
+    small {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .turn-flow {
+    margin-bottom: 5px;
+  }
+
+  .turn-step {
+    padding: 4px 2px 5px;
+
+    span {
+      font-size: 0.5rem;
+    }
+  }
+
+  .block {
+    padding: 7px;
+  }
+
+  .dice-pool {
+    height: 54px;
+    min-height: 54px;
+    padding: 5px;
+  }
+
+  .die {
+    width: 40px;
+    height: 40px;
+    font-size: 1.08rem;
+  }
+
+  .skill {
+    grid-template-columns: 70px 38px minmax(66px, 1fr) 44px;
+    gap: 5px;
+    padding: 4px;
+  }
+
+  .skill-name {
+    min-height: 42px;
+    font-size: 0.64rem;
+  }
+
+  .skill-base {
+    height: 42px;
+    min-height: 32px;
+    font-size: 0.94rem;
+  }
+
+  .slot {
+    height: 42px;
+    min-height: 42px;
+    padding: 3px 7px 3px 22px;
+    font-size: 0.58rem;
+
+    .die,
+    .die-placeholder {
+      flex-basis: 36px;
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  .skill-total {
+    height: 42px;
+    min-height: 32px;
+  }
+
+  .resource {
+    padding: 5px 6px;
+  }
+
+  .resource b {
+    font-size: 1.05rem;
+  }
+
+  .resources,
+  .mini-actions {
+    margin-top: 6px;
+  }
+
+  .log {
+    height: 46px;
+    min-height: 46px;
+    padding: 6px 8px;
+    font-size: 0.62rem;
+  }
+
+  .logbar {
+    .btn {
+      height: 38px;
+      min-height: 38px;
+      padding: 6px 8px;
+      font-size: 0.68rem;
+    }
+
+    .btn-kicker {
+      font-size: 0.42rem;
+    }
+
+    .btn-main {
+      font-size: 0.72rem;
+    }
+
+    .btn-progress {
+      font-size: 0.46rem;
+    }
+  }
+
+  .sidebar {
+    .legend-grid,
+    .rules-grid {
+      gap: 5px;
+    }
+
+    .legend-item,
+    .rules-grid div {
+      padding: 6px 7px;
+    }
+  }
+
+  #startModal {
+    .modal {
+      height: calc(100dvh - 16px);
+      max-height: calc(100dvh - 16px);
+      padding: 10px;
+    }
+
+    .modal-grid {
+      gap: 10px;
+
+      > div:last-child {
+        gap: 8px;
+      }
+    }
+
+    .poster-inner {
+      padding: 10px;
+    }
+
+    .poster-copy {
+      max-width: 360px;
+      padding: 10px 12px;
+
+      h3 {
+        font-size: 1.12rem;
+      }
+    }
+
+    .poster-copy p,
+    .intro-block p,
+    .class-block p,
+    .action-block p {
+      font-size: 0.68rem;
+      line-height: 1.3;
+    }
+
+    .intro-block,
+    .class-block,
+    .action-block {
+      padding: 8px;
+    }
+
+    .section-kicker {
+      font-size: 0.54rem;
+      margin-bottom: 3px;
+    }
+
+    .section-title {
+      font-size: 1.18rem;
+    }
+
+    .choice-card {
+      min-height: 92px;
+      padding: 7px;
+
+      strong {
+        font-size: 0.72rem;
+        min-height: 1.45em;
+      }
+
+      span {
+        margin-top: 3px;
+        font-size: 0.58rem;
+        line-height: 1.24;
+      }
+    }
+
+    .kid-toggle {
+      min-height: 36px;
+      margin-top: 6px;
+    }
+
+    .modal-actions {
+      margin-top: 7px;
+
+      .btn {
+        min-height: 40px;
+      }
+    }
+  }
+}

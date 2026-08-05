@@ -1,0 +1,8 @@
+/* Umbral de los Tres Dados */
+/* Tipografía global (variables CSS) */
+
+:root {
+  --font-mono:
+    "Courier New", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --tracking-wide: 0.08em;
+}

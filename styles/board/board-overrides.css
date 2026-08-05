@@ -1,0 +1,115 @@
+/* ⚠️ OVERRIDES INTENCIONADOS: estos selectores duplican a propósito a los definidos
+   en board-frame.css / enemy-card.css para sobrescribir en cascada por orden de
+   aparición (misma especificidad). Este fichero DEBE importarse el último dentro
+   de board.css. No fusionar estas reglas con sus bases ni reordenar. */
+
+.enemy-meta {
+  gap: 0;
+  padding: 0 4% 1.5%;
+}
+.enemy-meta-cell img {
+  max-width: 15px;
+}
+.enemy-meta-value {
+  font-size: clamp(0.62rem, 0.9vw, 0.8rem);
+}
+
+/* Raster background overrides */
+.top-slot,
+.bottom-slot {
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border: none;
+  box-shadow: none;
+}
+.board-frame {
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.enemy-card {
+  background-position: center;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* HUD inferior fiel al triptico de carta: enemigo | heroe | turno. */
+.combat-dashboard {
+  left: 3.05%;
+  right: 3.05%;
+  bottom: 1.85%;
+  height: 16.85%;
+  grid-template-columns: minmax(0, 0.93fr) minmax(0, 1.08fr) minmax(0, 1.08fr);
+  gap: 2.05%;
+  align-items: stretch;
+}
+
+.combat-dashboard::before {
+  content: "";
+  position: absolute;
+  left: -1.2%;
+  right: -1.2%;
+  top: -8.5%;
+  bottom: -2%;
+  z-index: 0;
+  background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgb(231 178 73 / 68%) 22% 44%,
+        transparent 44% 56%,
+        rgb(231 178 73 / 68%) 56% 78%,
+        transparent
+      )
+      center 6% / 24% 2px no-repeat,
+    linear-gradient(
+      180deg,
+      rgb(7 18 18 / 98%),
+      rgb(4 12 12 / 96%) 46%,
+      rgb(3 9 9 / 98%)
+    );
+  border-top: 1px solid rgb(32 48 43 / 95%);
+  pointer-events: none;
+}
+
+.combat-dashboard::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -3.8%;
+  width: 3.2%;
+  aspect-ratio: 1;
+  z-index: 0;
+  transform: translateX(-50%) rotate(45deg);
+  background: linear-gradient(
+    135deg,
+    #2b1c0d,
+    #d7a545 48%,
+    #241708 52%,
+    #5f421b
+  );
+  border: 1px solid rgb(244 206 111 / 65%);
+  box-shadow: 0 0 0 2px rgb(var(--black-rgb), 0.52);
+  pointer-events: none;
+}
+
+.enemy-portrait-frame {
+  position: relative;
+  z-index: 1;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.enemy-portrait {
+  width: 86%;
+  height: 88%;
+  object-fit: contain;
+  object-position: center bottom;
+  image-rendering: pixelated;
+}

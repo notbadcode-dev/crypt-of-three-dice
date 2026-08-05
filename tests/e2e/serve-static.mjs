@@ -19,9 +19,9 @@ const types = {
 
 function safePath(url) {
   const pathname = new URL(url, `http://127.0.0.1:${port}`).pathname;
-  const requested = pathname === "/" ? "/umbral-de-los-tres-dados.html" : pathname;
+  const requested = pathname === "/" ? "/index.html" : pathname;
   const filePath = normalize(join(root, decodeURIComponent(requested)));
-  if (!filePath.startsWith(root)) return null;
+  if (!filePath.startsWith(root)) {return null;}
   return filePath;
 }
 

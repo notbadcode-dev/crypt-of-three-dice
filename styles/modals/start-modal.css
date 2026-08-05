@@ -1,0 +1,287 @@
+/* Modal de portada/inicio: layout específico de dos columnas (poster + elección de clase) */
+
+/* Acciones del modal inicial: abajo, centradas y con idénticas dimensiones */
+/* Simetría del menú inicial */
+#startModal {
+  .modal-actions {
+    grid-column: 1 / -1;
+    width: 100%;
+    justify-content: center;
+    align-items: stretch;
+    gap: 10px;
+    margin-top: 10px;
+
+    .btn {
+      width: min(260px, 100%);
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      white-space: normal;
+    }
+  }
+
+  .kid-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: min(260px, 100%);
+    min-height: 42px;
+    margin: 10px auto 0;
+  }
+
+  .modal {
+    width: min(1180px, 100%);
+    height: min(760px, calc(100dvh - 24px));
+    max-height: calc(100dvh - 24px);
+    overflow: hidden;
+    padding: 12px;
+  }
+
+  .modal-grid {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    gap: 14px;
+    height: 100%;
+    min-height: 0;
+
+    > div:first-child,
+    > div:last-child {
+      min-width: 0;
+    }
+
+    > div:last-child {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      gap: 10px;
+      min-height: 0;
+    }
+  }
+
+  .poster {
+    min-height: 100%;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    background: #0b1f19;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -18px;
+      background-image: url("../../assets/images/intro-illustration.png");
+      background-size: cover;
+      background-position: center;
+      filter: blur(9px) saturate(0.9) brightness(0.74);
+      transform: scale(1.035);
+      opacity: 0.94;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          180deg,
+          rgb(6 18 15 / 8%) 0%,
+          rgb(6 18 15 / 2%) 24%,
+          rgb(6 18 15 / 16%) 72%,
+          rgb(6 18 15 / 34%) 100%
+        ),
+        radial-gradient(
+          circle at center,
+          transparent 58%,
+          rgb(11 31 25 / 20%) 80%,
+          rgb(11 31 25 / 52%) 100%
+        );
+      box-shadow: inset 0 0 52px rgb(11 31 25 / 62%);
+    }
+  }
+
+  .poster-inner {
+    width: 100%;
+    min-height: 100%;
+    grid-template-rows: auto 1fr;
+    align-content: start;
+    justify-items: start;
+    position: relative;
+    z-index: 1;
+    padding: 14px;
+  }
+
+  .poster-char {
+    display: none;
+  }
+
+  .poster-copy {
+    max-width: 400px;
+    padding: 12px 14px;
+    background: linear-gradient(180deg, rgb(8 22 18 / 84%), rgb(8 22 18 / 58%));
+    border: 2px solid rgb(129 155 182 / 34%);
+    box-shadow: inset 0 0 0 1px rgb(16 34 44 / 50%);
+    backdrop-filter: blur(1px);
+  }
+
+  .start-column {
+    min-height: 0;
+  }
+
+  .intro-block,
+  .class-block,
+  .action-block {
+    background: var(--panel-green-1);
+    border: 2px solid var(--frame-blue);
+    box-shadow: inset 0 0 0 2px var(--inset-navy);
+    padding: 10px;
+  }
+
+  .intro-block p,
+  .action-block p {
+    margin-bottom: 0;
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .class-block {
+    display: grid;
+    gap: 8px;
+    min-height: 0;
+  }
+
+  .section-kicker {
+    display: block;
+    color: var(--accent);
+    font-size: 0.62rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .section-title {
+    margin: 0;
+    font-size: clamp(1.15rem, 2.4vw, 1.62rem);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    text-shadow: var(--text-shadow-harder);
+  }
+
+  .action-block {
+    margin-top: auto;
+  }
+
+  .choice-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    align-items: stretch;
+    margin: 0;
+  }
+
+  .save-slot-grid {
+    grid-template-columns: 1fr;
+    margin-top: 10px;
+  }
+
+  .choice-card {
+    min-height: 140px;
+    padding: 9px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+
+    strong {
+      min-height: 1.9em;
+      position: relative;
+      z-index: 1;
+    }
+
+    span {
+      flex: 1;
+      font-size: 0.68rem;
+      line-height: 1.32;
+      position: relative;
+      z-index: 1;
+    }
+
+    .choice-card-media {
+      width: 100%;
+      min-height: 56px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      margin-bottom: 2px;
+      position: relative;
+      z-index: 1;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: auto 0 2px auto;
+        width: 58px;
+        height: 58px;
+        border-radius: 999px;
+        background: radial-gradient(
+          circle,
+          rgb(var(--gold-highlight-rgb), 0.24) 0%,
+          rgb(var(--gold-highlight-rgb), 0) 72%
+        );
+      }
+
+      img {
+        width: 54px;
+        height: 54px;
+        object-fit: contain;
+        object-position: center bottom;
+        image-rendering: pixelated;
+        filter: drop-shadow(0 4px 0 rgb(var(--black-rgb), 0.38));
+      }
+    }
+
+    &[data-class="warden"] {
+      background:
+        linear-gradient(
+          180deg,
+          rgb(var(--gold-highlight-rgb), 0.08),
+          rgb(var(--gold-highlight-rgb), 0) 44%
+        ),
+        var(--panel-green-1) !important;
+    }
+
+    &[data-class="berserker"] {
+      background:
+        linear-gradient(180deg, rgb(190 74 47 / 12%), rgb(190 74 47 / 0%) 44%),
+        var(--panel-green-1) !important;
+    }
+
+    &[data-class="scout"] {
+      background:
+        linear-gradient(
+          180deg,
+          rgb(83 196 104 / 10%),
+          rgb(83 196 104 / 0%) 44%
+        ),
+        var(--panel-green-1) !important;
+    }
+
+    &[data-class="arcanist"] {
+      background:
+        linear-gradient(
+          180deg,
+          rgb(102 162 255 / 11%),
+          rgb(102 162 255 / 0%) 44%
+        ),
+        var(--panel-green-1) !important;
+    }
+  }
+
+  h2,
+  p {
+    max-width: 100%;
+  }
+}

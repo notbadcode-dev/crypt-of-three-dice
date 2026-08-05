@@ -1,0 +1,145 @@
+/* Móvil pequeño: máxima compactación de topbar, dados y modal inicial */
+
+@media (width <= 540px) {
+  .main-panel,
+  .block {
+    padding: 7px;
+  }
+
+  .brand {
+    p {
+      display: none;
+    }
+    h1 {
+      font-size: 1rem;
+    }
+  }
+
+  .brand-mark {
+    width: 40px;
+    height: 40px;
+    font-size: 21px;
+  }
+
+  .skill {
+    grid-template-columns: 1fr 44px;
+
+    .slot,
+    .skill-total {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .die {
+    width: 46px;
+    height: 46px;
+  }
+  .mini-actions {
+    grid-template-columns: 1fr;
+  }
+  .game-card {
+    width: 100%;
+  }
+  .board-side-info {
+    gap: 8px;
+  }
+  .run-summary {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #startModal {
+    .modal {
+      height: calc(100dvh - 12px);
+      max-height: calc(100dvh - 12px);
+      overflow: auto;
+      overscroll-behavior: contain;
+      padding: 8px;
+    }
+
+    .poster {
+      display: none;
+    }
+
+    .modal-grid {
+      height: auto;
+
+      > div:last-child {
+        gap: 7px;
+        grid-template-rows: auto auto auto;
+      }
+    }
+
+    .intro-block,
+    .class-block,
+    .action-block {
+      padding: 8px;
+    }
+
+    .intro-block p,
+    .class-block p,
+    .action-block p {
+      font-size: 0.66rem;
+      line-height: 1.28;
+    }
+
+    .section-title {
+      font-size: 1.08rem;
+      line-height: 1.08;
+    }
+
+    .choice-grid {
+      gap: 6px;
+    }
+
+    .choice-card {
+      min-height: 76px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 48px;
+      grid-template-rows: auto minmax(0, 1fr);
+      align-items: center;
+      gap: 4px 8px;
+      padding: 7px;
+
+      strong {
+        grid-column: 1;
+        min-height: 0;
+        font-size: 0.72rem;
+      }
+
+      span {
+        font-size: 0.56rem;
+        line-height: 1.18;
+      }
+
+      .choice-card-media {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        width: 48px;
+        min-height: 48px;
+        margin: 0;
+        align-self: center;
+        justify-self: center;
+
+        &::before {
+          width: 48px;
+          height: 48px;
+        }
+
+        img {
+          width: 46px;
+          height: 46px;
+        }
+      }
+    }
+
+    .modal-actions {
+      gap: 7px;
+      margin-top: 7px;
+    }
+
+    .kid-toggle,
+    .modal-actions .btn {
+      min-height: 40px;
+    }
+  }
+}

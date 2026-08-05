@@ -26,7 +26,7 @@ globalThis.location = {
 };
 globalThis.window = {};
 
-const core = await import("../../scripts/app-core.js");
+const core = await import("../../.tsbuild/scripts/app-core.js");
 
 function makeState(overrides = {}) {
   return {
@@ -101,8 +101,7 @@ test("normalizeState clona estados validos y rechaza fases invalidas", () => {
     ...valid,
     saveVersion: 2,
     classUsed: false,
-    preserved: null,
-    _tempRange: undefined
+    preserved: null
   });
 
   assert.equal(core.normalizeState({ ...valid, phase: "bogus" }), null);

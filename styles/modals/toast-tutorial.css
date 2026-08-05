@@ -1,0 +1,27 @@
+/* Página de tutorial dentro del modal y toast de feedback efímero */
+
+.tutorial-page {
+  display: none;
+}
+.tutorial-page.active {
+  display: block;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%) translateY(24px);
+  opacity: 0;
+  z-index: 90;
+  background: var(--panel-green-1);
+  border: 2px solid var(--gold-highlight);
+  color: var(--white);
+  padding: 10px 12px;
+  font-weight: 900;
+  transition: 0.2s;
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}

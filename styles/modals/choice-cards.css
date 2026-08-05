@@ -1,0 +1,38 @@
+/* Tarjetas de elección (clases, opciones) reutilizadas en varios modales */
+
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 12px 0;
+}
+.choice-card {
+  text-align: left;
+  padding: 11px;
+  cursor: pointer;
+  background: var(--panel-green-1) !important;
+  border: 2px solid var(--frame-blue) !important;
+  box-shadow: inset 0 0 0 2px var(--inset-navy) !important;
+  border-radius: 0 !important;
+
+  &:hover,
+  &.selected {
+    background: #29483f !important;
+    border-color: var(--gold-highlight) !important;
+  }
+
+  strong {
+    display: block;
+    color: var(--white);
+    text-transform: uppercase;
+    font-size: 0.86rem;
+  }
+
+  span {
+    display: block;
+    margin-top: 5px;
+    color: var(--text-soft-2);
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+}

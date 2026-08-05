@@ -1,0 +1,132 @@
+/* Panel de estado del héroe: retrato, vida y barra de HP */
+
+.hero-panel {
+  padding: 7.2% 8% 7.5%;
+  grid-template-rows: 18% minmax(0, 1fr);
+  gap: 2.5%;
+}
+
+.hero-panel-body {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1fr);
+  gap: 5.5%;
+  align-items: stretch;
+}
+
+.hero-panel-portrait {
+  align-self: end;
+  justify-self: center;
+  width: 132%;
+  height: 118%;
+  object-fit: cover;
+  object-position: center 49%;
+  transform: translate(-4%, 5%);
+  image-rendering: pixelated;
+}
+
+.hero-health-block {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  align-self: stretch;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 2%;
+  padding: 2% 0 0;
+}
+
+.hero-panel #hpHud {
+  --hp-ratio: 100%;
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 3px;
+  padding: 4% 0 34% 31%;
+  color: var(--hero-hp-text);
+  background: none;
+  border: none;
+  box-shadow: none;
+  overflow: hidden;
+  font-size: 1.2rem;
+  line-height: 1;
+  white-space: nowrap;
+  text-align: left;
+
+  &::before {
+    content: "♥";
+    position: absolute;
+    left: 0;
+    top: 4%;
+    width: 26%;
+    color: var(--hp-red);
+    background: none;
+    font-size: 1.2rem;
+    line-height: 1;
+    text-align: center;
+    text-shadow:
+      var(--text-stroke-hp),
+      2px 2px 0 var(--black);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 29%;
+    min-height: 14px;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        rgb(255 236 193 / 18%) 0 2px,
+        transparent 2px 12px
+      ),
+      linear-gradient(90deg, #ed6862, #b6363c) left center / var(--hp-ratio)
+        100% no-repeat,
+      linear-gradient(180deg, rgb(16 23 23 / 98%), rgb(3 8 8 / 98%));
+    border: 1px solid rgb(220 188 109 / 78%);
+    box-shadow:
+      inset 0 0 0 1px rgb(var(--black-rgb), 0.72),
+      inset 0 2px 0 rgb(var(--white-rgb), 0.1),
+      0 2px 0 rgb(var(--black-rgb), 0.36);
+  }
+
+  span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .current-value {
+    font-size: 1em;
+  }
+
+  .max-value {
+    align-self: flex-start;
+    padding-top: 0.18em;
+    padding-bottom: 0;
+    font-size: 0.68em;
+  }
+}
+
+.hero-health-label {
+  position: relative;
+  z-index: 2;
+  color: var(--text-parchment);
+  font-size: 0.62rem;
+  line-height: 1;
+  font-weight: 900;
+  align-self: end;
+  text-align: right;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  text-shadow: var(--text-shadow-soft);
+}

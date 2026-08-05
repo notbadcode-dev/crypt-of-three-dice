@@ -1,0 +1,29 @@
+/* Umbral de los Tres Dados */
+/* Sombras globales (variables CSS) */
+
+:root {
+  --shadow: 0 18px 42px rgb(0 0 0 / 48%);
+  --text-shadow-soft: 1px 1px 0 var(--black);
+  --text-shadow-hard: 2px 2px 0 var(--black);
+  --text-shadow-harder: 3px 3px 0 var(--black);
+
+  /*
+   * Trazo de texto estilo pixel-art en las 4 direcciones cardinales.
+   * Se combina con un desplazamiento de esquina (1px/2px) en cada uso, p.ej.:
+   *   text-shadow: var(--text-stroke-black), 2px 2px 0 var(--black);
+   * Una variante por cada color de trazo usado en el proyecto, para no
+   * necesitar variables locales fuera de global/.
+   */
+  --text-stroke-black:
+    1px 0 0 var(--black), -1px 0 0 var(--black), 0 1px 0 var(--black),
+    0 -1px 0 var(--black);
+  --text-stroke-hp:
+    1px 0 0 var(--hp-stroke), -1px 0 0 var(--hp-stroke),
+    0 1px 0 var(--hp-stroke), 0 -1px 0 var(--hp-stroke);
+  --text-stroke-action-value:
+    1px 0 0 var(--action-value-stroke), -1px 0 0 var(--action-value-stroke),
+    0 1px 0 var(--action-value-stroke), 0 -1px 0 var(--action-value-stroke);
+  --text-stroke-enemy-value:
+    1px 0 0 var(--enemy-value-stroke), -1px 0 0 var(--enemy-value-stroke),
+    0 1px 0 var(--enemy-value-stroke), 0 -1px 0 var(--enemy-value-stroke);
+}

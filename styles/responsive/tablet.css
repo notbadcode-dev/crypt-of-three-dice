@@ -1,0 +1,25 @@
+/* Tablet/escritorio pequeño: la sidebar pasa a ir debajo del tablero */
+
+@media (width <= 1100px) {
+  .page {
+    width: min(100% - 12px, 1380px);
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .card-shell {
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 340px);
+    align-items: start;
+  }
+
+  .game-card {
+    width: min(100%, 680px);
+    max-height: none;
+  }
+
+  .sidebar {
+    grid-template-columns: 1fr 1fr;
+  }
+}

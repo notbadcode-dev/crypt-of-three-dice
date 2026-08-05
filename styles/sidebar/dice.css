@@ -1,0 +1,77 @@
+/* Dados de energía: pool, dado y placeholder animado */
+
+.dice-pool {
+  box-sizing: border-box;
+  height: 72px;
+  min-height: 72px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  background: var(--panel-green-3);
+  border: 2px solid var(--frame-blue);
+  box-shadow: inset 0 0 0 2px var(--inset-navy);
+}
+.die {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  border: 3px solid #d2dce2;
+  background:
+    radial-gradient(
+      circle at 30% 28%,
+      rgb(var(--white-rgb), 0.94) 0 14%,
+      transparent 15%
+    ),
+    linear-gradient(145deg, #f0f3f5, #afbec9);
+  color: var(--die-face-text);
+  font-size: 1.45rem;
+  font-weight: 900;
+  cursor: grab;
+  touch-action: none;
+  image-rendering: pixelated;
+  box-shadow:
+    inset -5px -5px 0 rgb(var(--black-rgb), 0.12),
+    4px 4px 0 var(--shadow-deep);
+
+  &.dragging {
+    opacity: 0.45;
+  }
+
+  &.assigned {
+    cursor: grab;
+  }
+
+  &.selected {
+    outline: 3px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+.die-placeholder {
+  cursor: default;
+  opacity: 0.72;
+  border-color: var(--die-placeholder-border);
+  background:
+    radial-gradient(
+      circle at 30% 28%,
+      rgb(var(--white-rgb), 0.22) 0 13%,
+      transparent 14%
+    ),
+    linear-gradient(145deg, #29463d, #112720);
+  color: var(--die-placeholder-text);
+  box-shadow:
+    inset -5px -5px 0 rgb(var(--black-rgb), 0.18),
+    inset 3px 3px 0 rgb(var(--white-rgb), 0.05),
+    4px 4px 0 var(--shadow-deep);
+  animation: die-wait 1.6s steps(2, end) infinite;
+}
+@keyframes die-wait {
+  50% {
+    filter: brightness(1.14);
+  }
+}

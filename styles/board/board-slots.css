@@ -1,0 +1,277 @@
+/* Ranuras superiores/inferiores del tablero (stats, HUD de estado del héroe) */
+
+.top-stat-row {
+  position: absolute;
+  left: 6.25%;
+  top: 3.9%;
+  width: 87.5%;
+  height: 11.4%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3.65%;
+  z-index: 3;
+}
+
+.top-slot {
+  background-image: url("../../assets/images/top-slot-bg.png");
+}
+.bottom-slot {
+  background-image: url("../../assets/images/bottom-slot-bg.png");
+  overflow: hidden;
+  isolation: isolate;
+}
+.bottom-slot:first-child {
+  background-image: url("../../assets/images/bottom-slot-bg.png");
+}
+
+.top-slot,
+.bottom-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-slot::after,
+.bottom-slot::after {
+  display: none;
+}
+
+.slot-inner {
+  width: 92%;
+  height: 82%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2px;
+  pointer-events: none;
+  text-align: center;
+}
+.top-slot .slot-inner,
+.bottom-slot .slot-inner {
+  position: absolute;
+  inset: 11% 12% 12%;
+  width: auto;
+  height: auto;
+  display: grid;
+  grid-template-rows: 66% 21% 11%;
+  align-items: center;
+  justify-items: center;
+  row-gap: 2%;
+  padding: 0;
+  box-sizing: border-box;
+  --icon-size: 82%;
+  --icon-shift-x: 0px;
+  --icon-shift-y: 0px;
+}
+.slot-icon {
+  width: 62%;
+  max-width: 78px;
+  flex: 0 0 auto;
+  image-rendering: pixelated;
+  margin: 0 auto;
+}
+.top-slot .slot-icon,
+.bottom-slot .slot-icon {
+  position: relative;
+  left: auto;
+  top: auto;
+  grid-row: 1;
+  width: var(--icon-size);
+  height: 100%;
+  max-width: 132px;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+  transform: translate(var(--icon-shift-x), var(--icon-shift-y));
+  margin: 0;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+.stat-slot-hp .slot-inner {
+  --icon-size: 112%;
+  --icon-shift-x: 0px;
+  --icon-shift-y: 0px;
+}
+.stat-slot-mov .slot-inner,
+.bottom-slot:nth-child(2) .slot-inner {
+  --icon-size: 96%;
+}
+.stat-slot-atk .slot-inner,
+.bottom-slot:nth-child(3) .slot-inner {
+  --icon-size: 118%;
+}
+.stat-slot-def .slot-inner,
+.bottom-slot:nth-child(4) .slot-inner {
+  --icon-size: 128%;
+}
+.hero-status-slot {
+  background: none;
+
+  .slot-inner {
+    inset: 10% 7% 11%;
+    z-index: 1;
+    grid-template-columns: minmax(18px, 0.54fr) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto;
+    column-gap: 6%;
+    row-gap: 1px;
+    --icon-size: 82%;
+  }
+
+  .slot-icon {
+    grid-column: 1;
+    grid-row: 1 / 3;
+    width: var(--icon-size);
+    height: 100%;
+    max-width: 32px;
+    align-self: center;
+    justify-self: center;
+    box-sizing: border-box;
+    padding: 2px;
+    background: linear-gradient(180deg, rgb(12 25 25 / 94%), rgb(4 9 9 / 96%));
+    border: 1px solid rgb(113 137 130 / 42%);
+    transform: translate(0, 1%);
+    filter: drop-shadow(2px 3px 0 rgb(var(--black-rgb), 0.34));
+  }
+
+  #hpHud {
+    --hp-ratio: 100%;
+    position: relative;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: end;
+    justify-self: stretch;
+    min-height: 16px;
+    width: 100%;
+    min-width: 0;
+    max-width: none;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 2px 4px 3px;
+    color: var(--hero-status-text);
+    background: linear-gradient(
+      180deg,
+      rgb(25 35 35 / 96%),
+      rgb(8 14 14 / 98%)
+    );
+    border: 1px solid rgb(214 187 117 / 74%);
+    box-shadow:
+      inset 0 0 0 1px rgb(8 10 9 / 78%),
+      inset 0 2px 0 rgb(var(--white-rgb), 0.08),
+      0 2px 0 rgb(var(--black-rgb), 0.32);
+    font-size: 0.68rem;
+    white-space: nowrap;
+    text-shadow:
+      var(--text-stroke-black),
+      2px 2px 0 var(--black);
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 3px;
+      top: 3px;
+      bottom: 3px;
+      width: var(--hp-ratio);
+      max-width: calc(100% - 6px);
+      background: linear-gradient(180deg, #d85d57, #7d292b);
+      box-shadow: inset 0 1px 0 rgb(255 236 207 / 24%);
+      opacity: 0.95;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      background: linear-gradient(
+        90deg,
+        transparent 0 48%,
+        rgb(var(--white-rgb), 0.12) 48% 52%,
+        transparent 52% 100%
+      );
+      background-size: 12px 100%;
+      opacity: 0.24;
+    }
+
+    span {
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  .slot-label {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+    justify-self: start;
+    color: var(--slot-label-text);
+    font-size: 0.4rem;
+    letter-spacing: 0.11em;
+  }
+}
+
+.hero-status-slot::before {
+  content: "";
+  position: absolute;
+  inset: 8% 0 7%;
+  z-index: 0;
+  background:
+    linear-gradient(180deg, rgb(var(--white-rgb), 0.055), transparent 32%),
+    linear-gradient(90deg, rgb(200 162 81 / 20%), transparent 26%),
+    linear-gradient(180deg, rgb(19 34 31 / 82%), rgb(5 12 12 / 68%));
+  border: 1px solid rgb(214 187 117 / 34%);
+  box-shadow:
+    inset 0 0 0 1px rgb(var(--black-rgb), 0.5),
+    inset 0 -7px 14px rgb(var(--black-rgb), 0.32);
+  pointer-events: none;
+}
+
+.slot-value {
+  color: var(--white);
+  font-size: clamp(0.8rem, 1.18vw, 1.04rem);
+  line-height: 1;
+  width: 100%;
+  text-align: center;
+}
+.top-slot .slot-value,
+.bottom-slot .slot-value {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  grid-row: 2;
+  align-self: center;
+  width: auto;
+  transform: none;
+  margin: 0;
+}
+.slot-value .current-value {
+  font-size: 1em;
+}
+.slot-value .max-value {
+  font-size: 0.72em;
+  margin-left: 1px;
+  opacity: 0.92;
+  vertical-align: baseline;
+}
+.slot-label {
+  color: var(--text-soft-4);
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  text-shadow:
+    var(--text-shadow-soft),
+    0 0 4px rgb(var(--black-rgb), 0.45);
+  width: 100%;
+  text-align: center;
+}
+.top-slot .slot-label,
+.bottom-slot .slot-label {
+  position: relative;
+  left: auto;
+  bottom: auto;
+  grid-row: 3;
+  align-self: start;
+  width: auto;
+  transform: none;
+  margin: 0;
+}

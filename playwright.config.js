@@ -21,7 +21,7 @@ module.exports = defineConfig({
   },
   webServer: {
     command: "node tests/e2e/serve-static.mjs",
-    url: "http://127.0.0.1:4173/umbral-de-los-tres-dados.html",
+    url: "http://127.0.0.1:4173/index.html",
     reuseExistingServer: !process.env.CI,
     timeout: 10_000
   },

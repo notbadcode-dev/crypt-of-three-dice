@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1b251f">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'">
 <title>Umbral de los Tres Dados</title>
 <link rel="icon" type="image/svg+xml" href="assets/icons/crypt-icon.svg">
 <link rel="stylesheet" href="styles/app.css">
@@ -19,10 +20,10 @@
       </div>
     </div>
     <div class="top-actions">
-      <button class="icon-btn" id="helpBtn" title="Instrucciones" aria-label="Abrir instrucciones">?</button>
-      <button class="icon-btn kid-toggle" id="kidModeBtn" title="Modo niño" aria-label="Activar modo niño" aria-pressed="false">Niño OFF</button>
-      <button class="icon-btn" id="soundBtn" title="Sonido" aria-label="Activar o desactivar sonido" aria-pressed="true">🔊</button>
-      <button class="icon-btn" id="saveBtn" title="Guardar" aria-label="Guardar partida">💾</button>
+      <button type="button" class="icon-btn" id="helpBtn" title="Instrucciones" aria-label="Abrir instrucciones">?</button>
+      <button type="button" class="icon-btn kid-toggle" id="kidModeBtn" title="Modo niño" aria-label="Activar modo niño" aria-pressed="false">Niño OFF</button>
+      <button type="button" class="icon-btn" id="soundBtn" title="Sonido" aria-label="Activar o desactivar sonido" aria-pressed="true">🔊</button>
+      <button type="button" class="icon-btn" id="saveBtn" title="Guardar" aria-label="Guardar partida">💾</button>
     </div>
   </header>
 
@@ -181,15 +182,15 @@
               <div class="resource"><small>DEF</small><b class="ui-number" id="defensePointsSide">0</b></div>
             </div>
             <div class="mini-actions">
-              <button class="btn blue" id="powerBtn" disabled aria-label="Usar talento de clase">Talento</button>
+              <button type="button" class="btn blue" id="powerBtn" disabled aria-label="Usar talento de clase">Talento</button>
             </div>
             <small class="action-note" id="powerHint">Asigna primero los dados.</small>
           </div>
 
           <div class="logbar">
             <div class="log" id="log" aria-live="polite">Selecciona una clase para comenzar.</div>
-            <button class="btn secondary" id="secondaryAction" disabled aria-label="Acción secundaria">Nueva partida</button>
-            <button class="btn primary" id="phaseBtn" disabled aria-label="Botón principal de fase">Comenzar</button>
+            <button type="button" class="btn secondary" id="secondaryAction" disabled aria-label="Acción secundaria">Nueva partida</button>
+            <button type="button" class="btn primary" id="phaseBtn" disabled aria-label="Botón principal de fase">Comenzar</button>
           </div>
         </div>
       </div>
@@ -244,28 +245,28 @@
             <p>Primero selecciona una clase. Después puedes continuar una partida guardada o empezar una nueva expedición.</p>
           </div>
           <div class="choice-grid" id="classGrid">
-            <button class="choice-card selected" data-class="warden">
+            <button type="button" class="choice-card selected" data-class="warden">
               <span class="choice-card-media" aria-hidden="true">
                 <img src="assets/images/class_warden.png" alt="Guardián">
               </span>
               <strong>Guardián</strong>
               <span>Una vez por nivel conserva un dado asignado para el siguiente turno.</span>
             </button>
-            <button class="choice-card" data-class="berserker">
+            <button type="button" class="choice-card" data-class="berserker">
               <span class="choice-card-media" aria-hidden="true">
                 <img src="assets/images/class_berserker.png" alt="Berserker">
               </span>
               <strong>Berserker</strong>
               <span>Con 1 de vida puede repetir una tirada completa.</span>
             </button>
-            <button class="choice-card" data-class="scout">
+            <button type="button" class="choice-card" data-class="scout">
               <span class="choice-card-media" aria-hidden="true">
                 <img src="assets/images/class_explorer.png" alt="Exploradora">
               </span>
               <strong>Exploradora</strong>
               <span>Una vez por nivel puede asignar un dado a Alcance.</span>
             </button>
-            <button class="choice-card" data-class="arcanist">
+            <button type="button" class="choice-card" data-class="arcanist">
               <span class="choice-card-media" aria-hidden="true">
                 <img src="assets/images/class_arcanist.png" alt="Arcanista">
               </span>
@@ -278,10 +279,10 @@
         <div class="action-block">
           <span class="section-kicker">Siguiente paso</span>
           <p>Continúa una expedición guardada o entra de nuevo al umbral desde el primer nivel.</p>
-          <button class="icon-btn kid-toggle" id="kidModeStartBtn" title="Modo niño" aria-label="Activar modo niño" aria-pressed="false">Niño OFF</button>
+          <button type="button" class="icon-btn kid-toggle" id="kidModeStartBtn" title="Modo niño" aria-label="Activar modo niño" aria-pressed="false">Niño OFF</button>
           <div class="modal-actions">
-            <button class="btn" id="continueBtn">Cargar partida</button>
-            <button class="btn primary" id="startBtn">Entrar en la cripta</button>
+            <button type="button" class="btn" id="continueBtn">Cargar partida</button>
+            <button type="button" class="btn primary" id="startBtn">Entrar en la cripta</button>
           </div>
         </div>
       </div>
@@ -310,9 +311,9 @@
       <p>Al terminar tu fase, los monstruos se recolocan y atacan. Cuando limpies un nivel, podrás curarte o mejorar un atributo permanente.</p>
     </div>
     <div class="modal-actions">
-      <button class="btn" id="helpPrev">Anterior</button>
-      <button class="btn primary" id="helpNext">Siguiente</button>
-      <button class="btn green hidden" id="helpClose">Cerrar</button>
+      <button type="button" class="btn" id="helpPrev">Anterior</button>
+      <button type="button" class="btn primary" id="helpNext">Siguiente</button>
+      <button type="button" class="btn green hidden" id="helpClose">Cerrar</button>
     </div>
   </div>
 </div>
@@ -322,11 +323,11 @@
     <h2>Nivel superado</h2>
     <p>Elige una recompensa antes de continuar.</p>
     <div class="choice-grid">
-      <button class="choice-card" data-upgrade="heal"><strong>Curación total</strong><span>Restaura toda la salud.</span></button>
-      <button class="choice-card" data-upgrade="speed"><strong>+1 Movimiento</strong><span>Más movilidad permanente.</span></button>
-      <button class="choice-card" data-upgrade="attack"><strong>+1 Ataque</strong><span>Más potencia ofensiva.</span></button>
-      <button class="choice-card" data-upgrade="defense"><strong>+1 Defensa</strong><span>Más protección.</span></button>
-      <button class="choice-card" data-upgrade="range"><strong>+1 Alcance</strong><span>Golpea desde más lejos.</span></button>
+      <button type="button" class="choice-card" data-upgrade="heal"><strong>Curación total</strong><span>Restaura toda la salud.</span></button>
+      <button type="button" class="choice-card" data-upgrade="speed"><strong>+1 Movimiento</strong><span>Más movilidad permanente.</span></button>
+      <button type="button" class="choice-card" data-upgrade="attack"><strong>+1 Ataque</strong><span>Más potencia ofensiva.</span></button>
+      <button type="button" class="choice-card" data-upgrade="defense"><strong>+1 Defensa</strong><span>Más protección.</span></button>
+      <button type="button" class="choice-card" data-upgrade="range"><strong>+1 Alcance</strong><span>Golpea desde más lejos.</span></button>
     </div>
   </div>
 </div>
@@ -341,9 +342,9 @@
     </label>
     <div class="choice-grid save-slot-grid" id="saveSlotPicker" aria-label="Ranuras de guardado"></div>
     <div class="modal-actions">
-      <button class="btn" id="saveCancelBtn">Cancelar</button>
-      <button class="btn danger" id="saveDeleteBtn">Eliminar</button>
-      <button class="btn primary" id="saveConfirmBtn">Guardar</button>
+      <button type="button" class="btn" id="saveCancelBtn">Cancelar</button>
+      <button type="button" class="btn danger" id="saveDeleteBtn">Eliminar</button>
+      <button type="button" class="btn primary" id="saveConfirmBtn">Guardar</button>
     </div>
   </div>
 </div>
@@ -354,9 +355,9 @@
     <p>Elige una de las partidas guardadas para retomarla.</p>
     <div class="choice-grid save-slot-grid" id="loadSlotsList" aria-label="Ranuras de carga"></div>
     <div class="modal-actions">
-      <button class="btn" id="loadCancelBtn">Cancelar</button>
-      <button class="btn danger" id="loadDeleteBtn">Eliminar</button>
-      <button class="btn primary" id="loadConfirmBtn">Cargar</button>
+      <button type="button" class="btn" id="loadCancelBtn">Cancelar</button>
+      <button type="button" class="btn danger" id="loadDeleteBtn">Eliminar</button>
+      <button type="button" class="btn primary" id="loadConfirmBtn">Cargar</button>
     </div>
   </div>
 </div>
@@ -366,8 +367,8 @@
     <h2>Eliminar partida</h2>
     <p id="deleteConfirmText">Esta acción no se puede deshacer.</p>
     <div class="modal-actions">
-      <button class="btn" id="deleteConfirmCancelBtn">Cancelar</button>
-      <button class="btn danger" id="deleteConfirmAcceptBtn">Eliminar</button>
+      <button type="button" class="btn" id="deleteConfirmCancelBtn">Cancelar</button>
+      <button type="button" class="btn danger" id="deleteConfirmAcceptBtn">Eliminar</button>
     </div>
   </div>
 </div>
@@ -377,7 +378,7 @@
     <h2 id="endTitle">Fin de la expedición</h2>
     <p id="endText"></p>
     <div class="modal-actions">
-      <button class="btn primary" id="endRestart">Nueva partida</button>
+      <button type="button" class="btn primary" id="endRestart">Nueva partida</button>
     </div>
   </div>
 </div>

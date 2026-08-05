@@ -1,0 +1,102 @@
+/* Umbral de los Tres Dados */
+/* ============================================================================
+ * THEME — degradados reutilizables
+ * ----------------------------------------------------------------------------
+ * Cada variable es un `linear-gradient(...)` completo construido a partir de
+ * los primitivos de `_colors.css`. Varios degradados que antes se repetían
+ * como literales casi idénticos en distintos ficheros (diferencias de solo
+ * unas pocas unidades RGB) se han agrupado aquí en un único token; esto
+ * puede introducir un cambio de color mínimo (imperceptible o casi) en
+ * alguno de los usos originales a cambio de una paleta de degradados
+ * coherente y mantenible.
+ * ============================================================================
+ */
+
+:root {
+  /* ---- Superficies oscuras (paneles/tablero/chrome) ---- */
+  --gradient-panel-surface: linear-gradient(
+    180deg,
+    rgb(var(--bg-wood-2-rgb) / 96%),
+    rgb(var(--bg-wood-3-rgb) / 96%)
+  );
+  --gradient-panel-void: linear-gradient(
+    180deg,
+    var(--bg-wood-2),
+    var(--bg-wood-3)
+  );
+  --gradient-body-void: linear-gradient(
+    180deg,
+    var(--bg-wood-1),
+    var(--void-mid) 68%,
+    var(--bg-wood-3)
+  );
+  --gradient-panel-green: linear-gradient(
+    180deg,
+    var(--panel-green-light),
+    var(--panel-green-1)
+  );
+
+  /* ---- Botones (topbar / logbar) ---- */
+  --gradient-button-slate: linear-gradient(
+    180deg,
+    var(--slate-light),
+    var(--slate-dark)
+  );
+  --gradient-button-gold: linear-gradient(
+    180deg,
+    var(--gold-light),
+    var(--gold-dark)
+  );
+  --gradient-button-red: linear-gradient(
+    180deg,
+    var(--red-light),
+    var(--red-dark)
+  );
+  --gradient-button-blue: linear-gradient(180deg, var(--blue), var(--blue-dark));
+  --gradient-button-green: linear-gradient(
+    180deg,
+    var(--success-light),
+    var(--success-dark)
+  );
+
+  /* ---- Barra de HP (héroe/enemigo) ---- */
+  --gradient-hp-bar-horizontal: linear-gradient(
+    90deg,
+    var(--hp-light),
+    var(--hp-dark)
+  );
+  --gradient-hp-bar-vertical: linear-gradient(
+    180deg,
+    var(--hp-light),
+    var(--hp-dark)
+  );
+
+  /* ---- Rombo dorado decorativo (HUD de enemigo / dashboard de combate) ---- */
+  --gradient-gold-diamond: linear-gradient(
+    135deg,
+    var(--gold-diamond-1),
+    var(--gold-diamond-2) 48%,
+    var(--gold-diamond-3) 52%,
+    var(--gold-diamond-4)
+  );
+
+  /* ---- Pieza de muro (tablero) ---- */
+  --gradient-wall-stone: linear-gradient(
+    145deg,
+    var(--stone-light),
+    var(--stone-mid) 52%,
+    var(--stone-dark)
+  );
+
+  /* ---- Dados de energía ---- */
+  --gradient-die-light: linear-gradient(
+    145deg,
+    var(--die-light-1),
+    var(--die-light-2)
+  );
+  --gradient-die-dark: linear-gradient(
+    145deg,
+    var(--die-dark-1),
+    var(--die-dark-2)
+  );
+}

@@ -1,13 +1,13 @@
 const path = require("node:path");
 const { test, expect } = require("@playwright/test");
 
-const appPath = "/umbral-de-los-tres-dados.html?test=1";
-const localAppUrl = `file://${path.resolve(__dirname, "..", "..", "umbral-de-los-tres-dados.html")}?test=1`;
+const appPath = "/index.html?test=1";
+const localAppUrl = `file://${path.resolve(__dirname, "..", "..", "index.html")}?test=1`;
 const pageErrors = new WeakMap();
 
 async function closeTutorialIfOpen(page) {
   const helpModal = page.locator("#helpModal");
-  if (!(await helpModal.isVisible())) return;
+  if (!(await helpModal.isVisible())) {return;}
 
   await page.locator("#helpNext").click();
   await page.locator("#helpNext").click();
@@ -133,7 +133,7 @@ test.beforeEach(async ({ page }) => {
   pageErrors.set(page, errors);
   page.on("pageerror", error => errors.push(error.message));
   page.on("console", message => {
-    if (message.type() === "error") errors.push(message.text());
+    if (message.type() === "error") {errors.push(message.text());}
   });
   await page.goto(appPath);
   await page.evaluate(() => {
@@ -150,7 +150,7 @@ test.afterEach(async ({ page }) => {
   expect(pageErrors.get(page) ?? []).toEqual([]);
 });
 
-test("muestra el inicio sin scroll interno en escritorio", async ({ page }) => {
+test("muestra el inicio sin scroll interno en escritorio @smoke", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto(appPath);
 
@@ -159,7 +159,7 @@ test("muestra el inicio sin scroll interno en escritorio", async ({ page }) => {
   await expectNoInternalScroll(modal);
 });
 
-test("permite pulsar Entrar y pasar de la vista inicial al juego", async ({ page }) => {
+test("permite pulsar Entrar y pasar de la vista inicial al juego @smoke", async ({ page }) => {
   await expect(page.locator("#startModal")).toBeVisible();
   await expect(page.locator("#gameCard")).toBeVisible();
   await expect(page.locator("#helpModal")).toBeHidden();
@@ -172,11 +172,11 @@ test("permite pulsar Entrar y pasar de la vista inicial al juego", async ({ page
   await expect(page.locator("#log")).not.toHaveText("Selecciona una clase para comenzar.");
 });
 
-test("el html abierto con file:// también permite entrar al juego", async ({ page }) => {
+test("el html abierto con file:// también permite entrar al juego @integration", async ({ page }) => {
   const errors = [];
   page.on("pageerror", error => errors.push(error.message));
   page.on("console", message => {
-    if (message.type() === "error") errors.push(message.text());
+    if (message.type() === "error") {errors.push(message.text());}
   });
 
   await page.goto(localAppUrl);
@@ -199,7 +199,7 @@ test("el html abierto con file:// también permite entrar al juego", async ({ pa
   expect(errors).toEqual([]);
 });
 
-test("modo niño se activa y persiste tras recargar", async ({ page }) => {
+test("modo niño se activa y persiste tras recargar @persistence", async ({ page }) => {
   const toggle = page.locator("#kidModeStartBtn");
   await expect(toggle).toHaveText(/Niño OFF/i);
 
@@ -212,7 +212,7 @@ test("modo niño se activa y persiste tras recargar", async ({ page }) => {
   await expect(page.locator("body")).toHaveClass(/kid-mode/);
 });
 
-test("Escape cierra el tutorial y devuelve el foco al boton de ayuda", async ({ page }) => {
+test("Escape cierra el tutorial y devuelve el foco al boton de ayuda @a11y", async ({ page }) => {
   await startGame(page);
   await page.locator("#helpBtn").click();
   await expect(page.locator("#helpModal")).toBeVisible();
@@ -224,7 +224,7 @@ test("Escape cierra el tutorial y devuelve el foco al boton de ayuda", async ({ 
   await expect(page.locator("#helpBtn")).toBeFocused();
 });
 
-test("el modal de guardado atrapa el foco con Tab y Shift+Tab", async ({ page }) => {
+test("el modal de guardado atrapa el foco con Tab y Shift+Tab @a11y", async ({ page }) => {
   await startGame(page);
   await page.locator("#saveBtn").click();
   await expect(page.locator("#saveModal")).toBeVisible();
@@ -239,7 +239,7 @@ test("el modal de guardado atrapa el foco con Tab y Shift+Tab", async ({ page })
   expect(await focusInside(page, "#saveModal")).toBe(true);
 });
 
-test("permite elegir cualquiera de las cuatro clases desde el inicio", async ({ page }) => {
+test("permite elegir cualquiera de las cuatro clases desde el inicio @smoke", async ({ page }) => {
   const cases = [
     ["warden", "Guardián"],
     ["berserker", "Berserker"],
@@ -263,7 +263,7 @@ test("permite elegir cualquiera de las cuatro clases desde el inicio", async ({ 
   }
 });
 
-test("permite entrar y lanzar dados de uno en uno o todos a la vez", async ({ page }) => {
+test("permite entrar y lanzar dados de uno en uno o todos a la vez @smoke", async ({ page }) => {
   await startGame(page);
 
   await expect(page.locator("#dicePool .die-placeholder")).toHaveCount(3);
@@ -278,7 +278,7 @@ test("permite entrar y lanzar dados de uno en uno o todos a la vez", async ({ pa
   await expect(page.locator("#phaseBtn")).toHaveText(/Confirmar asignación/i);
 });
 
-test("permite seleccionar, reasignar, desasignar y reiniciar asignaciones", async ({ page }) => {
+test("permite seleccionar, reasignar, desasignar y reiniciar asignaciones @smoke", async ({ page }) => {
   await startGame(page);
   await page.evaluate(() => window.__UMBRAL_TEST__.setRolls([1, 2, 3]));
   await page.locator("#phaseBtn").click();
@@ -306,7 +306,7 @@ test("permite seleccionar, reasignar, desasignar y reiniciar asignaciones", asyn
   expect(state.dice.every(d => d.assigned === null)).toBe(true);
 });
 
-test("las ranuras de atributos reservan el espacio del dado y no redimensionan al asignar", async ({ page }) => {
+test("las ranuras de atributos reservan el espacio del dado y no redimensionan al asignar @integration", async ({ page }) => {
   await startGame(page);
   await page.evaluate(() => window.__UMBRAL_TEST__.setRolls([2, 4, 6]));
   await page.locator("#phaseBtn").click();
@@ -345,7 +345,7 @@ test("las ranuras de atributos reservan el espacio del dado y no redimensionan a
   expect(after.overflowY).not.toMatch(/auto|scroll/);
 });
 
-test("bloquea asignar alcance salvo talento de exploradora y aplica alcance temporal", async ({ page }) => {
+test("bloquea asignar alcance salvo talento de exploradora y aplica alcance temporal @regression", async ({ page }) => {
   await startGame(page);
   await setGameState(page, {
     ...playableState({
@@ -402,7 +402,7 @@ test("bloquea asignar alcance salvo talento de exploradora y aplica alcance temp
   expect(state._tempRange).toBeUndefined();
 });
 
-test("cubre talentos de guardián, arcanista y berserker", async ({ page }) => {
+test("cubre talentos de guardián, arcanista y berserker @regression", async ({ page }) => {
   await startGame(page);
 
   await setGameState(page, playableState({
@@ -456,7 +456,7 @@ test("cubre talentos de guardián, arcanista y berserker", async ({ page }) => {
   expect(state.dice.map(d => d.value)).toEqual([2, 3, 4]);
 });
 
-test("permite asignar dados, confirmar turno, mover y terminar fase enemiga", async ({ page }) => {
+test("permite asignar dados, confirmar turno, mover y terminar fase enemiga @regression", async ({ page }) => {
   await startGame(page);
   await page.evaluate(() => window.__UMBRAL_TEST__.setRolls([2, 3, 4]));
 
@@ -481,7 +481,7 @@ test("permite asignar dados, confirmar turno, mover y terminar fase enemiga", as
   expect(state.phase).toBe("energy");
 });
 
-test("valida movimiento: fase, rango, muros, enemigos, línea de visión y diagonal", async ({ page }) => {
+test("valida movimiento: fase, rango, muros, enemigos, línea de visión y diagonal @regression", async ({ page }) => {
   await startGame(page);
   await setGameState(page, playableState({
     points: { speed: 6, attack: 0, defense: 99 },
@@ -523,7 +523,7 @@ test("valida movimiento: fase, rango, muros, enemigos, línea de visión y diago
   expect(state.hero).toEqual({ x: 1, y: 3 });
 });
 
-test("valida ataque: alcance, línea de visión, puntos insuficientes, daño y derrota", async ({ page }) => {
+test("valida ataque: alcance, línea de visión, puntos insuficientes, daño y derrota @regression", async ({ page }) => {
   await startGame(page);
 
   await setGameState(page, playableState({
@@ -575,7 +575,7 @@ test("valida ataque: alcance, línea de visión, puntos insuficientes, daño y d
   expect(state.enemies).toHaveLength(0);
 });
 
-test("la fase enemiga mueve criaturas, calcula daño absorbido y daño real", async ({ page }) => {
+test("la fase enemiga mueve criaturas, calcula daño absorbido y daño real @regression", async ({ page }) => {
   await startGame(page);
 
   await setGameState(page, playableState({
@@ -607,7 +607,7 @@ test("la fase enemiga mueve criaturas, calcula daño absorbido y daño real", as
   expect(state.hp).toBe(5);
 });
 
-test("permite derrotar enemigo, superar nivel y aplicar recompensa", async ({ page }) => {
+test("permite derrotar enemigo, superar nivel y aplicar recompensa @regression", async ({ page }) => {
   await startGame(page);
   await setGameState(page, playableState());
 
@@ -625,7 +625,7 @@ test("permite derrotar enemigo, superar nivel y aplicar recompensa", async ({ pa
   expect(state.phase).toBe("energy");
 });
 
-test("aplica todas las recompensas posibles", async ({ page }) => {
+test("aplica todas las recompensas posibles @regression", async ({ page }) => {
   await startGame(page);
 
   const upgrades = [
@@ -647,7 +647,7 @@ test("aplica todas las recompensas posibles", async ({ page }) => {
   }
 });
 
-test("permite guardar y cargar una partida existente", async ({ page }) => {
+test("permite guardar y cargar una partida existente @persistence", async ({ page }) => {
   await startGame(page);
   await setGameState(page, playableState({
     level: 5,
@@ -680,7 +680,7 @@ test("permite guardar y cargar una partida existente", async ({ page }) => {
   expect(state.hero).toEqual({ x: 2, y: 4 });
 });
 
-test("permite mantener hasta cinco partidas con nombre", async ({ page }) => {
+test("permite mantener hasta cinco partidas con nombre @persistence", async ({ page }) => {
   await startGame(page);
 
   for (const [slotIndex, name, level] of [
@@ -708,7 +708,7 @@ test("permite mantener hasta cinco partidas con nombre", async ({ page }) => {
   ]);
 });
 
-test("permite eliminar partidas guardadas tras confirmacion", async ({ page }) => {
+test("permite eliminar partidas guardadas tras confirmacion @persistence", async ({ page }) => {
   await startGame(page);
   await setGameState(page, playableState({ level: 4 }));
   await page.locator("#saveBtn").click();
@@ -729,7 +729,7 @@ test("permite eliminar partidas guardadas tras confirmacion", async ({ page }) =
   expect((await getSaveSlots(page)).filter(Boolean)).toHaveLength(0);
 });
 
-test("no elimina la partida si se cancela la confirmacion", async ({ page }) => {
+test("no elimina la partida si se cancela la confirmacion @persistence", async ({ page }) => {
   await startGame(page);
   await setGameState(page, playableState({ level: 4 }));
   await page.locator("#saveBtn").click();
@@ -750,7 +750,7 @@ test("no elimina la partida si se cancela la confirmacion", async ({ page }) => 
   expect((await getSaveSlots(page)).filter(Boolean)).toHaveLength(1);
 });
 
-test("Escape cierra la confirmacion de borrado y devuelve el foco al boton de eliminar", async ({ page }) => {
+test("Escape cierra la confirmacion de borrado y devuelve el foco al boton de eliminar @a11y", async ({ page }) => {
   await startGame(page);
   await setGameState(page, playableState({ level: 4 }));
   await page.locator("#saveBtn").click();
@@ -771,7 +771,7 @@ test("Escape cierra la confirmacion de borrado y devuelve el foco al boton de el
   await expect(page.locator("#loadDeleteBtn")).toBeFocused();
 });
 
-test("no carga partidas corruptas o de versión incompatible", async ({ page }) => {
+test("no carga partidas corruptas o de versión incompatible @persistence", async ({ page }) => {
   await page.evaluate(() => {
     localStorage.setItem("crypt_three_dice_retro_slots_v1", "{invalid-json");
   });
@@ -795,7 +795,7 @@ test("no carga partidas corruptas o de versión incompatible", async ({ page }) 
   await expect(await getGameState(page)).toBeNull();
 });
 
-test("muestra derrota cuando la fase enemiga deja al héroe sin vida", async ({ page }) => {
+test("muestra derrota cuando la fase enemiga deja al héroe sin vida @regression", async ({ page }) => {
   await startGame(page);
   await setGameState(page, playableState({
     hp: 1,
@@ -812,7 +812,7 @@ test("muestra derrota cuando la fase enemiga deja al héroe sin vida", async ({ 
   expect(state.hp).toBeLessThanOrEqual(0);
 });
 
-test("recorre una partida completa determinista hasta victoria", async ({ page }) => {
+test("recorre una partida completa determinista hasta victoria @regression", async ({ page }) => {
   test.setTimeout(60000);
   await startGame(page);
 
@@ -834,7 +834,7 @@ test("recorre una partida completa determinista hasta victoria", async ({ page }
   expect(state.phase).toBe("end");
 });
 
-test("el panel de dados de energía no usa scroll interno", async ({ page }) => {
+test("el panel de dados de energía no usa scroll interno @integration", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto(appPath);
   await startGame(page);
@@ -843,7 +843,7 @@ test("el panel de dados de energía no usa scroll interno", async ({ page }) => 
   await expectNoInternalScroll(dicePanel, 6);
 });
 
-test("el bloque superior con borde amarillo mantiene tamaño estable al tirar dados", async ({ page }) => {
+test("el bloque superior con borde amarillo mantiene tamaño estable al tirar dados @integration", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto(appPath);
   await startGame(page);
@@ -879,7 +879,7 @@ test("el bloque superior con borde amarillo mantiene tamaño estable al tirar da
   }
 });
 
-test("asignar 1, 2 o 3 dados no desplaza ni redimensiona la columna de juego", async ({ page }) => {
+test("asignar 1, 2 o 3 dados no desplaza ni redimensiona la columna de juego @integration", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto(appPath);
   await startGame(page);
@@ -935,7 +935,7 @@ test("asignar 1, 2 o 3 dados no desplaza ni redimensiona la columna de juego", a
   }
 });
 
-test("los elementos principales del layout permanecen estables durante el flujo del turno", async ({ page }) => {
+test("los elementos principales del layout permanecen estables durante el flujo del turno @integration", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto(appPath);
   await startGame(page);
@@ -985,7 +985,7 @@ test("los elementos principales del layout permanecen estables durante el flujo 
   expectSelectorsStable(baseline, await measureSelectors(page, selectors), 1);
 });
 
-test("las vistas principales no introducen scroll interno en tamaños de escritorio e iPad", async ({ page }) => {
+test("las vistas principales no introducen scroll interno en tamaños de escritorio e iPad @integration", async ({ page }) => {
   test.setTimeout(60000);
   for (const viewport of [
     { width: 1366, height: 768 },
@@ -1000,13 +1000,13 @@ test("las vistas principales no introducen scroll interno en tamaños de escrito
   }
 });
 
-test("el HTML de producción no expone hooks de test", async ({ page }) => {
-  await page.goto("/umbral-de-los-tres-dados.html");
+test("el HTML de producción no expone hooks de test @smoke", async ({ page }) => {
+  await page.goto("/index.html");
   const hasHook = await page.evaluate(() => Boolean(window.__UMBRAL_TEST__));
   expect(hasHook).toBe(false);
 });
 
-test("carga recursos locales organizados en scripts, styles y assets", async ({ page }) => {
+test("carga recursos locales organizados en scripts, styles y assets @smoke", async ({ page }) => {
   await page.goto(appPath);
   const resourceReport = await page.evaluate(() => {
     const imageSources = [...document.images].map(img => img.currentSrc || img.src);
@@ -1031,7 +1031,7 @@ test("carga recursos locales organizados en scripts, styles y assets", async ({ 
   expect(resourceReport.assetSources.some(src => src.startsWith("/assets/images/"))).toBe(true);
 });
 
-test("el indicador de vida usa el mismo componente compacto para héroe y enemigos", async ({ page }) => {
+test("el indicador de vida usa el mismo componente compacto para héroe y enemigos @regression", async ({ page }) => {
   await startGame(page);
   await setGameState(page, playableState({
     hp: 6,

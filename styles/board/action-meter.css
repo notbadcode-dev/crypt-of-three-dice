@@ -1,0 +1,118 @@
+/* Componente reutilizable "medidor de acción" (MOV/ATQ/DEF), usado en la carta
+   inferior de estadísticas y reutilizado dentro de .turn-panel */
+
+.action-meter {
+  --meter-accent: 214, 187, 117;
+  background: none;
+  display: grid;
+  grid-template-columns: minmax(12px, 0.44fr) minmax(10px, 0.46fr) minmax(
+      0,
+      0.95fr
+    );
+  grid-template-rows: minmax(0, 1fr);
+  align-items: center;
+  column-gap: 4%;
+  min-width: 0;
+  padding: 0 8%;
+  box-sizing: border-box;
+}
+.action-meter::before {
+  content: "";
+  position: absolute;
+  inset: 6% 4%;
+  background:
+    linear-gradient(180deg, rgb(var(--white-rgb), 0.07), transparent 28%),
+    linear-gradient(
+      135deg,
+      rgb(var(--meter-accent), 0.24),
+      transparent 30% 72%,
+      rgb(75 99 91 / 12%)
+    ),
+    linear-gradient(180deg, rgb(13 28 27 / 94%), rgb(3 9 9 / 86%));
+  border: 1px solid rgb(139 164 154 / 56%);
+  box-shadow:
+    inset 3px 0 0 rgb(var(--meter-accent), 0.68),
+    inset 0 0 0 1px rgb(var(--black-rgb), 0.62),
+    inset 0 -8px 14px rgb(var(--black-rgb), 0.34),
+    0 2px 0 rgb(var(--black-rgb), 0.26);
+  opacity: 1;
+  pointer-events: none;
+}
+.action-meter::after {
+  content: "";
+  position: absolute;
+  left: 9%;
+  right: 9%;
+  bottom: 14%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(var(--meter-accent), 0.48) 18% 82%,
+    transparent
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+.action-meter-icon {
+  position: relative;
+  z-index: 1;
+  grid-column: 1;
+  grid-row: 1;
+  width: 94%;
+  max-width: 18px;
+  justify-self: center;
+  align-self: center;
+  object-fit: contain;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  filter: drop-shadow(2px 2px 0 rgb(var(--black-rgb), 0.42));
+}
+.action-meter-value {
+  position: relative;
+  z-index: 1;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+  justify-self: center;
+  color: var(--action-value-text);
+  font-size: 0.9rem;
+  line-height: 0.9;
+  letter-spacing: 0;
+  text-align: left;
+  text-shadow:
+    var(--text-stroke-action-value),
+    2px 2px 0 var(--black);
+}
+.action-meter-label {
+  position: relative;
+  z-index: 1;
+  grid-column: 3;
+  grid-row: 1;
+  align-self: center;
+  justify-self: start;
+  color: var(--action-label-text);
+  font-size: 0.39rem;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  font-weight: 900;
+  line-height: 1;
+  text-shadow:
+    var(--text-stroke-black),
+    1px 1px 0 var(--black);
+}
+.action-meter-move {
+  --meter-accent: 88, 159, 183;
+}
+.action-meter-attack {
+  --meter-accent: 206, 91, 78;
+}
+.action-meter-defense {
+  --meter-accent: 177, 191, 181;
+}
+
+.bottom-stat-row .action-meter {
+  background: none;
+  border: none;
+  box-shadow: none;
+}

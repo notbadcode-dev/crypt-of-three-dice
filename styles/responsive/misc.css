@@ -1,0 +1,136 @@
+/* Ajustes finales sin media query: panel de energía compacto y normalización de contadores */
+
+/* Panel de energía compacto: evita scroll interno sin perder jerarquía jugable. */
+.board-side-info > .block:nth-child(2) {
+  padding: 7px;
+
+  h3 {
+    margin-bottom: 3px;
+    font-size: 0.78rem;
+  }
+
+  .dice-pool {
+    height: 48px;
+    min-height: 48px;
+    gap: 6px;
+    padding: 4px;
+  }
+
+  .die {
+    width: 36px;
+    height: 36px;
+    border-width: 3px;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+
+  .skills {
+    gap: 3px;
+    margin-top: 2px;
+  }
+
+  .skill-group-title {
+    margin-top: 0;
+    font-size: 0.48rem;
+    line-height: 1.05;
+  }
+
+  .skill {
+    grid-template-columns: 68px 34px minmax(64px, 1fr) 40px;
+    gap: 4px;
+    padding: 3px;
+  }
+
+  .skill-name {
+    min-height: 38px;
+    font-size: 0.64rem;
+  }
+
+  .skill-base,
+  .skill-total {
+    height: 38px;
+    min-height: 28px;
+  }
+
+  .skill-base {
+    font-size: 0.86rem;
+
+    &::before {
+      font-size: 0.36rem;
+    }
+  }
+
+  .skill-total {
+    small {
+      font-size: 0.36rem;
+    }
+
+    b {
+      margin-top: 1px;
+      font-size: 0.82rem;
+    }
+  }
+
+  .slot {
+    height: 38px;
+    min-height: 38px;
+    padding: 2px 6px 2px 20px;
+    font-size: 0.56rem;
+
+    .die,
+    .die-placeholder {
+      flex-basis: 30px;
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .resources {
+    gap: 4px;
+    margin-top: 2px;
+  }
+
+  .resource {
+    padding: 3px 4px;
+
+    small {
+      font-size: 0.46rem;
+    }
+
+    b {
+      margin-top: 1px;
+      font-size: 0.9rem;
+    }
+  }
+
+  .mini-actions {
+    margin-top: 2px;
+
+    .btn {
+      height: 30px;
+      min-height: 30px;
+      padding: 4px 7px;
+      font-size: 0.62rem;
+    }
+  }
+
+  .action-note {
+    display: none;
+  }
+}
+
+/* Normalizacion final de contadores para todos los breakpoints. */
+.slot-value.ui-number,
+#levelHud.ui-number,
+.skill-base.ui-number,
+.skill-total .ui-number,
+.resource .ui-number,
+.enemy-meta-value.ui-number {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.enemy-meta-value.ui-number {
+  font-size: clamp(0.62rem, 0.78vw, 0.76rem);
+}

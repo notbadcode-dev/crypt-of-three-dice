@@ -1,0 +1,100 @@
+/* Panel de turno: medidor de acción reutilizado (MOV/ATQ/DEF) y grid de recursos */
+
+.turn-panel {
+  padding: 7.2% 7.2% 7.5%;
+  grid-template-rows: 18% minmax(0, 1fr);
+  gap: 2.7%;
+
+  .action-meter {
+    --meter-accent: 214, 187, 117;
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    display: grid;
+    contain: layout paint;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 0.86fr) minmax(0, 0.58fr) auto;
+    align-items: center;
+    justify-items: center;
+    padding: 12% 8% 11%;
+    border: 1px solid rgb(214 170 72 / 68%);
+    background:
+      linear-gradient(180deg, rgb(var(--white-rgb), 0.055), transparent 28%),
+      linear-gradient(180deg, rgb(14 27 25 / 96%), rgb(3 8 8 / 94%));
+    box-shadow:
+      inset 0 0 0 1px rgb(var(--black-rgb), 0.66),
+      inset 0 -9px 13px rgb(var(--black-rgb), 0.29),
+      0 2px 0 rgb(var(--black-rgb), 0.34);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-left: 2px solid rgb(var(--meter-accent), 0.36);
+      background: linear-gradient(
+        180deg,
+        rgb(var(--meter-accent), 0.11),
+        transparent 38% 78%,
+        rgb(var(--meter-accent), 0.07)
+      );
+      pointer-events: none;
+    }
+
+    &::after {
+      display: none;
+    }
+  }
+
+  .action-meter-icon {
+    position: relative;
+    z-index: 1;
+    grid-column: 1;
+    grid-row: 1;
+    width: 72%;
+    max-width: 39px;
+    align-self: end;
+    justify-self: center;
+    object-fit: contain;
+    image-rendering: pixelated;
+  }
+
+  .action-meter-value {
+    position: relative;
+    z-index: 1;
+    grid-column: 1;
+    grid-row: 2;
+    align-self: center;
+    justify-self: center;
+    min-height: 1.12em;
+    color: var(--turn-action-value-text);
+    font-size: 1.28rem;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .action-meter-label {
+    position: relative;
+    z-index: 1;
+    grid-column: 1;
+    grid-row: 3;
+    align-self: start;
+    justify-self: center;
+    color: var(--text-parchment);
+    font-size: 0.49rem;
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    font-weight: 900;
+  }
+}
+
+.turn-resource-grid {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 5.4%;
+}

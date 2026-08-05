@@ -1,0 +1,118 @@
+/* Barra superior: marca, título y acciones (sonido, guardado, modo niño) */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  background: linear-gradient(180deg, rgb(22 35 40 / 94%), rgb(10 18 21 / 96%));
+  border: 3px solid #04090a;
+  box-shadow:
+    var(--shadow),
+    inset 0 0 0 2px #2f474d,
+    inset 0 0 0 5px rgb(var(--black-rgb), 0.34);
+  border-radius: 8px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+
+  h1 {
+    margin: 0;
+    line-height: 1;
+    font-size: clamp(1rem, 2vw, 1.55rem);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    text-shadow: var(--text-shadow-hard);
+  }
+
+  p {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+}
+.brand-mark {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  border: 3px solid #67798d;
+  box-shadow: inset 0 0 0 2px #293a46;
+  background: #0f1a1e url("../../assets/icons/crypt-icon.svg") center / 82% 82%
+    no-repeat;
+  image-rendering: pixelated;
+  font-size: 0;
+}
+.top-actions {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+.btn,
+.icon-btn {
+  border: 3px solid #08120f;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #25353c, #121c21);
+  color: var(--white);
+  padding: 9px 12px;
+  box-shadow:
+    inset 0 0 0 2px #46555b,
+    3px 3px 0 var(--shadow-deep);
+  cursor: pointer;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+
+  &:hover {
+    filter: brightness(1.08);
+  }
+
+  &:active {
+    transform: translate(2px, 2px);
+    box-shadow:
+      inset 0 0 0 2px #4b6b61,
+      1px 1px 0 var(--shadow-deep);
+  }
+}
+.btn {
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  &.primary {
+    background: linear-gradient(180deg, var(--gold-light), var(--gold-dark));
+    color: var(--ink-on-gold);
+  }
+
+  &.red {
+    background: linear-gradient(180deg, #d86a63, #8f3631);
+  }
+
+  &.blue {
+    background: linear-gradient(180deg, var(--blue), #2e6b8d);
+  }
+
+  &.green {
+    background: linear-gradient(180deg, #79d186, #3d8247);
+  }
+}
+.icon-btn {
+  min-width: 44px;
+}
+.kid-toggle {
+  min-width: 72px;
+  padding-inline: 10px;
+
+  &[aria-pressed="true"] {
+    background: linear-gradient(180deg, var(--gold-light), var(--gold-dark));
+    color: var(--ink-on-gold);
+  }
+}

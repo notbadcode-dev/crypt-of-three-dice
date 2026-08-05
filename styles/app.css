@@ -1,5 +1,7 @@
-@import "./base.css";
-@import "./board.css";
-@import "./sidebar.css";
-@import "./modals.css";
-@import "./responsive.css";
+@import "./global/global.css";
+
+@import "./base/base.css";
+@import "./board/board.css";
+@import "./sidebar/sidebar.css";
+@import "./modals/modals.css";
+@import "./responsive/responsive.css";

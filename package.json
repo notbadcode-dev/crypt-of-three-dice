@@ -3,8 +3,20 @@
   "version": "1.0.0",
   "private": true,
   "description": "Infraestructura de tests Playwright para Umbral de los Tres Dados.",
+  "author": "notbadcode",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/notbadcode-dev/crypt-of-three-dice"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "build:runtime": "node scripts/build-runtime.mjs",
+    "build:dist": "npm run build:runtime && node scripts/build-dist.mjs",
+    "typecheck": "tsc --project tsconfig.json --noEmit",
+    "optimize:images": "node scripts/optimize-images.mjs",
     "test": "playwright test",
     "test:e2e": "playwright test",
     "test:unit": "mkdir -p tests/unit/results && node --test --experimental-default-type=module --test-reporter=spec --test-reporter-destination=stdout --test-reporter=tap --test-reporter-destination=tests/unit/results/results.tap tests/unit/*.test.mjs",
@@ -13,9 +25,24 @@
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
     "test:report": "playwright show-report",
-    "serve": "node tests/e2e/serve-static.mjs"
+    "serve": "node tests/e2e/serve-static.mjs",
+    "lint": "eslint .",
+    "lint:css": "stylelint \"styles/**/*.css\""
   },
   "devDependencies": {
-    "@playwright/test": "^1.54.0"
+    "@eslint/js": "^10.0.1",
+    "@html-eslint/eslint-plugin": "^0.64.0",
+    "@html-eslint/parser": "^0.64.0",
+    "@playwright/test": "^1.54.0",
+    "eslint": "^10.1.0",
+    "fast-glob": "^3.3.3",
+    "globals": "^17.9.0",
+    "playwright": "^1.54.0",
+    "stylelint": "^17.14.1",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-declaration-strict-value": "^1.11.1",
+    "terser": "^5.37.0",
+    "typescript": "^5.7.0",
+    "typescript-eslint": "^8.66.0"
   }
 }

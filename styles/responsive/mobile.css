@@ -1,0 +1,70 @@
+/* Móvil: topbar apilada, columna única y modal inicial de una sola columna */
+
+@media (width <= 760px) {
+  .page {
+    width: min(100% - 10px, 1380px);
+    padding-top: 8px;
+  }
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .top-actions {
+    justify-content: flex-end;
+  }
+  .card-shell {
+    grid-template-columns: 1fr;
+  }
+  .game-card {
+    width: min(100%, 620px);
+  }
+  .sidebar {
+    grid-template-columns: 1fr;
+  }
+  .modal-grid,
+  .choice-grid {
+    grid-template-columns: 1fr;
+  }
+  .logbar {
+    grid-template-columns: 1fr;
+  }
+  .turn-flow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .skill {
+    grid-template-columns: 1fr 44px;
+
+    .slot,
+    .skill-total {
+      grid-column: 1 / -1;
+    }
+  }
+
+  #startModal {
+    .modal-grid {
+      grid-template-columns: 1fr;
+      height: auto;
+    }
+
+    .choice-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .choice-card {
+      min-height: unset;
+    }
+
+    .poster-char {
+      min-height: 170px;
+    }
+
+    .modal-actions {
+      flex-direction: column;
+      align-items: center;
+
+      .btn {
+        width: min(320px, 100%);
+      }
+    }
+  }
+}

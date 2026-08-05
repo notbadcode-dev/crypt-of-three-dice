@@ -1,0 +1,30 @@
+/* Debug opcional: activar añadiendo class="debug-board" al body. */
+.debug-board .game-card {
+  .top-stat-row,
+  .bottom-stat-row,
+  .overlay-grid,
+  .enemy-meta {
+    outline: 2px solid var(--debug-outline);
+    outline-offset: -2px;
+  }
+
+  .piece,
+  .wall-piece {
+    outline: 1px solid var(--debug-outline);
+    outline-offset: -1px;
+  }
+
+  .cell::after {
+    content: "";
+    position: absolute;
+    inset: 4%;
+    outline: 1px solid var(--debug-outline);
+    outline-offset: -1px;
+    pointer-events: none;
+  }
+
+  .slot-inner {
+    outline: 1px solid var(--debug-outline);
+    outline-offset: -1px;
+  }
+}

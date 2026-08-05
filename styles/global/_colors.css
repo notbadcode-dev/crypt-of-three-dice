@@ -1,0 +1,160 @@
+/* Umbral de los Tres Dados */
+/* ============================================================================
+ * THEME — sistema de diseño de color
+ * ----------------------------------------------------------------------------
+ * Este fichero tiene dos capas, en este orden:
+ *
+ *   1) PALETA (primitivos): valores de color "en bruto", agrupados por familia
+ *      de tono. No tienen significado de uso; solo nombran un color concreto
+ *      para poder reutilizarlo sin repetir literales.
+ *
+ *   2) TEMA (semántico): variables con nombre de ROL (superficie, borde,
+ *      texto, estado...) que apuntan a un primitivo de la paleta. Los
+ *      ficheros de componentes SIEMPRE deben consumir capa 2 (semántica); solo
+ *      recurren a un primitivo de paleta directamente si no existe aún un rol
+ *      semántico adecuado.
+ *
+ * Preparado para multi-theme: toda la capa semántica cuelga de `:root` con
+ * valores del tema oscuro actual (único tema soportado hoy). Un tema
+ * alternativo futuro (p. ej. modo claro) se añadiría redefiniendo SOLO la
+ * capa semántica bajo un selector de ámbito (p. ej. `:root[data-theme="light"]`),
+ * sin tocar los primitivos de paleta ni los ficheros de componentes.
+ * ============================================================================
+ */
+
+:root {
+  /* ---- PALETA · Vacío / madera (superficies casi negras, tablero y chrome) ---- */
+  --bg-wood-1: #0d1719;
+  --bg-wood-2: #122024;
+  --bg-wood-3: #091114;
+  --void-mid: #152326;
+  --felt: #122325;
+  --felt-2: #1a2f31;
+  --felt-3: #081113;
+  --border-void: #050a0b;
+
+  /* ---- PALETA · Verdes de panel (sidebar, huecos de dados, tarjetas) ---- */
+  --panel-green-1: #0d241e;
+  --panel-green-2: #10241f;
+  --panel-green-3: #0b211c;
+  --panel-green-light: #1a3b32;
+  --panel-teal: #223d36;
+  --panel-green-hover: #29483f;
+  --olive-highlight: #374628;
+  --green-mid: #315448;
+  --green-deep: #20352f;
+
+  /* ---- PALETA · Piedra y madera (muro/pieza decorativa del tablero) ---- */
+  --stone: #8f8a75;
+  --stone-2: #6f6b59;
+  --stone-light: #7b7460;
+  --stone-mid: #3d433c;
+  --stone-dark: #1b2729;
+  --stone-pale: #8f998b;
+  --border-wall: #252418;
+
+  /* ---- PALETA · Dorado (acentos, botón primario, rombo decorativo) ---- */
+  --gold-light: #ebdc69;
+  --gold-dark: #a48a2b;
+  --gold-highlight: #d6c454;
+  --gold-glow: #f1dd5c;
+  --gold-diamond-1: #1a1207;
+  --gold-diamond-2: #e2ac4f;
+  --gold-diamond-3: #271805;
+  --gold-diamond-4: #81591f;
+  --ink-on-gold: #121212;
+
+  /* ---- PALETA · Estados (peligro/éxito/info) y variantes de degradado ---- */
+  --accent: #c9a85b;
+  --danger: #d95c54;
+  --success: #66c56c;
+  --blue: #63b8de;
+  --blue-dark: #2e6b8d;
+  --red-light: #d86a63;
+  --red-dark: #8f3631;
+  --success-light: #79d186;
+  --success-dark: #3d8247;
+  --hp-light: #ed6862;
+  --hp-dark: #b6363c;
+  --hp-stroke: #2d0505;
+  --hp-red: #f05c5f;
+  --danger-modal-bg: #4a1818;
+  --danger-modal-bg-hover: #6a2020;
+  --modal-danger-border: #b85a5a;
+  --modal-danger-border-hover: #e07a7a;
+
+  /* ---- PALETA · Neutros fríos (bordes de acero/pizarra) ---- */
+  --steel: #75838c;
+  --steel-dark: #263238;
+  --ui-border: #59666f;
+  --frame-blue: #51657d;
+  --inset-navy: #182f39;
+  --shadow-deep: #07100d;
+  --border-slate: #6b7f94;
+  --border-slate-light: #67798d;
+  --border-inset-teal: #2f474d;
+  --border-inset-teal-light: #46555b;
+  --slate-light: #25353c;
+  --slate-dark: #121c21;
+  --surface-brand-mark: #0f1a1e;
+
+  /* ---- PALETA · Trazos oscuros (pixel-stroke bajo valores numéricos) ---- */
+  --stroke-umber: #2c2310;
+  --action-value-stroke: #2d2110;
+  --enemy-value-stroke: #4a3920;
+
+  /* ---- PALETA · Dado (caras claras/oscuras) ---- */
+  --die-light-1: #f0f3f5;
+  --die-light-2: #afbec9;
+  --die-dark-1: #29463d;
+  --die-dark-2: #112720;
+  --die-face-text: #0a1015;
+  --die-placeholder-border: #8094a5;
+
+  /* ---- PALETA · Blanco / negro absolutos ---- */
+  --black: #000;
+  --white: #fff;
+
+  /* ---- TEMA · Superficies y texto base ---- */
+  --ink: #edf0df;
+  --muted: #a6b1a6;
+
+  /* ---- TEMA · Escala "mist" — texto frío verde-grisáceo (4 niveles,
+     de más brillante a más apagado). Sustituye ~16 tonos casi idénticos
+     que existían como variables sueltas de un solo uso. ---- */
+  --text-mist-1: #d8e4de;
+  --text-mist-2: #c6d5cd;
+  --text-mist-3: #b0c0b9;
+  --text-mist-4: #93a89f;
+  --text-bright: #eef1e7;
+
+  /* ---- TEMA · Escala "parchment" — texto cálido dorado/pergamino
+     (2 niveles + tonos ya existentes que se mantienen por ser
+     perceptiblemente distintos). ---- */
+  --text-parchment-bright: #fef8e9;
+  --text-parchment-mid: #fdf1d3;
+  --text-parchment: #ead8ad;
+  --text-warm-gray: #e2ded0;
+
+  /* ---- TEMA · Roles de texto específicos ---- */
+  --modal-body-text: var(--text-mist-2);
+  --modal-danger-text: #fff4f4;
+
+  /* ---- TEMA · Contorno de depuración (solo visible con .debug-board) ---- */
+  --debug-outline: rgb(255 0 0 / 95%);
+
+  /*
+   * Canales RGB "crudos" para usar dentro de rgba(var(--x-rgb), alpha)
+   * cuando se necesita el mismo color de arriba con transparencia.
+   */
+  --black-rgb: 0, 0, 0;
+  --white-rgb: 255, 255, 255;
+  --accent-rgb: 201, 168, 91;
+  --success-rgb: 102, 197, 108;
+  --frame-blue-rgb: 81, 101, 125;
+  --inset-navy-rgb: 24, 47, 57;
+  --gold-highlight-rgb: 214, 196, 84;
+  --gold-glow-rgb: 241, 221, 92;
+  --bg-wood-2-rgb: 18, 32, 36;
+  --bg-wood-3-rgb: 9, 17, 20;
+}

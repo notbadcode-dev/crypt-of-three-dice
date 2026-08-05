@@ -6,3 +6,5 @@ playwright-report/
 test-results/
 tests/e2e/results/
 tests/unit/results/
+.tsbuild/
+dist/

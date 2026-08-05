@@ -1,0 +1,157 @@
+/* Caja de fase de turno, progreso (lanzar/asignar/actuar/terminar) y resumen de la partida */
+
+.phase-box {
+  box-sizing: border-box;
+  display: grid;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 10px 12px;
+  background: linear-gradient(180deg, #213f36, var(--panel-green-2));
+  border: 2px solid var(--gold-highlight);
+  box-shadow:
+    inset 0 0 0 2px rgb(var(--gold-highlight-rgb), 0.2),
+    3px 3px 0 rgb(var(--black-rgb), 0.35);
+  font-weight: 900;
+
+  span {
+    color: var(--text-soft-1);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  strong {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: 12px;
+    color: var(--accent);
+    font-size: 1rem;
+    line-height: 1.1;
+    min-height: 1.2em;
+    text-transform: uppercase;
+
+    span {
+      color: inherit;
+      font-size: inherit;
+      letter-spacing: inherit;
+    }
+  }
+}
+.phase-main {
+  min-width: 0;
+  text-align: left;
+}
+.phase-separator {
+  text-align: center;
+}
+.phase-action {
+  min-width: 0;
+  text-align: right;
+}
+.phase-single {
+  grid-column: 1 / -1;
+  text-align: left;
+}
+.turn-flow {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 8px;
+}
+.turn-step {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 7px 4px;
+  text-align: center;
+  background: transparent;
+  border: 0;
+  border-bottom: 3px solid rgb(var(--frame-blue-rgb), 0.7);
+  box-shadow: none;
+  color: var(--turn-step-text);
+  text-transform: uppercase;
+
+  span {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+  }
+
+  &.done {
+    color: var(--text-soft-4);
+    border-bottom-color: rgb(var(--success-rgb), 0.86);
+  }
+
+  &.active {
+    color: var(--white);
+    background: rgb(var(--gold-glow-rgb), 0.1);
+    border-bottom-color: var(--accent);
+    box-shadow: 0 4px 14px rgb(var(--gold-glow-rgb), 0.1);
+  }
+}
+.phase-hint {
+  box-sizing: border-box;
+  height: 56px;
+  margin-bottom: 8px;
+  padding: 8px 10px;
+  min-height: 56px;
+  background: var(--panel-green-2);
+  border: 2px solid rgb(var(--frame-blue-rgb), 0.66);
+  box-shadow: inset 0 0 0 2px rgb(var(--inset-navy-rgb), 0.75);
+  color: var(--text-bright);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+.run-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px 10px;
+  padding-top: 2px;
+  color: var(--run-summary-text);
+
+  div {
+    min-width: 0;
+    display: grid;
+    gap: 2px;
+  }
+
+  span {
+    color: var(--run-summary-label-text);
+    font-size: 0.58rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  b {
+    overflow: hidden;
+    color: var(--text-bright);
+    font-size: 0.78rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-shadow: var(--text-shadow-soft);
+  }
+
+  .objective-row {
+    grid-column: 1 / -1;
+    padding-top: 5px;
+    border-top: 1px solid rgb(141 162 176 / 35%);
+  }
+
+  small {
+    display: block;
+    grid-column: 1 / -1;
+    min-height: 1.25em;
+    max-height: 1.25em;
+    overflow: hidden;
+    color: var(--run-summary-hint-text);
+    font-size: 0.66rem;
+    line-height: 1.25;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
