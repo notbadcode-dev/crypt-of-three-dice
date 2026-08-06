@@ -1,113 +1,215 @@
-# Implementation Plan: [FEATURE]
+# Plan de Implementación: [FUNCIONALIDAD]
 
-**Branch**: `[###-feature-name]` | **Date**: [DATE] | **Spec**: [link]
+**Rama**: `[###-nombre-funcionalidad]` | **Fecha**: [FECHA] | **Especificación**: [enlace]
 
-**Input**: Feature specification from `/specs/[###-feature-name]/spec.md`
+**Entrada**: Especificación de funcionalidad desde `/specs/[###-nombre-funcionalidad]/spec.md`
 
-**Note**: This template is filled in by the `/speckit-plan` command; its definition describes the execution workflow.
+---
 
-## Summary
+## 📝 Resumen Ejecutivo
 
-[Extract from feature spec: primary requirement + technical approach from research]
+[Extrae de la especificación: requisito primario + enfoque técnico de investigación]
 
-## Technical Context
+**Valor para el usuario**: [Qué problema resuelve]
 
-<!--
-  ACTION REQUIRED: Replace the content in this section with the technical details
-  for the project. The structure here is presented in advisory capacity to guide
-  the iteration process.
--->
+**Enfoque técnico**: [Cómo lo resolveremos]
 
-**Language/Version**: [e.g., Python 3.11, Swift 5.9, Rust 1.75 or NEEDS CLARIFICATION]
+---
 
-**Primary Dependencies**: [e.g., FastAPI, UIKit, LLVM or NEEDS CLARIFICATION]
+## 🔧 Contexto Técnico
 
-**Storage**: [if applicable, e.g., PostgreSQL, CoreData, files or N/A]
+| Aspecto | Especificación |
+|---------|---|
+| **Lenguaje/Versión** | [ej: TypeScript 5.7, Python 3.11, o REQUIERE CLARIFICACIÓN] |
+| **Stack Principal** | [ej: Node.js + Express, React 18, etc.] |
+| **Dependencias Críticas** | [librerías principales requeridas] |
+| **Almacenamiento** | [ej: PostgreSQL, localStorage, archivos, o N/A] |
+| **Testing** | [ej: Playwright, Jest, pytest, Vitest] |
+| **Plataforma Objetivo** | [ej: navegador, desktop, servidor] |
+| **Tipo de Proyecto** | [ej: librería, CLI, aplicación web, componente] |
+| **Metas de Rendimiento** | [ej: <200ms p95, 60 fps, 1000 req/s] |
+| **Restricciones** | [ej: <100MB, offline-capable, sin terceros] |
+| **Escala Esperada** | [ej: 10k usuarios, 50 pantallas] |
 
-**Testing**: [e.g., pytest, XCTest, cargo test or NEEDS CLARIFICATION]
+---
 
-**Target Platform**: [e.g., Linux server, iOS 15+, WASM or NEEDS CLARIFICATION]
+## ✅ Verificación de Constitución
 
-**Project Type**: [e.g., library/cli/web-service/mobile-app/compiler/desktop-app or NEEDS CLARIFICATION]
+**PUERTA**: Debe pasar ANTES de Fase 0 (Investigación)  
+**Re-verificar**: Después de Fase 1 (Diseño)
 
-**Performance Goals**: [domain-specific, e.g., 1000 req/s, 10k lines/sec, 60 fps or NEEDS CLARIFICATION]
+### Verificación contra los 7 Pilares:
 
-**Constraints**: [domain-specific, e.g., <200ms p95, <100MB memory, offline-capable or NEEDS CLARIFICATION]
+- [ ] **I. Identidad Visual Retro**: [Aplica a tu proyecto — verificar]
+- [ ] **II. Arquitectura Modular**: [Cumple con estructura modular sin framework]
+- [ ] **III. Tests (NON-NEGOTIABLE)**: [Especificados tests E2E + unit]
+- [ ] **IV. Flujo de Trabajo**: [Sigue convenciones del proyecto]
+- [ ] **V. Deuda Técnica**: [No introduce deuda nueva o documentada]
+- [ ] **VI. CI/CD & Build**: [Integra con pipeline actual]
+- [ ] **VII. Assets**: [Optimización de assets si aplica]
 
-**Scale/Scope**: [domain-specific, e.g., 10k users, 1M LOC, 50 screens or NEEDS CLARIFICATION]
+---
 
-## Constitution Check
+## 🗂️ Estructura de Proyecto
 
-*GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
+### Documentación (esta funcionalidad)
 
-[Gates determined based on constitution file]
-
-## Project Structure
-
-### Documentation (this feature)
-
-```text
-specs/[###-feature]/
-├── plan.md              # This file (/speckit-plan command output)
-├── research.md          # Phase 0 output (/speckit-plan command)
-├── data-model.md        # Phase 1 output (/speckit-plan command)
-├── quickstart.md        # Phase 1 output (/speckit-plan command)
-├── contracts/           # Phase 1 output (/speckit-plan command)
-└── tasks.md             # Phase 2 output (/speckit-tasks command - NOT created by /speckit-plan)
+```
+.specs/[###-nombre]/
+├── spec.md                    # Especificación funcional (entrada)
+├── plan.md                    # Este archivo (salida de /speckit-plan)
+├── investigacion.md           # Fase 0: investigación técnica
+├── modelo-datos.md            # Fase 1: diseño de datos
+├── guia-rapida.md             # Fase 1: guía de desarrollador
+├── contratos/                 # Fase 1: definición de APIs/interfaces
+│   ├── api.yaml               # Especificación OpenAPI o similar
+│   └── tipos.ts               # Tipos TypeScript compartidos
+└── tareas.md                  # Fase 2: salida de /speckit-tasks
 ```
 
-### Source Code (repository root)
-<!--
-  ACTION REQUIRED: Replace the placeholder tree below with the concrete layout
-  for this feature. Delete unused options and expand the chosen structure with
-  real paths (e.g., apps/admin, packages/something). The delivered plan must
-  not include Option labels.
--->
+### Código Fuente (Estructura Base — Ajusta según tu proyecto)
 
-```text
-# [REMOVE IF UNUSED] Option 1: Single project (DEFAULT)
-src/
-├── models/
-├── services/
-├── cli/
-└── lib/
+```
+Proyecto Single:
+
+scripts/                       # TypeScript modularizado
+├── config/                    # [Para esta funcionalidad]
+├── core/                      # [Lógica de negocio nueva]
+├── state/                     # [Estado/persistencia]
+├── ui/                        # [UI/componentes nuevos]
+
+styles/                        # CSS temático
+├── board/                     # [Si afecta UI del tablero]
+└── [nueva-carpeta]/           # [Si introduce nuevo componente]
 
 tests/
-├── contract/
-├── integration/
-└── unit/
-
-# [REMOVE IF UNUSED] Option 2: Web application (when "frontend" + "backend" detected)
-backend/
-├── src/
-│   ├── models/
-│   ├── services/
-│   └── api/
-└── tests/
-
-frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   └── services/
-└── tests/
-
-# [REMOVE IF UNUSED] Option 3: Mobile + API (when "iOS/Android" detected)
-api/
-└── [same as backend above]
-
-ios/ or android/
-└── [platform-specific structure: feature modules, UI flows, platform tests]
+├── e2e/                       # Pruebas end-to-end (Playwright)
+└── unit/                      # Pruebas unitarias (Node test runner)
 ```
 
-**Structure Decision**: [Document the selected structure and reference the real
-directories captured above]
+---
 
-## Complexity Tracking
+## 🎯 Fases de Implementación
 
-> **Fill ONLY if Constitution Check has violations that must be justified**
+### Fase 0: Investigación (Bloqueante) ⚠️
 
-| Violation | Why Needed | Simpler Alternative Rejected Because |
-|-----------|------------|-------------------------------------|
-| [e.g., 4th project] | [current need] | [why 3 projects insufficient] |
-| [e.g., Repository pattern] | [specific problem] | [why direct DB access insufficient] |
+**Propósito**: Validar enfoque técnico y responder preguntas de diseño
+
+**Entregables**:
+- `investigacion.md`: Hallazgos técnicos, opciones consideradas, decisiones
+- Decisiones documentadas sobre: [arquitectura clave, librerías, patrones]
+- Riesgos y mitigaciones identificados
+
+**Tareas**:
+- Investigar [aspecto 1]
+- Investigar [aspecto 2]
+- Investigar [aspecto 3]
+
+**Duración estimada**: [X horas]
+
+---
+
+### Fase 1: Diseño (Bloqueante)
+
+**Propósito**: Definir estructura técnica detallada
+
+**Entregables**:
+- `modelo-datos.md`: Esquema de datos, relaciones, persistencia
+- `contratos/`: Definición de APIs, tipos, interfaces
+- `guia-rapida.md`: Cómo un nuevo desarrollador empieza a contribuir
+- Revisión de arquitectura completa
+
+**Tareas**:
+- Diseñar modelo de datos
+- Diseñar contratos/APIs
+- Crear ejemplos de uso
+
+**Duración estimada**: [X horas]
+
+---
+
+### Fase 2: Generación de Tareas
+
+**Propósito**: Desglosar en tareas atómicas (salida de `/speckit-tasks`)
+
+**Salida**: `tareas.md` con:
+- Tareas agrupadas por historia de usuario (independientes)
+- Dependencias claras
+- Orden recomendado
+
+---
+
+### Fase 3: Implementación (Paralela por Historia)
+
+**Propósito**: Ejecutar tareas según `tareas.md`
+
+**Checkpoint**: Cada historia de usuario P1, P2, P3 completada y verificada
+
+---
+
+### Fase 4: Refinamiento e Integración
+
+**Propósito**: Asegurar que todo funciona junto
+
+- Tests E2E completos
+- Optimizaciones de rendimiento
+- Documentación final
+- Code review final
+
+---
+
+## 🔀 Decisiones Técnicas Clave
+
+| Decisión | Rationale | Alternativas Rechazadas |
+|----------|-----------|------------------------|
+| [Decisión 1] | [Por qué] | [Qué otras opciones consideramos] |
+| [Decisión 2] | [Por qué] | [Alternativas] |
+
+---
+
+## ⚠️ Riesgos y Mitigaciones
+
+| Riesgo | Impacto | Probabilidad | Mitigación |
+|--------|---------|------------|-----------|
+| [Riesgo 1] | Alto | Media | [Cómo prevenimos] |
+| [Riesgo 2] | Medio | Baja | [Cómo prevenimos] |
+
+---
+
+## 📊 Estimación y Timeline
+
+| Fase | Duración Est. | Dependencias |
+|------|--------------|--------------|
+| Fase 0: Investigación | [X horas] | — |
+| Fase 1: Diseño | [X horas] | Fase 0 ✓ |
+| Fase 2: Tareas | [X horas] | Fase 1 ✓ |
+| Fase 3: Implementación | [X horas] | Fase 2 ✓ |
+| Fase 4: Refinamiento | [X horas] | Fase 3 ✓ |
+| **Total** | **[X horas]** | |
+
+---
+
+## 🚀 Criterios de Éxito
+
+Para que este plan se considere **"Completado"**:
+
+- ✅ Fase 0 (Investigación) completada y aprobada
+- ✅ Fase 1 (Diseño) completada con contratos claros
+- ✅ Fase 2 (Tareas) generadas con dependencias correctas
+- ✅ Fase 3 (Implementación) completada con todos los tests pasando
+- ✅ Fase 4 (Refinamiento) completada con documentación final
+- ✅ Verificación con constitución del proyecto: **APROBADA**
+
+---
+
+## 📚 Referencias y Documentación
+
+- Constitución del Proyecto: [docs/index.md](../../../docs/index.md)
+- Especificación: `spec.md` (this feature)
+- Convencionnes: [docs/convenciones.md](../../../docs/convenciones.md)
+- Deuda Técnica: [docs/deuda-tecnica.md](../../../docs/deuda-tecnica.md)
+
+---
+
+**Versión**: 1.0 | **Última actualización**: [FECHA]  
+**Aprobado por**: [Rol/Persona] | **Fecha aprobación**: [FECHA]
