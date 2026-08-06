@@ -336,6 +336,7 @@
   /* stylelint-disable-next-line property-no-unknown */
   image-rendering: crisp-edges;
   transform: translate(var(--icon-shift-x), var(--icon-shift-y));
+}
 .stat-slot-hp .slot-inner {
   --icon-size: 112%;
   --icon-shift-x: 0px;
