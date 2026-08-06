@@ -8,8 +8,8 @@ const UPGRADE_TYPES = ["heal", "speed", "attack", "defense", "range"];
 
 /* app-config.js */
 const ASSET_PATHS = {
-    heroSprite: "assets/images/hero-sprite-alpha.png",
-    enemySprite: "assets/images/enemy-sprite.png"
+    heroSprite: "assets/images/hero-sprite-alpha.webp",
+    enemySprite: "assets/images/enemy_orco.webp"
 };
 const SIZE = 5;
 const SAVE_KEY = "crypt_three_dice_retro_board_v1";
@@ -115,7 +115,7 @@ function levelData() {
     return levels[app.state.level - 1];
 }
 function setSelectedClass(classId) {
-    if (Object.prototype.hasOwnProperty.call(classNames, classId)) {
+    if (Object.hasOwn(classNames, classId)) {
         app.selectedClass = classId;
     }
 }
@@ -233,7 +233,7 @@ function normalizeState(raw) {
     if (raw.saveVersion !== undefined && raw.saveVersion !== SAVE_VERSION) {
         return null;
     }
-    if (typeof raw.classId !== "string" || !Object.prototype.hasOwnProperty.call(classNames, raw.classId)) {
+    if (typeof raw.classId !== "string" || !Object.hasOwn(classNames, raw.classId)) {
         return null;
     }
     if (!Number.isInteger(raw.level) || raw.level < 1 || raw.level > levels.length) {
@@ -665,7 +665,7 @@ function moveMonsters() {
     const data = levelData();
     const speed = data.stats[0];
     const range = data.stats[3];
-    const ordered = [...app.state.enemies].sort((a, b) => cost(a, app.state.hero) - cost(b, app.state.hero));
+    const ordered = app.state.enemies.toSorted((a, b) => cost(a, app.state.hero) - cost(b, app.state.hero));
     for (const enemy of ordered) {
         let budget = speed;
         while (budget >= 2) {
@@ -947,7 +947,11 @@ function phaseInstruction() {
 
 /* ui-feedback.js */
 function say(message) {
-    $("#log").textContent = message;
+    const logEl = $("#log");
+    logEl.textContent = message;
+    logEl.classList.remove("log-flash");
+    void logEl.offsetWidth;
+    logEl.classList.add("log-flash");
 }
 function toast(message) {
     const toastEl = $("#toast");
@@ -958,6 +962,9 @@ function toast(message) {
 }
 
 /* modal-manager.js */
+// Debe coincidir con la duración de la animación "modal-out"/"scrim-out"
+// (--transition-base, 0.25s) declarada en styles/modals/modal-shell.css.
+const MODAL_CLOSE_MS = 260;
 const modalOrder = [
     "startModal",
     "helpModal",
@@ -1075,17 +1082,29 @@ function setModalHidden(id, hidden, opener = null) {
             modalReturnFocus.set(id, returnTarget);
         }
     }
-    modal.classList.toggle("hidden", hidden);
-    modal.setAttribute("aria-hidden", String(hidden));
-    if (hidden) {
+    if (!hidden) {
+        modal.classList.remove("closing");
+        modal.classList.remove("hidden");
+        modal.setAttribute("aria-hidden", "false");
+        updateModalEnvironment();
+        focusModal(id);
+        return;
+    }
+    const finishClose = () => {
+        modal.classList.remove("closing");
+        modal.classList.add("hidden");
+        modal.setAttribute("aria-hidden", "true");
         const returnFocus = modalReturnFocus.get(id);
         modalReturnFocus.delete(id);
         updateModalEnvironment();
         focusElement(returnFocus);
+    };
+    if (modal.classList.contains("hidden") || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        finishClose();
         return;
     }
-    updateModalEnvironment();
-    focusModal(id);
+    modal.classList.add("closing");
+    setTimeout(finishClose, MODAL_CLOSE_MS);
 }
 function closeTopModalWithEscape() {
     const id = topModalId();
@@ -1937,7 +1956,7 @@ if (TEST_MODE) {
     const testWindow = window;
     testWindow.__UMBRAL_TEST__ = {
         getState() {
-            return app.state ? JSON.parse(JSON.stringify(app.state)) : null;
+            return app.state ? structuredClone(app.state) : null;
         },
         setState(rawState) {
             setTestState(rawState);

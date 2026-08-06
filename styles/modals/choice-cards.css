@@ -14,11 +14,16 @@
   border: 2px solid var(--frame-blue) !important;
   box-shadow: inset 0 0 0 2px var(--inset-navy) !important;
   border-radius: 0 !important;
+  transition:
+    transform var(--transition-fast) var(--ease-out-soft),
+    background var(--transition-base) var(--ease-out-soft),
+    border-color var(--transition-base) var(--ease-out-soft);
 
   &:hover,
   &.selected {
-    background: #29483f !important;
+    background: var(--panel-green-hover) !important;
     border-color: var(--gold-highlight) !important;
+    transform: translateY(-3px);
   }
 
   strong {

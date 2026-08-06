@@ -66,7 +66,7 @@
     align-self: center;
     justify-self: center;
     min-height: 1.12em;
-    color: var(--turn-action-value-text);
+    color: var(--text-parchment-mid);
     font-size: 1.28rem;
     line-height: 1;
     text-align: center;

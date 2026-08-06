@@ -110,7 +110,7 @@ npm run test:install
 │   └── images/                    # Sprites, retratos, fondos y UI raster
 ├── styles/
 │   ├── app.css                    # Entrada CSS (barrel principal)
-│   ├── global/                    # Tokens: colores, tipografía, sombras (+ barrel)
+│   ├── global/                    # Tokens: colores (paleta+tema), gradientes, tipografía, sombras (+ barrel)
 │   ├── base/                      # Reset, topbar y layout (+ barrel)
 │   ├── board/                     # Tablero, HUD, carta enemigo/héroe/turno (+ barrel)
 │   ├── sidebar/                   # Paneles laterales, dados y controles (+ barrel)
@@ -129,6 +129,18 @@ npm run test:install
     ├── e2e/                       # Playwright y servidor estático
     └── unit/                      # Tests unitarios de lógica aislada
 ```
+
+---
+
+## Theme de colores
+
+Todos los colores y gradientes de la interfaz viven en `styles/global/`, organizados en dos capas:
+
+- **Paleta** (`_colors.css`, primeras secciones): primitivos crudos agrupados por familia (fondos, verdes de panel, piedra, dorado, estados, dado, texto, etc.), cada uno con un único valor hexadecimal/rgb.
+- **Tema semántico** (`_colors.css`, secciones finales): variables con nombre de uso (`--text-mist-1..4`, `--text-parchment*`, `--modal-danger-text`, alias `--text-soft-1..5`, etc.) que referencian primitivos de la paleta. Los componentes solo deben consumir variables semánticas o de paleta ya existentes; no declarar colores nuevos fuera de `styles/global/`.
+- **Gradientes** (`_gradients.css`): gradientes reutilizables compuestos a partir de los primitivos de la paleta, para evitar literales `linear-gradient(...)` repetidos entre componentes.
+
+Para un tema alternativo en el futuro, sobrescribe solo la capa semántica (por ejemplo con `:root[data-theme="claro"] { --text-mist-1: ...; }`), sin tocar la paleta ni los componentes.
 
 ---
 

@@ -7,7 +7,7 @@
   min-height: 88px;
 
   .save-slot-meta {
-    color: var(--save-slot-meta-text);
+    color: var(--text-mist-4);
     font-size: 0.68rem;
   }
 }
@@ -38,7 +38,7 @@
     font: inherit;
 
     &::placeholder {
-      color: var(--save-input-placeholder-text);
+      color: var(--text-mist-4);
     }
   }
 }

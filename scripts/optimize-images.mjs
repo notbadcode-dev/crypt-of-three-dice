@@ -3,17 +3,17 @@ import fg from "fast-glob";
 import fs from "fs";
 import { createHash } from "crypto";
 
-const pngFiles = await fg("assets/images/**/*.png");
+const webpFiles = await fg("assets/images/**/*.webp");
 
-if (pngFiles.length === 0) {
-  console.log("No PNG files found to optimize.");
+if (webpFiles.length === 0) {
+  console.log("No WebP files found to optimize.");
   process.exit(0);
 }
 
-console.log(`🖼️  Analyzing ${pngFiles.length} PNG file(s) for optimization...`);
+console.log(`🖼️  Analyzing ${webpFiles.length} WebP file(s) for optimization...`);
 let totalSize = 0;
 
-for (const file of pngFiles) {
+for (const file of webpFiles) {
   const stats = fs.statSync(file);
   const size = stats.size;
   totalSize += size;
@@ -23,7 +23,7 @@ for (const file of pngFiles) {
 }
 
 const totalSizeKb = (totalSize / 1024).toFixed(2);
-console.log(`\n✅ Total PNG assets: ${totalSizeKb} KB across ${pngFiles.length} files`);
-console.log("💡 Tip: Use imagemin, oxipng, or sharp CLI for production PNG optimization.");
+console.log(`\n✅ Total WebP assets: ${totalSizeKb} KB across ${webpFiles.length} files`);
+console.log("💡 Tip: Use cwebp -q 90 -alpha_q 100 -m 6 for production WebP optimization.");
 
 

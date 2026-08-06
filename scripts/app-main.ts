@@ -17,7 +17,7 @@ if (TEST_MODE) {
   const testWindow = window as Window & { __UMBRAL_TEST__?: AppTestApi };
   testWindow.__UMBRAL_TEST__ = {
     getState() {
-      return app.state ? JSON.parse(JSON.stringify(app.state)) as GameState : null;
+      return app.state ? structuredClone(app.state) : null;
     },
     setState(rawState) {
       setTestState(rawState);

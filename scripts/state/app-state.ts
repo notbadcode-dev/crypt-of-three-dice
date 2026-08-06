@@ -65,7 +65,7 @@ export function levelData(): LevelConfig {
 }
 
 export function setSelectedClass(classId: ClassId) {
-  if (Object.prototype.hasOwnProperty.call(classNames, classId)) {
+  if (Object.hasOwn(classNames, classId)) {
     app.selectedClass = classId;
   }
 }

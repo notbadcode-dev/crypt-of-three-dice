@@ -19,7 +19,9 @@
   color: var(--white);
   padding: 10px 12px;
   font-weight: 900;
-  transition: 0.2s;
+  transition:
+    opacity var(--transition-base) var(--ease-out-soft),
+    transform var(--transition-base) var(--ease-snap);
 }
 .toast.show {
   opacity: 1;

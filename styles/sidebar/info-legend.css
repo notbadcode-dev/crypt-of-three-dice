@@ -3,7 +3,7 @@
 .info-list {
   margin: 0;
   padding-left: 18px;
-  color: var(--info-list-text);
+  color: var(--text-mist-2);
   font-size: 0.76rem;
   line-height: 1.48;
 }
@@ -30,7 +30,7 @@
   span {
     display: block;
     margin-top: 4px;
-    color: var(--rules-grid-text);
+    color: var(--text-mist-2);
     font-size: 0.72rem;
     line-height: 1.32;
   }

@@ -29,7 +29,7 @@
 
   > .block:first-child {
     box-sizing: border-box;
-    background: linear-gradient(180deg, #16382f, var(--panel-green-1));
+    background: var(--gradient-panel-green);
     border-color: var(--gold-highlight);
     box-shadow:
       inset 0 0 0 2px rgb(var(--gold-highlight-rgb), 0.22),

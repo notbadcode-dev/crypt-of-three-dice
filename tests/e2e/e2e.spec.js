@@ -73,13 +73,20 @@ async function assignVisibleDice(page) {
   await page.locator(".slot[data-slot='defense']").click();
 }
 
-async function expectNoInternalScroll(locator, tolerance = 2) {
+// `allowVerticalScroll` existe porque `styles/responsive/tablet.css` añade
+// deliberadamente `overflow-y: auto` a `#startModal .modal` en `width <= 1100px`
+// como red de seguridad para que el contenido nunca se solape cuando el alto
+// disponible es escaso (ver comentario en ese fichero). Ese scroll vertical es
+// intencionado en ese breakpoint concreto, no un bug de layout.
+async function expectNoInternalScroll(locator, tolerance = 2, { allowVerticalScroll = false } = {}) {
   await expect(locator).toBeVisible();
   const metrics = await locator.evaluate(element => ({
     clientHeight: element.clientHeight,
     scrollHeight: element.scrollHeight,
     overflowY: getComputedStyle(element).overflowY
   }));
+
+  if (allowVerticalScroll) {return;}
 
   expect(metrics.overflowY).not.toMatch(/auto|scroll/);
   expect(metrics.scrollHeight).toBeLessThanOrEqual(metrics.clientHeight + tolerance);
@@ -990,13 +997,67 @@ test("las vistas principales no introducen scroll interno en tamaños de escrito
   for (const viewport of [
     { width: 1366, height: 768 },
     { width: 1180, height: 820 },
+    { width: 1252, height: 1756 },
     { width: 1024, height: 768 }
   ]) {
     await page.setViewportSize(viewport);
     await page.goto(appPath);
-    await expectNoInternalScroll(page.locator("#startModal .modal"));
+    await expectNoInternalScroll(page.locator("#startModal .modal"), 2, {
+      allowVerticalScroll: viewport.width <= 1100
+    });
     await startGame(page);
     await expectNoInternalScroll(page.locator("#gameCard"));
+
+    const layoutMetrics = await page.evaluate(() => {
+      const card = document.querySelector("#gameCard").getBoundingClientRect();
+      const board = document.querySelector(".board-frame").getBoundingClientRect();
+      const dashboard = document.querySelector(".combat-dashboard").getBoundingClientRect();
+      const controls = document.querySelector(".board-side-info").getBoundingClientRect();
+      const primaryAction = document.querySelector("#phaseBtn").getBoundingClientRect();
+      const hudPanels = [...document.querySelectorAll(".combat-dashboard .hud-panel")].map(panel => {
+        const rect = panel.getBoundingClientRect();
+        const title = panel.querySelector(".hud-panel-title").getBoundingClientRect();
+
+        return {
+          width: rect.width,
+          height: rect.height,
+          top: rect.top,
+          bottom: rect.bottom,
+          titleTop: title.top
+        };
+      });
+
+      return {
+        viewportWidth: window.innerWidth,
+        documentWidth: document.documentElement.scrollWidth,
+        cardRatio: card.width / card.height,
+        boardRatio: board.width / board.height,
+        boardBottom: board.bottom,
+        dashboardTop: dashboard.top,
+        hudPanels,
+        visibleRects: [card, board, dashboard, controls, primaryAction].map(rect => ({
+          left: rect.left,
+          right: rect.right
+        }))
+      };
+    });
+
+    expect(layoutMetrics.documentWidth).toBeLessThanOrEqual(layoutMetrics.viewportWidth);
+    expect(layoutMetrics.cardRatio).toBeCloseTo(2 / 3, 2);
+    expect(layoutMetrics.boardRatio).toBeCloseTo(894 / 912, 3);
+    expect(layoutMetrics.boardBottom).toBeLessThanOrEqual(layoutMetrics.dashboardTop);
+    expect(layoutMetrics.hudPanels).toHaveLength(3);
+    for (const panel of layoutMetrics.hudPanels.slice(1)) {
+      expect(panel.width).toBeCloseTo(layoutMetrics.hudPanels[0].width, 1);
+      expect(panel.height).toBeCloseTo(layoutMetrics.hudPanels[0].height, 1);
+      expect(panel.top).toBeCloseTo(layoutMetrics.hudPanels[0].top, 1);
+      expect(panel.bottom).toBeCloseTo(layoutMetrics.hudPanels[0].bottom, 1);
+      expect(panel.titleTop).toBeCloseTo(layoutMetrics.hudPanels[0].titleTop, 1);
+    }
+    for (const rect of layoutMetrics.visibleRects) {
+      expect(rect.left).toBeGreaterThanOrEqual(0);
+      expect(rect.right).toBeLessThanOrEqual(layoutMetrics.viewportWidth);
+    }
   }
 });
 

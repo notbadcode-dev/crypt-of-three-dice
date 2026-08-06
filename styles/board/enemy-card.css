@@ -45,7 +45,7 @@
   left: auto;
   min-width: 0;
   padding: 0;
-  color: var(--enemy-meta-text);
+  color: var(--text-parchment-mid);
   background: none;
   box-shadow: none;
   font-size: clamp(0.68rem, 0.95vw, 0.86rem);
@@ -125,7 +125,7 @@
   grid-template-rows: minmax(0, 1fr) auto;
   gap: 2.6%;
   padding: 4.4%;
-  background: url("../../assets/images/enemy-card-bg.png") center / 100% 100%
+  background: url("../../assets/images/enemy-card-bg.webp") center / 100% 100%
     no-repeat;
   border: none;
   box-shadow: none;
@@ -148,6 +148,7 @@
   object-fit: cover;
   object-position: center 28%;
   image-rendering: pixelated;
+  transition: opacity var(--transition-slow) var(--ease-out-soft);
   filter: drop-shadow(0 2px 1px rgb(var(--black-rgb), 0.35));
 }
 
@@ -247,9 +248,6 @@
 }
 
 .hud-panel {
-  --panel-line: #d9a64f;
-  --panel-line-dark: #5b3d18;
-  --panel-edge: #8f6c30;
   position: relative;
   min-width: 0;
   min-height: 0;
@@ -278,13 +276,7 @@
     height: 13px;
     z-index: 1;
     transform: translate(-50%, -48%) rotate(45deg);
-    background: linear-gradient(
-      135deg,
-      #1a1207,
-      #e2ac4f 48%,
-      #271805 52%,
-      #81591f
-    );
+    background: var(--gradient-gold-diamond);
     border: 1px solid rgb(244 210 120 / 72%);
     box-shadow: 0 0 0 2px rgb(var(--black-rgb), 0.55);
     pointer-events: none;
@@ -310,7 +302,7 @@
   margin: 0;
   min-width: 0;
   align-self: center;
-  color: var(--hud-panel-title-text);
+  color: var(--text-parchment-mid);
   font-size: 0.72rem;
   line-height: 1;
   font-weight: 900;
@@ -352,6 +344,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 6.4%;
+  transition: opacity var(--transition-slow) var(--ease-out-soft);
 }
 
 .panel-stat {
@@ -406,7 +399,7 @@
   grid-column: 2;
   grid-row: 1;
   min-height: 1.12em;
-  color: var(--panel-stat-text);
+  color: var(--text-parchment-mid);
   font-size: 1.02rem;
   line-height: 1;
 }

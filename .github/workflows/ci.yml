@@ -13,8 +13,8 @@ permissions:
   contents: read
 
 jobs:
-  lint:
-    name: Lint (eslint + stylelint)
+  lint-js:
+    name: Lint (eslint)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,8 +29,27 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
-      - name: Lint
-        run: npm run lint
+      - name: Lint JS/TS/HTML
+        run: npx eslint .
+
+  lint-css:
+    name: Lint (stylelint)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Lint CSS
+        run: npm run lint:css
 
   typecheck:
     name: Typecheck
@@ -113,7 +132,7 @@ jobs:
 
   deploy:
     name: Publicar en GitHub Pages
-    needs: [lint, typecheck, unit]
+    needs: [lint-js, lint-css, typecheck, unit]
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:

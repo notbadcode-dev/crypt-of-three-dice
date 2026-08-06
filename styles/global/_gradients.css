@@ -16,8 +16,8 @@
   /* ---- Superficies oscuras (paneles/tablero/chrome) ---- */
   --gradient-panel-surface: linear-gradient(
     180deg,
-    rgb(var(--bg-wood-2-rgb) / 96%),
-    rgb(var(--bg-wood-3-rgb) / 96%)
+    rgb(var(--bg-wood-2-rgb), 0.96),
+    rgb(var(--bg-wood-3-rgb), 0.96)
   );
   --gradient-panel-void: linear-gradient(
     180deg,
@@ -34,6 +34,11 @@
     180deg,
     var(--panel-green-light),
     var(--panel-green-1)
+  );
+  --gradient-panel-log: linear-gradient(
+    180deg,
+    var(--panel-green-deep),
+    var(--panel-green-3)
   );
 
   /* ---- Botones (topbar / logbar) ---- */
@@ -52,7 +57,11 @@
     var(--red-light),
     var(--red-dark)
   );
-  --gradient-button-blue: linear-gradient(180deg, var(--blue), var(--blue-dark));
+  --gradient-button-blue: linear-gradient(
+    180deg,
+    var(--blue),
+    var(--blue-dark)
+  );
   --gradient-button-green: linear-gradient(
     180deg,
     var(--success-light),

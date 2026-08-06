@@ -11,9 +11,9 @@ body {
   font-family: var(--font-mono);
   background:
     linear-gradient(rgb(3 8 10 / 72%), rgb(3 8 10 / 72%)),
-    url("../../assets/images/intro-illustration.png") center top /
-      cover no-repeat fixed,
-    linear-gradient(180deg, #071013, #152326 68%, #0b1418);
+    url("../../assets/images/intro-illustration.webp") center top / cover
+      no-repeat fixed,
+    var(--gradient-body-void);
 }
 
 body {

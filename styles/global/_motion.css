@@ -1,0 +1,22 @@
+/* Tokens de movimiento (duraciones, easings) reutilizados por los componentes
+   que declaran transiciones/animaciones. Salvaguarda de accesibilidad:
+   respeta prefers-reduced-motion recortando duraciones a (casi) cero. */
+
+:root {
+  --transition-fast: 0.15s;
+  --transition-base: 0.25s;
+  --transition-slow: 0.35s;
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

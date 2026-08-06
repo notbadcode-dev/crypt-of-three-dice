@@ -50,7 +50,7 @@
   justify-content: flex-start;
   gap: 3px;
   padding: 4% 0 34% 31%;
-  color: var(--hero-hp-text);
+  color: var(--text-parchment-bright);
   background: none;
   border: none;
   box-shadow: none;
@@ -90,14 +90,15 @@
         rgb(255 236 193 / 18%) 0 2px,
         transparent 2px 12px
       ),
-      linear-gradient(90deg, #ed6862, #b6363c) left center / var(--hp-ratio)
-        100% no-repeat,
+      linear-gradient(90deg, var(--hp-light), var(--hp-dark)) left center /
+        var(--hp-ratio) 100% no-repeat,
       linear-gradient(180deg, rgb(16 23 23 / 98%), rgb(3 8 8 / 98%));
     border: 1px solid rgb(220 188 109 / 78%);
     box-shadow:
       inset 0 0 0 1px rgb(var(--black-rgb), 0.72),
       inset 0 2px 0 rgb(var(--white-rgb), 0.1),
       0 2px 0 rgb(var(--black-rgb), 0.36);
+    transition: background-size var(--transition-slow) var(--ease-out-soft);
   }
 
   span {

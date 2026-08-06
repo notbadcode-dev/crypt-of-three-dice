@@ -16,7 +16,7 @@ export function moveMonsters() {
   const data = levelData();
   const speed = data.stats[0];
   const range = data.stats[3];
-  const ordered = [...app.state.enemies].sort((a, b) => cost(a, app.state.hero) - cost(b, app.state.hero));
+  const ordered = app.state.enemies.toSorted((a, b) => cost(a, app.state.hero) - cost(b, app.state.hero));
 
   for (const enemy of ordered) {
     let budget = speed;

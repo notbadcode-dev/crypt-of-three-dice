@@ -22,4 +22,62 @@
   .sidebar {
     grid-template-columns: 1fr 1fr;
   }
+
+  /* El modal inicial usa una altura fija pensada para escritorio (760px); en
+     tablets el ancho cae en este breakpoint aunque el alto disponible sea
+     mucho mayor (retrato) o mucho menor (móviles en landscape). Se sube el
+     techo para aprovechar el alto en retrato y se añade scroll de seguridad
+     para que el contenido nunca se solape cuando el alto real es escaso.
+     La fila central de `.start-column` usa `minmax(0, 1fr)` en escritorio,
+     que fija el mínimo de la fila en 0 e ignora el contenido: si las
+     tarjetas de clase no caben, se dibujan encima del bloque de acciones en
+     vez de encogerse. Con scroll ya disponible en el modal, esa fila pasa a
+     `auto` (alto real de su contenido) para eliminar el solape. */
+  #startModal .modal {
+    height: min(920px, calc(100dvh - 24px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  #startModal .modal-grid > div:last-child {
+    grid-template-rows: auto auto auto;
+  }
+
+  /* `.class-block` fuerza "min-height: 0" en escritorio para poder encogerse
+     dentro de la fila `1fr`; con la fila ya en `auto` hay que retirar ese 0
+     explícito, porque una fila `auto` sigue usando el mínimo especificado
+     del item (0) en vez de su contenido real al calcular su tamaño. */
+  #startModal .class-block {
+    min-height: auto;
+  }
+}
+
+/* Evita que el panel operativo comprima el tablero en anchos intermedios. */
+@media (width <= 840px) {
+  .card-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .game-card {
+    width: min(100%, 680px);
+  }
+
+  .board-side-info {
+    grid-template-areas:
+      "phase"
+      "actions"
+      "dice";
+
+    > .block:first-child {
+      grid-area: phase;
+    }
+
+    > .block:nth-child(2) {
+      grid-area: dice;
+    }
+
+    > .logbar {
+      grid-area: actions;
+    }
+  }
 }

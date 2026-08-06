@@ -21,14 +21,14 @@
   border-radius: 8px;
   display: grid;
   place-items: center;
-  border: 3px solid #d2dce2;
+  border: 3px solid var(--die-border);
   background:
     radial-gradient(
       circle at 30% 28%,
       rgb(var(--white-rgb), 0.94) 0 14%,
       transparent 15%
     ),
-    linear-gradient(145deg, #f0f3f5, #afbec9);
+    var(--gradient-die-light);
   color: var(--die-face-text);
   font-size: 1.45rem;
   font-weight: 900;
@@ -38,9 +38,22 @@
   box-shadow:
     inset -5px -5px 0 rgb(var(--black-rgb), 0.12),
     4px 4px 0 var(--shadow-deep);
+  transition:
+    transform var(--transition-fast) var(--ease-out-soft),
+    box-shadow var(--transition-fast) var(--ease-out-soft),
+    opacity var(--transition-fast) var(--ease-out-soft),
+    outline-offset var(--transition-fast) var(--ease-out-soft);
+
+  &:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow:
+      inset -5px -5px 0 rgb(var(--black-rgb), 0.12),
+      4px 6px 0 var(--shadow-deep);
+  }
 
   &.dragging {
     opacity: 0.45;
+    transition-duration: 0.05s;
   }
 
   &.assigned {
@@ -62,8 +75,8 @@
       rgb(var(--white-rgb), 0.22) 0 13%,
       transparent 14%
     ),
-    linear-gradient(145deg, #29463d, #112720);
-  color: var(--die-placeholder-text);
+    var(--gradient-die-dark);
+  color: var(--text-mist-1);
   box-shadow:
     inset -5px -5px 0 rgb(var(--black-rgb), 0.18),
     inset 3px 3px 0 rgb(var(--white-rgb), 0.05),

@@ -3,7 +3,11 @@ import { $, TURN_TIMING } from "../config/app-config.js";
 type ToastElement = HTMLElement & { _timer?: ReturnType<typeof setTimeout> };
 
 export function say(message: string) {
-  $("#log").textContent = message;
+  const logEl = $("#log");
+  logEl.textContent = message;
+  logEl.classList.remove("log-flash");
+  void logEl.offsetWidth;
+  logEl.classList.add("log-flash");
 }
 
 export function toast(message: string) {

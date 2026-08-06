@@ -1,8 +1,8 @@
 import type { ClassId, LayoutConfig, LevelConfig } from "./types.js";
 
 export const ASSET_PATHS = {
-  heroSprite: "assets/images/hero-sprite-alpha.png",
-  enemySprite: "assets/images/enemy-sprite.png"
+  heroSprite: "assets/images/hero-sprite-alpha.webp",
+  enemySprite: "assets/images/enemy_orco.webp"
 } as const;
 
 export const SIZE = 5;

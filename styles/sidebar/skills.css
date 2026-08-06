@@ -44,8 +44,8 @@
   min-height: 40px;
   display: grid;
   place-items: center;
-  background: #223d36;
-  border: 2px solid #6c8195;
+  background: var(--panel-teal);
+  border: 2px solid var(--border-slate);
   color: var(--accent);
   font-size: 1.08rem;
 
@@ -105,7 +105,7 @@
   }
 
   &.over {
-    background: #374628;
+    background: var(--olive-highlight);
     border-color: var(--accent);
     border-style: solid;
   }
@@ -115,7 +115,7 @@
   }
 
   &.fixed {
-    background: #142820;
+    background: var(--panel-green-1);
     border-style: solid;
     border-color: rgb(107 127 148 / 58%);
     color: var(--text-soft-5);

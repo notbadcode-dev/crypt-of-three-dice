@@ -9,7 +9,7 @@
 ## Estructura
 - `index.html`: shell principal de la aplicación y markup de la UI.
 - `styles/`: CSS organizado en subcarpetas temáticas, cada una con su propio barrel (`<carpeta>/<carpeta>.css`) importado desde `styles/app.css`:
-  - `global/`: tokens (`_colors.css`, `_typography.css`, `_shadows.css`).
+  - `global/`: tokens (`_colors.css`, `_gradients.css`, `_typography.css`, `_shadows.css`). `_colors.css` está organizado en dos capas: paleta de primitivos (valores hex/rgb crudos agrupados por familia) y tema semántico (variables de uso como `--text-mist-1..4`, `--text-parchment*`, alias `--text-soft-1..5`, etc. que referencian la paleta). Los componentes solo deben consumir variables semánticas o de paleta ya existentes en `_colors.css`/`_gradients.css`; no declarar colores ni gradientes nuevos fuera de `styles/global/`. Un futuro theme alternativo debe sobrescribir solo la capa semántica (p.ej. `:root[data-theme="..."] { ... }`), nunca la paleta ni los componentes.
   - `base/`: `reset.css`, `topbar.css`, `layout.css`.
   - `board/`: `board-frame.css`, `board-slots.css`, `action-meter.css`, `enemy-card.css`, `hero-panel.css`, `turn-panel.css`, `board-debug.css` y `board-overrides.css` (⚠️ overrides intencionados, importado el último — ver más abajo).
   - `sidebar/`: `sidebar-panel.css`, `turn-phase.css`, `dice.css`, `skills.css`, `resources.css`, `logbar.css`, `info-legend.css`.
@@ -48,6 +48,9 @@
 - Preservar compatibilidad desktop y móvil.
 - Antes de cambios grandes en UI, revisar el HTML principal y los estilos segmentados para no duplicar reglas.
 - No tocar `node_modules/` ni artefactos de resultados salvo que el trabajo lo requiera explícitamente.
+
+## Deuda técnica conocida
+- **TypeScript pinneado en 5.9.3 (no en 7.x/"latest")**: desde 2026-08, `typescript@latest` en npm es la 7.0.2, la reescritura nativa en Go ("tsgo", instala un binario nativo por plataforma tipo `@typescript/typescript-darwin-arm64`). No se actualiza porque `typescript-eslint@8.66.0` (usado en `eslint.config.mjs` para el linting type-aware de `scripts/**/*.ts`) declara `peerDependencies.typescript: ">=4.8.4 <6.1.0"` — TS 7 queda fuera de ese rango soportado y rompería el lint. Revisar de nuevo cuando `typescript-eslint` publique soporte oficial para la serie 7.x. Mientras tanto, mantener `typescript` en la última versión estable de la serie 5.x compatible con ese rango.
 
 ## Qué mirar primero en un chat nuevo
 1. `package.json`

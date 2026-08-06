@@ -34,30 +34,31 @@
           <div class="game-card" id="gameCard">
             <div class="card-frame" aria-hidden="true"></div>
             <div class="top-stat-row">
+              <span class="top-stat-caption">Atributos base</span>
               <div class="top-slot stat-slot-hp">
                 <div class="slot-inner">
-                  <img class="slot-icon" src="assets/images/icon-speed.png" alt="">
+                  <img class="slot-icon" src="assets/images/icon-speed.webp" alt="">
                   <div class="slot-value ui-number" id="topSpeed">1</div>
                   <div class="slot-label">MOV</div>
                 </div>
               </div>
               <div class="top-slot stat-slot-mov">
                 <div class="slot-inner">
-                  <img class="slot-icon" src="assets/images/icon-defense.png" alt="">
+                  <img class="slot-icon" src="assets/images/icon-defense.webp" alt="">
                   <div class="slot-value ui-number" id="topDefense">1</div>
                   <div class="slot-label">Def</div>
                 </div>
               </div>
               <div class="top-slot stat-slot-atk">
                 <div class="slot-inner">
-                  <img class="slot-icon" src="assets/images/icon-attack.png" alt="">
+                  <img class="slot-icon" src="assets/images/icon-attack.webp" alt="">
                   <div class="slot-value ui-number" id="topAttack">1</div>
                   <div class="slot-label">ATQ</div>
                 </div>
               </div>
               <div class="top-slot stat-slot-def">
                 <div class="slot-inner">
-                  <img class="slot-icon" src="assets/images/icon-range.png" alt="">
+                  <img class="slot-icon" src="assets/images/icon-range.webp" alt="">
                   <div class="slot-value ui-number" id="topRange">2</div>
                   <div class="slot-label">ALC</div>
                 </div>
@@ -72,16 +73,16 @@
               <section class="hud-panel enemy-card enemy-panel" aria-label="Enemigo actual">
                 <h2 class="hud-panel-title" id="enemyPanelName">Arañas de ceniza</h2>
                 <div class="enemy-portrait-frame">
-                  <img class="enemy-portrait" src="assets/images/enemy-portrait.png" alt="Criatura enemiga">
+                  <img class="enemy-portrait" src="assets/images/enemy_orco.webp" alt="Criatura enemiga">
                 </div>
                 <div class="enemy-panel-stats" aria-label="Atributos enemigos">
                   <span class="panel-stat panel-stat-hp" aria-label="Vida enemiga">
-                    <img src="assets/images/icon-hp.png" alt="">
+                    <img src="assets/images/icon-hp.webp" alt="">
                     <span class="panel-stat-value ui-number" id="enemyHpMeta">2</span>
                     <span class="panel-stat-label">Vida</span>
                   </span>
                   <span class="panel-stat panel-stat-atk" aria-label="Ataque enemigo">
-                    <img src="assets/images/icon-attack.png" alt="">
+                    <img src="assets/images/icon-attack.webp" alt="">
                     <span class="panel-stat-value ui-number" id="enemyAtkMeta">1</span>
                     <span class="panel-stat-label">ATQ</span>
                   </span>
@@ -93,7 +94,7 @@
               <section class="hud-panel hero-panel" aria-label="Estado del héroe">
                 <h2 class="hud-panel-title">Héroe</h2>
                 <div class="hero-panel-body">
-                  <img class="hero-panel-portrait" id="heroHudPortrait" src="assets/images/hero-portrait.png" alt="Guardián">
+                  <img class="hero-panel-portrait" id="heroHudPortrait" src="assets/images/hero-sprite-alpha.webp" alt="Guardián">
                   <div class="hero-health-block">
                     <div class="slot-value ui-number" id="hpHud"><span class="current-value">6</span><span class="max-value">/6</span></div>
                     <div class="hero-health-label">Vida</div>
@@ -105,17 +106,17 @@
                 <h2 class="hud-panel-title">Turno</h2>
                 <div class="turn-resource-grid">
                   <div class="bottom-slot action-meter action-meter-move" aria-label="Movimiento disponible">
-                    <img class="action-meter-icon" src="assets/images/icon-speed.png" alt="">
+                    <img class="action-meter-icon" src="assets/images/icon-speed.webp" alt="">
                     <div class="action-meter-value ui-number" id="movePoints">0</div>
                     <div class="action-meter-label">Mov</div>
                   </div>
                   <div class="bottom-slot action-meter action-meter-attack" aria-label="Ataque disponible">
-                    <img class="action-meter-icon" src="assets/images/icon-attack.png" alt="">
+                    <img class="action-meter-icon" src="assets/images/icon-attack.webp" alt="">
                     <div class="action-meter-value ui-number" id="attackPoints">0</div>
                     <div class="action-meter-label">ATQ</div>
                   </div>
                   <div class="bottom-slot action-meter action-meter-defense" aria-label="Defensa disponible">
-                    <img class="action-meter-icon" src="assets/images/icon-defense.png" alt="">
+                    <img class="action-meter-icon" src="assets/images/icon-defense.webp" alt="">
                     <div class="action-meter-value ui-number" id="defensePoints">0</div>
                     <div class="action-meter-label">Def</div>
                   </div>
@@ -229,7 +230,7 @@
             <h3>Umbral de los Tres Dados</h3>
             <p>Una mazmorra táctica de una sola carta. Asigna tres dados, abre camino entre criaturas y aguanta hasta el último umbral.</p>
           </div>
-          <div class="poster-char"><img id="startPosterImage" src="assets/images/class_warden.png" alt="Guardián"></div>
+          <div class="poster-char"><img id="startPosterImage" src="assets/images/class_warden.webp" alt="Guardián"></div>
         </div>
       </div>
       <div class="start-column">
@@ -247,28 +248,28 @@
           <div class="choice-grid" id="classGrid">
             <button type="button" class="choice-card selected" data-class="warden">
               <span class="choice-card-media" aria-hidden="true">
-                <img src="assets/images/class_warden.png" alt="Guardián">
+                <img src="assets/images/class_warden.webp" alt="Guardián">
               </span>
               <strong>Guardián</strong>
               <span>Una vez por nivel conserva un dado asignado para el siguiente turno.</span>
             </button>
             <button type="button" class="choice-card" data-class="berserker">
               <span class="choice-card-media" aria-hidden="true">
-                <img src="assets/images/class_berserker.png" alt="Berserker">
+                <img src="assets/images/class_berserker.webp" alt="Berserker">
               </span>
               <strong>Berserker</strong>
               <span>Con 1 de vida puede repetir una tirada completa.</span>
             </button>
             <button type="button" class="choice-card" data-class="scout">
               <span class="choice-card-media" aria-hidden="true">
-                <img src="assets/images/class_explorer.png" alt="Exploradora">
+                <img src="assets/images/class_explorer.webp" alt="Exploradora">
               </span>
               <strong>Exploradora</strong>
               <span>Una vez por nivel puede asignar un dado a Alcance.</span>
             </button>
             <button type="button" class="choice-card" data-class="arcanist">
               <span class="choice-card-media" aria-hidden="true">
-                <img src="assets/images/class_arcanist.png" alt="Arcanista">
+                <img src="assets/images/class_arcanist.webp" alt="Arcanista">
               </span>
               <strong>Arcanista</strong>
               <span>Una vez por nivel puede volver a tirar los tres dados.</span>

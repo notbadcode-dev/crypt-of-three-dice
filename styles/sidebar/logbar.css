@@ -38,7 +38,7 @@
       }
 
       .btn-progress {
-        color: var(--log-btn-progress-primary-text);
+        color: var(--stroke-umber);
       }
     }
   }
@@ -60,7 +60,7 @@
 
   .btn-progress {
     display: block;
-    color: var(--log-btn-progress-text);
+    color: var(--gold-glow);
     font-size: 0.52rem;
     letter-spacing: var(--tracking-wide);
     line-height: 1;
@@ -75,12 +75,21 @@
   align-content: center;
   padding: 10px 12px;
   overflow: hidden;
-  background: linear-gradient(180deg, #122923, #0b1d18);
+  background: var(--gradient-panel-log);
   border: 2px solid rgb(var(--frame-blue-rgb), 0.78);
   box-shadow: inset 0 0 0 2px rgb(var(--inset-navy-rgb), 0.75);
-  color: var(--log-text);
+  color: var(--text-mist-1);
   font-size: 0.84rem;
   line-height: 1.35;
+
+  &.log-flash {
+    animation: log-flash var(--transition-slow) var(--ease-out-soft);
+  }
+}
+@keyframes log-flash {
+  from {
+    opacity: 0.35;
+  }
 }
 .btn.secondary {
   background: linear-gradient(180deg, var(--green-mid), var(--green-deep));

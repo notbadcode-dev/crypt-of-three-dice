@@ -30,6 +30,19 @@ export default {
     "declaration-empty-line-before": null,
     "custom-property-empty-line-before": null,
     "declaration-block-single-line-max-declarations": null,
-    "declaration-block-no-redundant-longhand-properties": null
+    "declaration-block-no-redundant-longhand-properties": null,
+    "media-feature-name-allowed-list": [
+      "width",
+      "height",
+      "prefers-reduced-motion"
+    ],
+    "media-feature-name-value-allowed-list": {
+      "width": ["540px", "760px", "840px", "1100px", "1101px", "1320px"],
+      "height": ["850px"]
+    },
+    "media-feature-name-unit-allowed-list": {
+      "width": ["px"],
+      "height": ["px"]
+    }
   }
 };

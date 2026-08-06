@@ -69,13 +69,14 @@
   }
 
   .game-card {
-    width: auto;
-    height: min(1013px, calc(100dvh - 112px));
+    width: min(675px, calc(66.667dvh - 85.333px));
+    height: auto;
     max-width: 100%;
+    max-height: none;
   }
 
   .board-side-info {
-    height: 100%;
+    height: min(100%, 840px);
     min-height: 0;
     overflow: visible;
     gap: 6px;
@@ -287,5 +288,16 @@
     span {
       font-size: 0.58rem;
     }
+  }
+}
+
+/* En escritorio estrecho la ayuda duplicada cede espacio al flujo jugable. */
+@media (width >= 1101px) and (width <= 1320px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sidebar {
+    display: none;
   }
 }

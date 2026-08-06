@@ -25,7 +25,7 @@
 }
 .board-frame {
   background-position: center;
-  background-size: 100% 100%;
+  background-size: contain;
   background-repeat: no-repeat;
 }
 .enemy-card {
@@ -34,64 +34,108 @@
   background-repeat: no-repeat;
 }
 
-/* HUD inferior fiel al triptico de carta: enemigo | heroe | turno. */
+/* HUD inferior integrado: enemigo | heroe | turno. */
 .combat-dashboard {
-  left: 3.05%;
-  right: 3.05%;
-  bottom: 1.85%;
-  height: 16.85%;
-  grid-template-columns: minmax(0, 0.93fr) minmax(0, 1.08fr) minmax(0, 1.08fr);
-  gap: 2.05%;
+  left: 6.2%;
+  right: 6.2%;
+  bottom: 3.95%;
+  height: 18.1%;
+  box-sizing: border-box;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  padding: 0.65% 0.75% 0.7%;
   align-items: stretch;
 }
 
 .combat-dashboard::before {
-  content: "";
-  position: absolute;
-  left: -1.2%;
-  right: -1.2%;
-  top: -8.5%;
-  bottom: -2%;
-  z-index: 0;
-  background:
-    linear-gradient(
-        90deg,
-        transparent,
-        rgb(231 178 73 / 68%) 22% 44%,
-        transparent 44% 56%,
-        rgb(231 178 73 / 68%) 56% 78%,
-        transparent
-      )
-      center 6% / 24% 2px no-repeat,
-    linear-gradient(
-      180deg,
-      rgb(7 18 18 / 98%),
-      rgb(4 12 12 / 96%) 46%,
-      rgb(3 9 9 / 98%)
-    );
-  border-top: 1px solid rgb(32 48 43 / 95%);
-  pointer-events: none;
+  display: none;
 }
 
 .combat-dashboard::after {
+  display: none;
+}
+
+.hud-panel {
+  border: 0;
+  background:
+    linear-gradient(180deg, rgb(83 102 87 / 18%), transparent 28%),
+    linear-gradient(180deg, rgb(10 24 23 / 84%), rgb(3 10 10 / 72%));
+  box-shadow: none;
+}
+
+.hud-panel + .hud-panel {
+  border-left: 1px solid rgb(125 151 139 / 42%);
+  box-shadow: -2px 0 0 rgb(var(--black-rgb), 0.52);
+}
+
+.hud-panel::before {
+  display: none;
+}
+
+.hud-panel::after {
   content: "";
   position: absolute;
-  left: 50%;
-  top: -3.8%;
-  width: 3.2%;
-  aspect-ratio: 1;
-  z-index: 0;
-  transform: translateX(-50%) rotate(45deg);
+  left: 8%;
+  right: 8%;
+  top: 23%;
+  height: 1px;
+  z-index: 1;
+  border: 0;
   background: linear-gradient(
-    135deg,
-    #2b1c0d,
-    #d7a545 48%,
-    #241708 52%,
-    #5f421b
+    90deg,
+    transparent,
+    rgb(184 148 72 / 46%) 16% 84%,
+    transparent
   );
-  border: 1px solid rgb(244 206 111 / 65%);
-  box-shadow: 0 0 0 2px rgb(var(--black-rgb), 0.52);
-  pointer-events: none;
+  box-shadow: 0 1px 0 rgb(var(--black-rgb), 0.48);
+}
+
+.enemy-card,
+.enemy-panel {
+  padding: 5.2% 6% 5.5%;
+  grid-template-rows: 16% minmax(0, 1fr) 24%;
+  gap: 3%;
+  background-image: none;
+}
+
+.hero-panel,
+.turn-panel {
+  padding: 5.2% 6% 5.5%;
+  grid-template-rows: 16% minmax(0, 1fr);
+  gap: 3%;
+}
+
+.hud-panel-title,
+.enemy-panel .hud-panel-title {
+  align-self: center;
+  font-size: clamp(0.5rem, 0.88vw, 0.68rem);
+  letter-spacing: 0.03em;
+}
+
+.panel-stat,
+.turn-panel .action-meter {
+  border: 1px solid rgb(104 133 121 / 68%);
+  background:
+    linear-gradient(180deg, rgb(var(--white-rgb), 0.045), transparent 30%),
+    linear-gradient(180deg, rgb(13 28 26 / 94%), rgb(3 10 10 / 94%));
+  box-shadow:
+    inset 2px 0 0 rgb(191 148 64 / 44%),
+    inset 0 0 0 1px rgb(var(--black-rgb), 0.62),
+    inset 0 -7px 12px rgb(var(--black-rgb), 0.28);
+}
+
+.turn-panel .action-meter::before {
+  border-left: 0;
+  background: linear-gradient(
+    180deg,
+    rgb(var(--meter-accent), 0.08),
+    transparent 42% 82%,
+    rgb(var(--meter-accent), 0.05)
+  );
+}
+
+.turn-resource-grid {
+  gap: 3.5%;
 }
 
 .enemy-portrait-frame {
@@ -107,9 +151,20 @@
 }
 
 .enemy-portrait {
-  width: 86%;
-  height: 88%;
+  width: 82%;
+  height: 82%;
   object-fit: contain;
   object-position: center bottom;
   image-rendering: pixelated;
+}
+
+.hero-panel-body {
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1fr);
+  gap: 4%;
+}
+
+.hero-panel-portrait {
+  width: 115%;
+  height: 108%;
+  transform: translate(-2%, 4%);
 }

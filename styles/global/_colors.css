@@ -38,6 +38,7 @@
   --panel-green-2: #10241f;
   --panel-green-3: #0b211c;
   --panel-green-light: #1a3b32;
+  --panel-green-deep: #122923;
   --panel-teal: #223d36;
   --panel-green-hover: #29483f;
   --olive-highlight: #374628;
@@ -109,6 +110,7 @@
   --die-dark-1: #29463d;
   --die-dark-2: #112720;
   --die-face-text: #0a1015;
+  --die-border: #d2dce2;
   --die-placeholder-border: #8094a5;
 
   /* ---- PALETA · Blanco / negro absolutos ---- */
@@ -127,6 +129,14 @@
   --text-mist-3: #b0c0b9;
   --text-mist-4: #93a89f;
   --text-bright: #eef1e7;
+
+  /* Alias históricos de la escala "mist" (mantenidos por el nombre semántico
+     ya usado en muchos componentes; apuntan a los 4 niveles consolidados). */
+  --text-soft-1: var(--text-mist-2);
+  --text-soft-2: var(--text-mist-3);
+  --text-soft-3: var(--text-mist-1);
+  --text-soft-4: var(--text-mist-1);
+  --text-soft-5: var(--text-mist-3);
 
   /* ---- TEMA · Escala "parchment" — texto cálido dorado/pergamino
      (2 niveles + tonos ya existentes que se mantienen por ser

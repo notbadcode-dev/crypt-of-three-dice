@@ -17,11 +17,11 @@
 }
 
 .panel {
-  background: linear-gradient(180deg, rgb(22 35 40 / 96%), rgb(8 16 20 / 96%));
-  border: 4px solid #050a0b;
+  background: var(--gradient-panel-surface);
+  border: 4px solid var(--border-void);
   box-shadow:
     var(--shadow),
-    inset 0 0 0 2px #33484e,
+    inset 0 0 0 2px var(--border-inset-teal),
     inset 0 0 0 6px rgb(var(--black-rgb), 0.22);
   border-radius: 6px;
 }

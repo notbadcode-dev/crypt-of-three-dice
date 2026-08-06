@@ -12,16 +12,30 @@
   z-index: 3;
 }
 
+.top-stat-caption {
+  position: absolute;
+  left: 0;
+  top: -17%;
+  color: var(--text-soft-4);
+  font-size: 0.4rem;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-shadow: var(--text-shadow-soft);
+  pointer-events: none;
+}
+
 .top-slot {
-  background-image: url("../../assets/images/top-slot-bg.png");
+  background-image: url("../../assets/images/top-slot-bg.webp");
 }
 .bottom-slot {
-  background-image: url("../../assets/images/bottom-slot-bg.png");
+  background-image: url("../../assets/images/bottom-slot-bg.webp");
   overflow: hidden;
   isolation: isolate;
 }
 .bottom-slot:first-child {
-  background-image: url("../../assets/images/bottom-slot-bg.png");
+  background-image: url("../../assets/images/bottom-slot-bg.webp");
 }
 
 .top-slot,
@@ -149,7 +163,7 @@
     box-sizing: border-box;
     overflow: hidden;
     padding: 2px 4px 3px;
-    color: var(--hero-status-text);
+    color: var(--text-parchment-bright);
     background: linear-gradient(
       180deg,
       rgb(25 35 35 / 96%),
@@ -174,9 +188,10 @@
       bottom: 3px;
       width: var(--hp-ratio);
       max-width: calc(100% - 6px);
-      background: linear-gradient(180deg, #d85d57, #7d292b);
+      background: var(--gradient-hp-bar-vertical);
       box-shadow: inset 0 1px 0 rgb(255 236 207 / 24%);
       opacity: 0.95;
+      transition: width var(--transition-slow) var(--ease-out-soft);
     }
 
     &::after {
@@ -204,7 +219,7 @@
     grid-row: 2;
     align-self: start;
     justify-self: start;
-    color: var(--slot-label-text);
+    color: var(--text-parchment);
     font-size: 0.4rem;
     letter-spacing: 0.11em;
   }

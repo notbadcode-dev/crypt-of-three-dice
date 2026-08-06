@@ -2,6 +2,10 @@ import { app } from "../app-core.js";
 import { $, $$ } from "../config/app-config.js";
 import { closeDeleteConfirm, closeLoadModal, closeSaveModal, updateContinueButtonUi } from "./save-load-ui.js";
 
+// Debe coincidir con la duración de la animación "modal-out"/"scrim-out"
+// (--transition-base, 0.25s) declarada en styles/modals/modal-shell.css.
+const MODAL_CLOSE_MS = 260;
+
 const modalOrder = [
   "startModal",
   "helpModal",
@@ -121,19 +125,32 @@ function setModalHidden(id: ModalId, hidden: boolean, opener: HTMLElement | null
     if (returnTarget) {modalReturnFocus.set(id, returnTarget);}
   }
 
-  modal.classList.toggle("hidden", hidden);
-  modal.setAttribute("aria-hidden", String(hidden));
+  if (!hidden) {
+    modal.classList.remove("closing");
+    modal.classList.remove("hidden");
+    modal.setAttribute("aria-hidden", "false");
+    updateModalEnvironment();
+    focusModal(id);
+    return;
+  }
 
-  if (hidden) {
+  const finishClose = () => {
+    modal.classList.remove("closing");
+    modal.classList.add("hidden");
+    modal.setAttribute("aria-hidden", "true");
     const returnFocus = modalReturnFocus.get(id);
     modalReturnFocus.delete(id);
     updateModalEnvironment();
     focusElement(returnFocus);
+  };
+
+  if (modal.classList.contains("hidden") || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    finishClose();
     return;
   }
 
-  updateModalEnvironment();
-  focusModal(id);
+  modal.classList.add("closing");
+  setTimeout(finishClose, MODAL_CLOSE_MS);
 }
 
 function closeTopModalWithEscape() {

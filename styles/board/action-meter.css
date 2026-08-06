@@ -75,7 +75,7 @@
   grid-row: 1;
   align-self: center;
   justify-self: center;
-  color: var(--action-value-text);
+  color: var(--text-parchment-mid);
   font-size: 0.9rem;
   line-height: 0.9;
   letter-spacing: 0;
@@ -91,7 +91,7 @@
   grid-row: 1;
   align-self: center;
   justify-self: start;
-  color: var(--action-label-text);
+  color: var(--text-warm-gray);
   font-size: 0.39rem;
   text-transform: uppercase;
   letter-spacing: 0.11em;

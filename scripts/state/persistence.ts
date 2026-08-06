@@ -54,7 +54,7 @@ export function isValidPoint(value: unknown): value is Position {
 export function normalizeState(raw: unknown): GameState | null {
   if (!isObject(raw)) {return null;}
   if (raw.saveVersion !== undefined && raw.saveVersion !== SAVE_VERSION) {return null;}
-  if (typeof raw.classId !== "string" || !Object.prototype.hasOwnProperty.call(classNames, raw.classId)) {return null;}
+  if (typeof raw.classId !== "string" || !Object.hasOwn(classNames, raw.classId)) {return null;}
   if (!Number.isInteger(raw.level) || (raw.level as number) < 1 || (raw.level as number) > levels.length) {return null;}
   if (!Number.isInteger(raw.turn) || (raw.turn as number) < 1) {return null;}
   if (!Number.isInteger(raw.hp) || !Number.isInteger(raw.maxHp) || (raw.maxHp as number) < 1) {return null;}
