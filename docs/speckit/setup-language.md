@@ -1,4 +1,4 @@
-# Configuración de Spec Kit — Castellano + BDD/EARS/Gherkin
+# Configuración de Spec Kit — Idioma y BDD/EARS/Gherkin
 
 ## 🌍 Localización y Estandares
 

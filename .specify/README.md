@@ -16,7 +16,7 @@ Este proyecto usa **Spec Kit** para desarrollo guiado por especificaciones:
 | Carpeta/Archivo | Propósito |
 |---|---|
 | `memory/constitution.md` | Principios de gobierno del proyecto (7 pilares) |
-| `../../../docs/speckit/setup-castellano-bdd.md` | Guía detallada de configuración (EARS + Gherkin) |
+| `../../../docs/speckit/setup-language.md` | Guía detallada de configuración (EARS + Gherkin) |
 | `templates/` | **Tus templates en castellano** |
 | `integrations/` | Configuración de integraciones (Copilot, etc.) |
 | `scripts/` | Scripts de utility para Spec Kit |
@@ -33,7 +33,7 @@ cat .specify/memory/constitution.md
 ### 2. Leer la Guía de Configuración
 
 ```bash
-cat ../../../docs/speckit/setup-castellano-bdd.md
+cat ../../../docs/speckit/setup-language.md
 ```
 
 ### 3. Crear tu Primer Feature
