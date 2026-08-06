@@ -1,3 +1,12 @@
+/**
+ * @name test-ui-interaction
+ * @type example
+ * @parent_skill playwright-e2e-patterns
+ * @keywords ["E2E test", "UI interaction", "clicks", "forms", "modals"]
+ * @example_scenario "User interactions: clicks, modals, forms, keyboard"
+ * @updated 2026-08-06
+ */
+
 // Example: UI Interaction E2E test
 // Tests: User clicks, forms submit, UI state changes
 

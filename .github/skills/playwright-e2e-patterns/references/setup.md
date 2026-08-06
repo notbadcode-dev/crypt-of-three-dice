@@ -1,3 +1,11 @@
+---
+name: "setup"
+type: "reference"
+parent_skill: "playwright-e2e-patterns"
+keywords: ["Playwright", "configuration", "browsers", "installation", "debugging"]
+updated: "2026-08-06"
+---
+
 # Playwright Setup & Configuration
 
 Reference for Playwright installation, configuration details, and project setup.

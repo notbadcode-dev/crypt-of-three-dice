@@ -1,3 +1,11 @@
+---
+name: "visual-regression"
+type: "reference"
+parent_skill: "playwright-e2e-patterns"
+keywords: ["visual regression", "snapshots", "screenshot testing", "diffs"]
+updated: "2026-08-06"
+---
+
 # Visual Regression Testing Strategy
 
 Reference for snapshot testing, when to update, and managing visual diffs.

@@ -1,3 +1,12 @@
+/**
+ * @name test-visual-snapshot
+ * @type example
+ * @parent_skill playwright-e2e-patterns
+ * @keywords ["visual regression", "snapshots", "responsive design", "layout"]
+ * @example_scenario "Visual regression testing: full page, components, multi-viewport"
+ * @updated 2026-08-06
+ */
+
 // Example: Visual Regression Snapshot Test
 // Tests: Layout, colors, spacing, responsive design
 

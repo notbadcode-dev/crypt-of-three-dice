@@ -1,3 +1,11 @@
+---
+name: "webp-pipeline"
+type: "reference"
+parent_skill: "asset-workflow-images"
+keywords: ["WebP", "compression", "cwebp", "optimization", "quality"]
+updated: "2026-08-06"
+---
+
 # WebP Pipeline & Image Optimization
 
 Reference for WebP compression details, optimization scripts, and quality/size tradeoffs.

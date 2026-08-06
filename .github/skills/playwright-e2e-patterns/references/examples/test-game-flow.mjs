@@ -1,3 +1,12 @@
+/**
+ * @name test-game-flow
+ * @type example
+ * @parent_skill playwright-e2e-patterns
+ * @keywords ["E2E test", "game flow", "hero selection", "integration"]
+ * @example_scenario "Complete game flow: hero select → game start → first turn"
+ * @updated 2026-08-06
+ */
+
 // Example: Complete game flow E2E test
 // Tests: Hero selection → Game start → First turn setup
 

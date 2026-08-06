@@ -1,3 +1,12 @@
+---
+name: "add-new-image"
+type: "example"
+parent_skill: "asset-workflow-images"
+keywords: ["images", "WebP", "rembg", "optimization", "workflow"]
+example_scenario: "Add ice ability icon (ice-ability-icon.png)"
+updated: "2026-08-06"
+---
+
 # Example: Adding a New Image Asset
 
 Scenario: You're adding a new "ice ability" visual effect. The designers provided `ice-ability-icon.png` (256×256 px, opaque white background).
