@@ -101,6 +101,7 @@
   transform: translate(var(--icon-shift-x), var(--icon-shift-y));
   margin: 0;
   image-rendering: pixelated;
+  /* stylelint-disable-next-line property-no-unknown */
   image-rendering: crisp-edges;
 }
 .stat-slot-mov .slot-inner,

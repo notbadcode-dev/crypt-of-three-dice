@@ -65,6 +65,7 @@
   align-self: center;
   object-fit: contain;
   image-rendering: pixelated;
+  /* stylelint-disable-next-line property-no-unknown */
   image-rendering: crisp-edges;
   filter: drop-shadow(2px 2px 0 rgb(var(--black-rgb), 0.42));
 }

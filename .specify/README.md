@@ -84,8 +84,10 @@ ENTONCES recibo confirmación por email
 | Recurso | Ubicación |
 |---------|-----------|
 | Constitución | [memory/constitution.md](memory/constitution.md) |
-| Guía Castellano + BDD | [memory/SETUP-CASTELLANO-BDD.md](memory/SETUP-CASTELLANO-BDD.md) |
-| Templates (Castellano) | [templates/overrides/](templates/overrides/) |
+| Guía Castellano + BDD | [../../docs/speckit/setup-language.md](../../docs/speckit/setup-language.md) |
+| Templates (Castellano) | [templates/](templates/) |
+| Flujo Spec Kit | [../../docs/spec-kit-workflow.md](../../docs/spec-kit-workflow.md) |
+| Auditoría Spec Kit | [../../spec-kit-audit.md](../../spec-kit-audit.md) |
 | Documentación Spec Kit | [https://github.github.io/spec-kit/](https://github.github.io/spec-kit/) |
 | Proyecto | [../../index.html](../../index.html) |
 

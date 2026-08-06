@@ -48,7 +48,7 @@ export function isObject(value: unknown): value is Record<string, unknown> {
 }
 
 export function isValidPoint(value: unknown): value is Position {
-  return isObject(value) && Number.isInteger((value).x) && Number.isInteger((value).y);
+  return isObject(value) && Number.isInteger((value as Record<string, unknown>).x) && Number.isInteger((value as Record<string, unknown>).y);
 }
 
 export function normalizeState(raw: unknown): GameState | null {
@@ -59,25 +59,25 @@ export function normalizeState(raw: unknown): GameState | null {
   if (!Number.isInteger(raw.turn) || (raw.turn as number) < 1) {return null;}
   if (!Number.isInteger(raw.hp) || !Number.isInteger(raw.maxHp) || (raw.maxHp as number) < 1) {return null;}
 
-  const skills = raw.skills;
-  if (!isObject(skills) || !["speed", "attack", "defense", "range"].every((key: string) => Number.isInteger(skills[key]))) {return null;}
-  const assign = raw.assign;
-  if (!isObject(assign) || !["speed", "attack", "defense", "range"].every((key: string) => assign[key] === null || Number.isInteger(assign[key]))) {return null;}
-  const points = raw.points;
-  if (!isObject(points) || !["speed", "attack", "defense"].every((key: string) => Number.isInteger(points[key]))) {return null;}
+  const skills = raw.skills as unknown;
+  if (!isObject(skills) || !["speed", "attack", "defense", "range"].every((key: string) => Number.isInteger((skills as Record<string, unknown>)[key]))) {return null;}
+  const assign = raw.assign as unknown;
+  if (!isObject(assign) || !["speed", "attack", "defense", "range"].every((key: string) => (assign as Record<string, unknown>)[key] === null || Number.isInteger((assign as Record<string, unknown>)[key]))) {return null;}
+  const points = raw.points as unknown;
+  if (!isObject(points) || !["speed", "attack", "defense"].every((key: string) => Number.isInteger((points as Record<string, unknown>)[key]))) {return null;}
   if (!isValidPoint(raw.hero)) {return null;}
-  const rawWalls = raw.walls;
+  const rawWalls = raw.walls as unknown;
   if (!Array.isArray(rawWalls) || !rawWalls.every(isValidPoint)) {return null;}
-  const rawEnemies = raw.enemies;
-  if (!Array.isArray(rawEnemies) || !rawEnemies.every((enemy: unknown) => isObject(enemy) && typeof (enemy).id === "string" && isValidPoint(enemy) && Number.isInteger((enemy as Record<string, unknown>).hp) && Number.isInteger((enemy as Record<string, unknown>).maxHp))) {return null;}
-  const rawDice = raw.dice;
-  if (!Array.isArray(rawDice) || !rawDice.every((die: unknown) => isObject(die) && Number.isInteger((die).id) && Number.isInteger((die).value) && (((die).assigned) === null || typeof (die).assigned === "string"))) {return null;}
+  const rawEnemies = raw.enemies as unknown;
+  if (!Array.isArray(rawEnemies) || !rawEnemies.every((enemy: unknown) => isObject(enemy) && typeof (enemy as Record<string, unknown>).id === "string" && isValidPoint(enemy) && Number.isInteger((enemy as Record<string, unknown>).hp) && Number.isInteger((enemy as Record<string, unknown>).maxHp))) {return null;}
+  const rawDice = raw.dice as unknown;
+  if (!Array.isArray(rawDice) || !rawDice.every((die: unknown) => isObject(die) && Number.isInteger((die as Record<string, unknown>).id) && Number.isInteger((die as Record<string, unknown>).value) && (((die as Record<string, unknown>).assigned) === null || typeof (die as Record<string, unknown>).assigned === "string"))) {return null;}
   if (typeof raw.phase !== "string" || !["energy", "assign", "adventure", "monsterMove", "monsterAttack", "upgrade", "end"].includes(raw.phase)) {return null;}
 
-  const walls = rawWalls;
+  const walls = rawWalls as Position[];
   const enemies = rawEnemies as unknown as EnemyState[];
   const dice = rawDice as unknown as DieState[];
-  const tempRange = Number.isInteger((raw)._tempRange) ? ((raw)._tempRange as number) : undefined;
+  const tempRange = Number.isInteger((raw as Record<string, unknown>)._tempRange) ? ((raw as Record<string, unknown>)._tempRange as number) : undefined;
 
   return {
     saveVersion: SAVE_VERSION,
@@ -107,16 +107,16 @@ export function hasSave(): boolean {
 function normalizeSlot(slot: unknown, index: number): SaveSlot | null {
   if (!isObject(slot)) {return null;}
 
-  const state = normalizeState((slot).state);
+  const state = normalizeState((slot as Record<string, unknown>).state);
   if (!state) {return null;}
 
-  const name = typeof (slot).name === "string" ? ((slot).name).trim().slice(0, 40) : "";
+  const name = typeof (slot as Record<string, unknown>).name === "string" ? ((slot as Record<string, unknown>).name as string).trim().slice(0, 40) : "";
   if (!name) {return null;}
 
   return {
     id: index,
     name,
-    savedAt: typeof (slot).savedAt === "number" && Number.isFinite((slot).savedAt) ? (slot).savedAt : 0,
+    savedAt: typeof (slot as Record<string, unknown>).savedAt === "number" && Number.isFinite((slot as Record<string, unknown>).savedAt as number) ? (slot as Record<string, unknown>).savedAt as number : 0,
     state
   };
 }

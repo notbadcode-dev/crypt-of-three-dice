@@ -224,7 +224,7 @@ function isObject(value) {
     return value !== null && typeof value === "object";
 }
 function isValidPoint(value) {
-    return isObject(value) && Number.isInteger((value).x) && Number.isInteger((value).y);
+    return isObject(value) && Number.isInteger(value.x) && Number.isInteger(value.y);
 }
 function normalizeState(raw) {
     if (!isObject(raw)) {
@@ -265,11 +265,11 @@ function normalizeState(raw) {
         return null;
     }
     const rawEnemies = raw.enemies;
-    if (!Array.isArray(rawEnemies) || !rawEnemies.every((enemy) => isObject(enemy) && typeof (enemy).id === "string" && isValidPoint(enemy) && Number.isInteger(enemy.hp) && Number.isInteger(enemy.maxHp))) {
+    if (!Array.isArray(rawEnemies) || !rawEnemies.every((enemy) => isObject(enemy) && typeof enemy.id === "string" && isValidPoint(enemy) && Number.isInteger(enemy.hp) && Number.isInteger(enemy.maxHp))) {
         return null;
     }
     const rawDice = raw.dice;
-    if (!Array.isArray(rawDice) || !rawDice.every((die) => isObject(die) && Number.isInteger((die).id) && Number.isInteger((die).value) && (((die).assigned) === null || typeof (die).assigned === "string"))) {
+    if (!Array.isArray(rawDice) || !rawDice.every((die) => isObject(die) && Number.isInteger(die.id) && Number.isInteger(die.value) && ((die.assigned) === null || typeof die.assigned === "string"))) {
         return null;
     }
     if (typeof raw.phase !== "string" || !["energy", "assign", "adventure", "monsterMove", "monsterAttack", "upgrade", "end"].includes(raw.phase)) {
@@ -278,7 +278,7 @@ function normalizeState(raw) {
     const walls = rawWalls;
     const enemies = rawEnemies;
     const dice = rawDice;
-    const tempRange = Number.isInteger((raw)._tempRange) ? (raw)._tempRange : undefined;
+    const tempRange = Number.isInteger(raw._tempRange) ? raw._tempRange : undefined;
     return {
         saveVersion: SAVE_VERSION,
         classId: raw.classId,
@@ -306,18 +306,18 @@ function normalizeSlot(slot, index) {
     if (!isObject(slot)) {
         return null;
     }
-    const state = normalizeState((slot).state);
+    const state = normalizeState(slot.state);
     if (!state) {
         return null;
     }
-    const name = typeof (slot).name === "string" ? ((slot).name).trim().slice(0, 40) : "";
+    const name = typeof slot.name === "string" ? slot.name.trim().slice(0, 40) : "";
     if (!name) {
         return null;
     }
     return {
         id: index,
         name,
-        savedAt: typeof (slot).savedAt === "number" && Number.isFinite((slot).savedAt) ? (slot).savedAt : 0,
+        savedAt: typeof slot.savedAt === "number" && Number.isFinite(slot.savedAt) ? slot.savedAt : 0,
         state
     };
 }
@@ -677,7 +677,7 @@ function moveMonsters() {
                 .map((option) => ({ option, score: monsterScore(option, range) }))
                 .sort((a, b) => a.score - b.score);
             const best = scored[0];
-            if (!best) {
+            if (best === undefined) {
                 break;
             }
             if (monsterScore(enemy, range) <= best.score) {

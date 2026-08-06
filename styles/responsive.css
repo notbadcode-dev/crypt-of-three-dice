@@ -676,6 +676,7 @@
     height: calc(100dvh - 12px);
     max-height: calc(100dvh - 12px);
     overflow: auto;
+    /* stylelint-disable-next-line property-no-unknown */
     overscroll-behavior: contain;
     padding: 8px;
   }

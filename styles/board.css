@@ -333,6 +333,7 @@
   transform: translate(var(--icon-shift-x), var(--icon-shift-y));
   margin: 0;
   image-rendering: pixelated;
+  /* stylelint-disable-next-line property-no-unknown */
   image-rendering: crisp-edges;
   transform: translate(var(--icon-shift-x), var(--icon-shift-y));
 .stat-slot-hp .slot-inner {
@@ -520,6 +521,7 @@
   align-self: center;
   object-fit: contain;
   image-rendering: pixelated;
+  /* stylelint-disable-next-line property-no-unknown */
   image-rendering: crisp-edges;
   filter: drop-shadow(2px 2px 0 rgba(0, 0, 0, 0.42));
 }

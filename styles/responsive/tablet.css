@@ -36,6 +36,7 @@
   #startModal .modal {
     height: min(920px, calc(100dvh - 24px));
     overflow-y: auto;
+    /* stylelint-disable-next-line property-no-unknown */
     overscroll-behavior: contain;
   }
 
@@ -48,6 +49,7 @@
      explícito, porque una fila `auto` sigue usando el mínimo especificado
      del item (0) en vez de su contenido real al calcular su tamaño. */
   #startModal .class-block {
+    /* stylelint-disable-next-line property-no-unknown */
     min-height: auto;
   }
 }

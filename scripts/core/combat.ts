@@ -29,7 +29,7 @@ export function moveMonsters() {
         .sort((a, b) => a.score - b.score);
 
       const best = scored[0];
-      if (!best) {break;}
+      if (best === undefined) {break;}
       if (monsterScore(enemy, range) <= best.score) {break;}
 
       enemy.x = best.option.x;
