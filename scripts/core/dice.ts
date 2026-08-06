@@ -16,8 +16,8 @@ export function total(skill: SlotKey): number {
 }
 
 export function allAssigned() {
-  return [...PRIMARY_SLOT_KEYS].every((slot) => app.state.assign[slot] !== null) ||
-    (app.state.classId === "scout" && app.state.classUsed && (["attack", "defense", "range"] as const).every((slot) => app.state.assign[slot] !== null));
+  return [...PRIMARY_SLOT_KEYS].every((slot: SlotKey) => app.state.assign[slot] !== null) ||
+    (app.state.classId === "scout" && app.state.classUsed && (["attack", "defense", "range"] as const).every((slot: SlotKey) => app.state.assign[slot] !== null));
 }
 
 export function nextRollValue() {

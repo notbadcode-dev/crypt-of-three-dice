@@ -103,11 +103,6 @@
   image-rendering: pixelated;
   image-rendering: crisp-edges;
 }
-.stat-slot-hp .slot-inner {
-  --icon-size: 112%;
-  --icon-shift-x: 0px;
-  --icon-shift-y: 0px;
-}
 .stat-slot-mov .slot-inner,
 .bottom-slot:nth-child(2) .slot-inner {
   --icon-size: 96%;

@@ -31,6 +31,8 @@
 - [Documentación](#documentación)
 - [Notas](#notas)
 
+> Documentación completa del proyecto: [`docs/index.md`](docs/index.md)
+
 ---
 
 ## Descripción
@@ -132,21 +134,14 @@ npm run test:install
 
 ---
 
-## Theme de colores
-
-Todos los colores y gradientes de la interfaz viven en `styles/global/`, organizados en dos capas:
-
-- **Paleta** (`_colors.css`, primeras secciones): primitivos crudos agrupados por familia (fondos, verdes de panel, piedra, dorado, estados, dado, texto, etc.), cada uno con un único valor hexadecimal/rgb.
-- **Tema semántico** (`_colors.css`, secciones finales): variables con nombre de uso (`--text-mist-1..4`, `--text-parchment*`, `--modal-danger-text`, alias `--text-soft-1..5`, etc.) que referencian primitivos de la paleta. Los componentes solo deben consumir variables semánticas o de paleta ya existentes; no declarar colores nuevos fuera de `styles/global/`.
-- **Gradientes** (`_gradients.css`): gradientes reutilizables compuestos a partir de los primitivos de la paleta, para evitar literales `linear-gradient(...)` repetidos entre componentes.
-
-Para un tema alternativo en el futuro, sobrescribe solo la capa semántica (por ejemplo con `:root[data-theme="claro"] { --text-mist-1: ...; }`), sin tocar la paleta ni los componentes.
-
----
-
 ## Documentación
 
-- Reglas operativas del repo: [`AGENTS.md`](AGENTS.md)
+Todo el detalle de arquitectura, build, tests, CI/CD, assets, convenciones y
+deuda técnica vive organizado en [`docs/`](docs/index.md) — empezar por
+[`docs/index.md`](docs/index.md).
+
+- Reglas operativas del repo (punto de entrada para agentes IA): [`AGENTS.md`](AGENTS.md)
+- Índice de documentación: [`docs/index.md`](docs/index.md)
 - Entrada principal del juego: [`index.html`](index.html)
 - Configuración Playwright: [`playwright.config.js`](playwright.config.js)
 - Runtime generado: [`scripts/app.js`](scripts/app.js)

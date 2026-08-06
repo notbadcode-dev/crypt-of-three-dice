@@ -48,7 +48,7 @@ export function isObject(value: unknown): value is Record<string, unknown> {
 }
 
 export function isValidPoint(value: unknown): value is Position {
-  return isObject(value) && Number.isInteger(value.x) && Number.isInteger(value.y);
+  return isObject(value) && Number.isInteger((value).x) && Number.isInteger((value).y);
 }
 
 export function normalizeState(raw: unknown): GameState | null {
@@ -60,24 +60,24 @@ export function normalizeState(raw: unknown): GameState | null {
   if (!Number.isInteger(raw.hp) || !Number.isInteger(raw.maxHp) || (raw.maxHp as number) < 1) {return null;}
 
   const skills = raw.skills;
-  if (!isObject(skills) || !["speed", "attack", "defense", "range"].every((key) => Number.isInteger(skills[key]))) {return null;}
+  if (!isObject(skills) || !["speed", "attack", "defense", "range"].every((key: string) => Number.isInteger(skills[key]))) {return null;}
   const assign = raw.assign;
-  if (!isObject(assign) || !["speed", "attack", "defense", "range"].every((key) => assign[key] === null || Number.isInteger(assign[key]))) {return null;}
+  if (!isObject(assign) || !["speed", "attack", "defense", "range"].every((key: string) => assign[key] === null || Number.isInteger(assign[key]))) {return null;}
   const points = raw.points;
-  if (!isObject(points) || !["speed", "attack", "defense"].every((key) => Number.isInteger(points[key]))) {return null;}
+  if (!isObject(points) || !["speed", "attack", "defense"].every((key: string) => Number.isInteger(points[key]))) {return null;}
   if (!isValidPoint(raw.hero)) {return null;}
   const rawWalls = raw.walls;
   if (!Array.isArray(rawWalls) || !rawWalls.every(isValidPoint)) {return null;}
   const rawEnemies = raw.enemies;
-  if (!Array.isArray(rawEnemies) || !rawEnemies.every((enemy) => isObject(enemy) && typeof enemy.id === "string" && isValidPoint(enemy) && Number.isInteger(enemy.hp) && Number.isInteger(enemy.maxHp))) {return null;}
+  if (!Array.isArray(rawEnemies) || !rawEnemies.every((enemy: unknown) => isObject(enemy) && typeof (enemy).id === "string" && isValidPoint(enemy) && Number.isInteger((enemy as Record<string, unknown>).hp) && Number.isInteger((enemy as Record<string, unknown>).maxHp))) {return null;}
   const rawDice = raw.dice;
-  if (!Array.isArray(rawDice) || !rawDice.every((die) => isObject(die) && Number.isInteger(die.id) && Number.isInteger(die.value) && (die.assigned === null || typeof die.assigned === "string"))) {return null;}
+  if (!Array.isArray(rawDice) || !rawDice.every((die: unknown) => isObject(die) && Number.isInteger((die).id) && Number.isInteger((die).value) && (((die).assigned) === null || typeof (die).assigned === "string"))) {return null;}
   if (typeof raw.phase !== "string" || !["energy", "assign", "adventure", "monsterMove", "monsterAttack", "upgrade", "end"].includes(raw.phase)) {return null;}
 
   const walls = rawWalls;
   const enemies = rawEnemies as unknown as EnemyState[];
   const dice = rawDice as unknown as DieState[];
-  const tempRange = Number.isInteger(raw._tempRange) ? (raw._tempRange as number) : undefined;
+  const tempRange = Number.isInteger((raw)._tempRange) ? ((raw)._tempRange as number) : undefined;
 
   return {
     saveVersion: SAVE_VERSION,
@@ -86,16 +86,16 @@ export function normalizeState(raw: unknown): GameState | null {
     turn: raw.turn as number,
     hp: raw.hp as number,
     maxHp: raw.maxHp as number,
-    skills: {...skills} as unknown as SkillState,
+    skills: Object.assign({}, skills) as unknown as SkillState,
     phase: raw.phase as GameState["phase"],
-    dice: dice.map((die) => ({...die})),
-    assign: {...assign} as unknown as AssignState,
-    points: {...points} as unknown as PointState,
-    hero: {...raw.hero},
-    enemies: enemies.map((enemy) => ({...enemy})),
-    walls: walls.map((wall) => ({...wall})),
-    classUsed: Boolean(raw.classUsed),
-    preserved: (raw.preserved as number | null) ?? null,
+    dice: dice.map((die: DieState) => ({ id: die.id, value: die.value, assigned: die.assigned })),
+    assign: Object.assign({}, assign) as unknown as AssignState,
+    points: Object.assign({}, points) as unknown as PointState,
+    hero: Object.assign({}, (raw).hero),
+    enemies: enemies.map((enemy: EnemyState) => ({ id: enemy.id, x: enemy.x, y: enemy.y, hp: enemy.hp, maxHp: enemy.maxHp })),
+    walls: walls.map((wall: Position) => ({ x: wall.x, y: wall.y })),
+    classUsed: Boolean((raw).classUsed),
+    preserved: ((raw).preserved as number | null) ?? null,
     ...(tempRange !== undefined ? { _tempRange: tempRange } : {})
   };
 }
@@ -107,23 +107,23 @@ export function hasSave(): boolean {
 function normalizeSlot(slot: unknown, index: number): SaveSlot | null {
   if (!isObject(slot)) {return null;}
 
-  const state = normalizeState(slot.state);
+  const state = normalizeState((slot).state);
   if (!state) {return null;}
 
-  const name = typeof slot.name === "string" ? slot.name.trim().slice(0, 40) : "";
+  const name = typeof (slot).name === "string" ? ((slot).name).trim().slice(0, 40) : "";
   if (!name) {return null;}
 
   return {
     id: index,
     name,
-    savedAt: typeof slot.savedAt === "number" && Number.isFinite(slot.savedAt) ? slot.savedAt : 0,
+    savedAt: typeof (slot).savedAt === "number" && Number.isFinite((slot).savedAt) ? (slot).savedAt : 0,
     state
   };
 }
 
-function persistSaveSlots(slots: (SaveSlot | null)[]) {
+function persistSaveSlots(slots: (SaveSlot | null)[]): void {
   localStorage.setItem(SAVE_SLOTS_KEY, JSON.stringify(
-    slots.map((slot) => slot ? {
+    slots.map((slot: SaveSlot | null) => slot ? {
       name: slot.name,
       savedAt: slot.savedAt,
       state: slot.state
@@ -173,7 +173,7 @@ export function getSaveSlots(): (SaveSlot | null)[] {
   }
 
   const rawSlotsList = rawSlots;
-  const normalizedSlots = Array.from({ length: MAX_SAVE_SLOTS }, (_, index) => {
+  const normalizedSlots = Array.from({ length: MAX_SAVE_SLOTS }, (_, index: number) => {
     if (index >= rawSlotsList.length) {
       dirty = true;
       return null;
@@ -245,7 +245,7 @@ export function load(slotIndex: number): boolean {
   }
 }
 
-export function setTestRolls(values: number[]) {
+export function setTestRolls(values: number[]): void {
   app.testRolls = values.map(Number);
 }
 

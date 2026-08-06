@@ -7,6 +7,7 @@ export default {
     "selector-id-pattern": null,
     "no-descending-specificity": null,
     "import-notation": null,
+    "property-no-vendor-prefix": [true, { ignoreProperties: ["-webkit-user-select", "-webkit-backdrop-filter"] }],
     "scale-unlimited/declaration-strict-value": [
       ["color", "background-color", "border-color", "fill", "stroke"],
       {

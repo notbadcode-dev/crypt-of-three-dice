@@ -224,7 +224,7 @@ function isObject(value) {
     return value !== null && typeof value === "object";
 }
 function isValidPoint(value) {
-    return isObject(value) && Number.isInteger(value.x) && Number.isInteger(value.y);
+    return isObject(value) && Number.isInteger((value).x) && Number.isInteger((value).y);
 }
 function normalizeState(raw) {
     if (!isObject(raw)) {
@@ -265,11 +265,11 @@ function normalizeState(raw) {
         return null;
     }
     const rawEnemies = raw.enemies;
-    if (!Array.isArray(rawEnemies) || !rawEnemies.every((enemy) => isObject(enemy) && typeof enemy.id === "string" && isValidPoint(enemy) && Number.isInteger(enemy.hp) && Number.isInteger(enemy.maxHp))) {
+    if (!Array.isArray(rawEnemies) || !rawEnemies.every((enemy) => isObject(enemy) && typeof (enemy).id === "string" && isValidPoint(enemy) && Number.isInteger(enemy.hp) && Number.isInteger(enemy.maxHp))) {
         return null;
     }
     const rawDice = raw.dice;
-    if (!Array.isArray(rawDice) || !rawDice.every((die) => isObject(die) && Number.isInteger(die.id) && Number.isInteger(die.value) && (die.assigned === null || typeof die.assigned === "string"))) {
+    if (!Array.isArray(rawDice) || !rawDice.every((die) => isObject(die) && Number.isInteger((die).id) && Number.isInteger((die).value) && (((die).assigned) === null || typeof (die).assigned === "string"))) {
         return null;
     }
     if (typeof raw.phase !== "string" || !["energy", "assign", "adventure", "monsterMove", "monsterAttack", "upgrade", "end"].includes(raw.phase)) {
@@ -278,7 +278,7 @@ function normalizeState(raw) {
     const walls = rawWalls;
     const enemies = rawEnemies;
     const dice = rawDice;
-    const tempRange = Number.isInteger(raw._tempRange) ? raw._tempRange : undefined;
+    const tempRange = Number.isInteger((raw)._tempRange) ? (raw)._tempRange : undefined;
     return {
         saveVersion: SAVE_VERSION,
         classId: raw.classId,
@@ -286,16 +286,16 @@ function normalizeState(raw) {
         turn: raw.turn,
         hp: raw.hp,
         maxHp: raw.maxHp,
-        skills: { ...skills },
+        skills: Object.assign({}, skills),
         phase: raw.phase,
-        dice: dice.map((die) => ({ ...die })),
-        assign: { ...assign },
-        points: { ...points },
-        hero: { ...raw.hero },
-        enemies: enemies.map((enemy) => ({ ...enemy })),
-        walls: walls.map((wall) => ({ ...wall })),
-        classUsed: Boolean(raw.classUsed),
-        preserved: raw.preserved ?? null,
+        dice: dice.map((die) => ({ id: die.id, value: die.value, assigned: die.assigned })),
+        assign: Object.assign({}, assign),
+        points: Object.assign({}, points),
+        hero: Object.assign({}, (raw).hero),
+        enemies: enemies.map((enemy) => ({ id: enemy.id, x: enemy.x, y: enemy.y, hp: enemy.hp, maxHp: enemy.maxHp })),
+        walls: walls.map((wall) => ({ x: wall.x, y: wall.y })),
+        classUsed: Boolean((raw).classUsed),
+        preserved: (raw).preserved ?? null,
         ...(tempRange !== undefined ? { _tempRange: tempRange } : {})
     };
 }
@@ -306,18 +306,18 @@ function normalizeSlot(slot, index) {
     if (!isObject(slot)) {
         return null;
     }
-    const state = normalizeState(slot.state);
+    const state = normalizeState((slot).state);
     if (!state) {
         return null;
     }
-    const name = typeof slot.name === "string" ? slot.name.trim().slice(0, 40) : "";
+    const name = typeof (slot).name === "string" ? ((slot).name).trim().slice(0, 40) : "";
     if (!name) {
         return null;
     }
     return {
         id: index,
         name,
-        savedAt: typeof slot.savedAt === "number" && Number.isFinite(slot.savedAt) ? slot.savedAt : 0,
+        savedAt: typeof (slot).savedAt === "number" && Number.isFinite((slot).savedAt) ? (slot).savedAt : 0,
         state
     };
 }
@@ -677,7 +677,10 @@ function moveMonsters() {
                 .map((option) => ({ option, score: monsterScore(option, range) }))
                 .sort((a, b) => a.score - b.score);
             const best = scored[0];
-            if (!best || monsterScore(enemy, range) <= best.score) {
+            if (!best) {
+                break;
+            }
+            if (monsterScore(enemy, range) <= best.score) {
                 break;
             }
             enemy.x = best.option.x;
@@ -775,11 +778,11 @@ function setupLevel() {
         return;
     }
     app.state.hero = { x: layout.hero[0], y: layout.hero[1] };
-    app.state.walls = layout.walls.map(([x, y]) => ({ x, y }));
-    app.state.enemies = layout.spawns.slice(0, data.count).map(([x, y], index) => ({
+    app.state.walls = layout.walls.map((pos) => ({ x: pos[0], y: pos[1] }));
+    app.state.enemies = layout.spawns.slice(0, data.count).map((pos, index) => ({
         id: `e${Date.now()}${index}`,
-        x,
-        y,
+        x: pos[0],
+        y: pos[1],
         hp: data.hp,
         maxHp: data.hp
     }));
@@ -1235,7 +1238,8 @@ function dieEl(die) {
     element.dataset.die = String(die.id);
     element.addEventListener("dragstart", (event) => {
         app.selectedDieId = null;
-        (event).dataTransfer?.setData("text/plain", String(die.id));
+        const dragEvent = event;
+        dragEvent.dataTransfer?.setData("text/plain", String(die.id));
         element.classList.add("dragging");
     });
     element.addEventListener("dragend", () => { element.classList.remove("dragging"); });
@@ -1276,7 +1280,11 @@ function renderDice() {
         }
     }
     $$(".slot[data-slot]").forEach((slot) => {
-        const name = slot.dataset.slot;
+        const slotKey = slot.dataset.slot;
+        if (!slotKey) {
+            return;
+        }
+        const name = slotKey;
         const id = app.state.assign[name];
         const enabled = canAssignToSlot(name);
         slot.classList.toggle("fixed", name === "range" && !enabled);
@@ -1341,14 +1349,15 @@ function renderBoard() {
     for (let y = 0; y < SIZE; y++) {
         for (let x = 0; x < SIZE; x++) {
             const cell = app.boardCells[y * SIZE + x];
-            if (!cell) {
+            if (cell === undefined) {
                 continue;
             }
-            cell.className = "cell";
-            cell.tabIndex = -1;
-            cell.removeAttribute("role");
-            cell.removeAttribute("aria-label");
-            cell.replaceChildren();
+            const cellEl = cell;
+            cellEl.className = "cell";
+            cellEl.tabIndex = -1;
+            cellEl.removeAttribute("role");
+            cellEl.removeAttribute("aria-label");
+            cellEl.replaceChildren();
             if (app.state.phase === "adventure" && validHeroTarget(x, y)) {
                 cell.classList.add("valid");
                 cell.tabIndex = 0;

@@ -12,7 +12,7 @@ import {
 import { $, $$, ASSET_PATHS, SIZE } from "../config/app-config.js";
 import type { DieState, SlotKey } from "../config/types.js";
 
-function dieEl(die: DieState): HTMLElement {
+function dieEl(die: DieState | { id: number; value: number; assigned: string | null }): HTMLElement {
   const element = document.createElement("div");
   const isSelected = !die.assigned && die.id === app.selectedDieId;
   element.className = "die" + (die.assigned ? " assigned" : "") + (isSelected ? " selected" : "");
@@ -26,7 +26,8 @@ function dieEl(die: DieState): HTMLElement {
 
   element.addEventListener("dragstart", (event) => {
     app.selectedDieId = null;
-    (event).dataTransfer?.setData("text/plain", String(die.id));
+    const dragEvent = event;
+    dragEvent.dataTransfer?.setData("text/plain", String(die.id));
     element.classList.add("dragging");
   });
   element.addEventListener("dragend", () => { element.classList.remove("dragging"); });
@@ -70,7 +71,9 @@ export function renderDice() {
   }
 
   $$(".slot[data-slot]").forEach((slot) => {
-    const name = slot.dataset.slot as SlotKey;
+    const slotKey = slot.dataset.slot as SlotKey | undefined;
+    if (!slotKey) {return;}
+    const name = slotKey;
     const id = app.state.assign[name];
     const enabled = canAssignToSlot(name);
     slot.classList.toggle("fixed", name === "range" && !enabled);
@@ -90,7 +93,7 @@ export function renderDice() {
   });
 }
 
-function ensureBoard() {
+function ensureBoard(): void {
   if (app.boardCells.length) {return;}
 
   const board = $("#board");
@@ -123,18 +126,19 @@ function ensureBoard() {
   }
 }
 
-export function renderBoard() {
+export function renderBoard(): void {
   ensureBoard();
 
   for (let y = 0; y < SIZE; y++) {
     for (let x = 0; x < SIZE; x++) {
       const cell = app.boardCells[y * SIZE + x];
-      if (!cell) {continue;}
-      cell.className = "cell";
-      cell.tabIndex = -1;
-      cell.removeAttribute("role");
-      cell.removeAttribute("aria-label");
-      cell.replaceChildren();
+      if (cell === undefined) {continue;}
+      const cellEl = cell as HTMLElement;
+      cellEl.className = "cell";
+      cellEl.tabIndex = -1;
+      cellEl.removeAttribute("role");
+      cellEl.removeAttribute("aria-label");
+      cellEl.replaceChildren();
 
       if (app.state.phase === "adventure" && validHeroTarget(x, y)) {
         cell.classList.add("valid");

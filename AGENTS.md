@@ -6,62 +6,48 @@
 - Entrada principal: `index.html`
 - Objetivo actual del repo: mantener la experiencia jugable y su infraestructura de tests Playwright.
 
-## Estructura
-- `index.html`: shell principal de la aplicación y markup de la UI.
-- `styles/`: CSS organizado en subcarpetas temáticas, cada una con su propio barrel (`<carpeta>/<carpeta>.css`) importado desde `styles/app.css`:
-  - `global/`: tokens (`_colors.css`, `_gradients.css`, `_typography.css`, `_shadows.css`). `_colors.css` está organizado en dos capas: paleta de primitivos (valores hex/rgb crudos agrupados por familia) y tema semántico (variables de uso como `--text-mist-1..4`, `--text-parchment*`, alias `--text-soft-1..5`, etc. que referencian la paleta). Los componentes solo deben consumir variables semánticas o de paleta ya existentes en `_colors.css`/`_gradients.css`; no declarar colores ni gradientes nuevos fuera de `styles/global/`. Un futuro theme alternativo debe sobrescribir solo la capa semántica (p.ej. `:root[data-theme="..."] { ... }`), nunca la paleta ni los componentes.
-  - `base/`: `reset.css`, `topbar.css`, `layout.css`.
-  - `board/`: `board-frame.css`, `board-slots.css`, `action-meter.css`, `enemy-card.css`, `hero-panel.css`, `turn-panel.css`, `board-debug.css` y `board-overrides.css` (⚠️ overrides intencionados, importado el último — ver más abajo).
-  - `sidebar/`: `sidebar-panel.css`, `turn-phase.css`, `dice.css`, `skills.css`, `resources.css`, `logbar.css`, `info-legend.css`.
-  - `modals/`: `modal-shell.css`, `poster.css`, `choice-cards.css`, `save-load.css`, `start-modal.css`, `toast-tutorial.css`.
-  - `responsive/`: un fichero por breakpoint (`desktop.css`, `desktop-short.css`, `tablet.css`, `mobile.css`, `mobile-small.css`) más `misc.css` (reglas sin media query).
-  - `styles/app.css` es el único fichero CSS referenciado por los tests (`tests/e2e/e2e.spec.js`); la estructura interna de subcarpetas es libre siempre que `app.css` siga siendo la entrada.
-- `scripts/config/`: configuración, constantes y tipos (`app-config.ts`, `types.ts`).
-- `scripts/state/`: estado global y persistencia (`app-state.ts`, `persistence.ts`).
-- `scripts/core/`: lógica de juego pura (`audio.ts`, `combat.ts`, `dice.ts`, `game-flow.ts`, `geometry.ts`).
-- `scripts/ui/`: renderizado e interacciones de interfaz (`app-ui.ts`, `board-ui.ts`, `hud-ui.ts`, `modal-manager.ts`, `save-load-ui.ts`, `ui-feedback.ts`).
-- `scripts/app-core.ts`: barrel de re-exports de `state/` y `core/`, usado por los tests unitarios (no entra en el bundle de producción).
-- `scripts/app-main.ts`: arranque de la aplicación.
-- `scripts/build-runtime.mjs`: concatena los módulos anteriores (en un orden fijo, ver `sourceFiles`) en `scripts/app.js`.
-- `assets/`: iconos e imágenes.
-- `tests/e2e/`: pruebas Playwright.
-- `tests/unit/`: pruebas unitarias Node si existen para la lógica aislada.
+## Documentación
 
-## Flujo de trabajo
-- Si se editan archivos dentro de `scripts/` (`config/`, `state/`, `core/`, `ui/`, `app-core.ts`, `app-main.ts`), normalmente hay que regenerar `scripts/app.js` con `npm run build:runtime`.
-- La app se sirve en tests desde `http://127.0.0.1:4173/index.html`.
-- No asumir framework: esto es HTML/CSS/TS modular sin bundler de frontend.
-
-## Comandos útiles
-- `npm run build:runtime`: compila TS (`tsc`) y reconstruye `scripts/app.js`.
-- `npm run typecheck`: solo comprueba tipos (`tsc --noEmit`), sin generar `scripts/app.js`.
-- `npm run lint`: ESLint (flat config) sobre `scripts/**/*.ts`, `.mjs` y el HTML principal.
-- `npm run lint:css`: Stylelint sobre `styles/**/*.css`.
-- `npm test` o `npm run test:e2e`: ejecuta Playwright.
-- `npm run test:unit`: ejecuta los tests unitarios (Node test runner) sobre `tests/unit/*.test.mjs`, importando `.tsbuild/scripts/app-core.js`.
-- `npm run test:chromium`: tests solo en Chromium.
-- `npm run test:headed`: tests visibles.
-- `npm run serve`: servidor estático para pruebas locales.
-
-## Convenciones
-- Mantener la estética retro sobria ya existente; evitar rediseños que rompan la identidad visual.
-- Preservar compatibilidad desktop y móvil.
-- Antes de cambios grandes en UI, revisar el HTML principal y los estilos segmentados para no duplicar reglas.
-- No tocar `node_modules/` ni artefactos de resultados salvo que el trabajo lo requiera explícitamente.
-
-## Deuda técnica conocida
-- **TypeScript pinneado en 5.9.3 (no en 7.x/"latest")**: desde 2026-08, `typescript@latest` en npm es la 7.0.2, la reescritura nativa en Go ("tsgo", instala un binario nativo por plataforma tipo `@typescript/typescript-darwin-arm64`). No se actualiza porque `typescript-eslint@8.66.0` (usado en `eslint.config.mjs` para el linting type-aware de `scripts/**/*.ts`) declara `peerDependencies.typescript: ">=4.8.4 <6.1.0"` — TS 7 queda fuera de ese rango soportado y rompería el lint. Revisar de nuevo cuando `typescript-eslint` publique soporte oficial para la serie 7.x. Mientras tanto, mantener `typescript` en la última versión estable de la serie 5.x compatible con ese rango.
+Toda la información detallada del proyecto (arquitectura de `scripts/` y
+`styles/`, build de producción, tests, CI/CD, assets, convenciones y deuda
+técnica) vive organizada en [docs/](docs/index.md). Empezar siempre por
+[docs/index.md](docs/index.md).
 
 ## Qué mirar primero en un chat nuevo
 1. `package.json`
-2. `AGENTS.md`
-3. `index.html`
-4. `scripts/` (y su subcarpeta relevante: `config/`, `state/`, `core/` o `ui/`) afectados por la tarea
-5. `playwright.config.js` y `tests/e2e/` si hay cambios de comportamiento
+2. `AGENTS.md` (este archivo)
+3. [docs/index.md](docs/index.md)
+4. `index.html`
+5. `scripts/` (y su subcarpeta relevante: `config/`, `state/`, `core/` o `ui/`) afectados por la tarea
+6. `playwright.config.js` y `tests/e2e/` si hay cambios de comportamiento
 
-## Nota para futuros agentes
-- Si un cambio visual o de lógica no se refleja, comprobar si falta regenerar `scripts/app.js`.
-- Si la petición del usuario menciona "archivo único" o "single file", confirmar si quiere tocar solo `index.html` o mantener la estructura modular actual.
-- `scripts/build-runtime.mjs` NO es un bundler real: compila con `tsc` y concatena los `.js` resultantes en el orden fijo de `sourceFiles`, quitando `import`/`export` por regex. Si se añade un módulo nuevo hay que insertarlo a mano en `sourceFiles` (después de sus dependencias) y actualizar las rutas relativas en los imports afectados. IMPORTANTE: `scripts/config/types.js` también está en `sourceFiles` (primero de todos) porque `types.ts` define const arrays reales en tiempo de ejecución (`CLASS_IDS`, `PRIMARY_SLOT_KEYS`, `SLOT_KEYS`, `PHASES`, `UPGRADE_TYPES`), no solo tipos/interfaces borrados en compilación — si se quita de `sourceFiles` la app rompe en runtime con "X is not defined".
-- No añadir barrels (`export * from ...`) nuevos salvo `scripts/app-core.ts`, que existe solo para que los tests unitarios importen `.tsbuild/scripts/app-core.js` de una vez; `stripExports` en `build-runtime.mjs` solo limpia `export const`/`export function`, así que un `export *` adicional rompería el bundle final si no se ajusta ese script.
-- `styles/board/board-overrides.css` contiene selectores DUPLICADOS A PROPÓSITO (`.enemy-meta`, `.enemy-meta-cell img`, `.enemy-meta-value`, `.top-slot,.bottom-slot`, `.board-frame`, `.enemy-card`, `.combat-dashboard`, `.combat-dashboard::before/::after`, `.enemy-portrait-frame`, `.enemy-portrait`) que sobrescriben en cascada a los definidos en `board-frame.css`/`enemy-card.css` por orden de importación (misma especificidad). Este fichero DEBE seguir importándose el último en `styles/board/board.css`; no fusionar estas reglas con sus bases ni reordenar los `@import`.
+## Reglas críticas para agentes
+
+- Si se editan archivos dentro de `scripts/`, normalmente hay que
+  regenerar `scripts/app.js` con `npm run build:runtime`. Detalle completo
+  de la mecánica de concatenación (orden de `sourceFiles`, el caso especial
+  de `types.js`, por qué no añadir barrels nuevos) en
+  [docs/arquitectura/scripts.md](docs/arquitectura/scripts.md).
+- Antes de editar cualquier `scripts/*.ts` que no sea `app-core.ts` o
+  `app-main.ts`, verificar con `file_search` en qué subcarpeta vive
+  realmente (`config/`, `core/`, `state/` o `ui/`).
+- `styles/board/board-overrides.css` contiene selectores duplicados **a
+  propósito** y debe seguir importándose el último — ver
+  [docs/arquitectura/css.md](docs/arquitectura/css.md).
+- Si la petición del usuario menciona "archivo único" o "single file",
+  confirmar si quiere tocar solo `index.html` o mantener la estructura
+  modular actual.
+- No tocar `node_modules/` ni artefactos de resultados salvo que el trabajo
+  lo requiera explícitamente.
+
+## Convenciones
+
+Mantener la estética retro sobria ya existente y la compatibilidad
+desktop/móvil. Detalle completo en
+[docs/convenciones.md](docs/convenciones.md).
+
+## Deuda técnica conocida
+
+TypeScript pinneado en la serie 5.x (no en 7.x/"latest") por
+incompatibilidad de `typescript-eslint` con TS 7. Detalle en
+[docs/deuda-tecnica.md](docs/deuda-tecnica.md).

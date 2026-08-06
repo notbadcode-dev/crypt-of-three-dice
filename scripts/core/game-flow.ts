@@ -18,17 +18,17 @@ import { freshState, getSaveSlots, save } from "../state/persistence.js";
 import { monsterAttack, moveMonsters } from "./combat.js";
 import { allAssigned, roll, total } from "./dice.js";
 
-export function setupLevel() {
+export function setupLevel(): void {
   const data = levelData();
   const layout = layouts[data.layout];
   if (!layout) {return;}
 
-  app.state.hero = {x:layout.hero[0], y:layout.hero[1]};
-  app.state.walls = layout.walls.map(([x, y]) => ({x, y}));
-  app.state.enemies = layout.spawns.slice(0, data.count).map(([x, y], index) => ({
+  app.state.hero = {x: layout.hero[0], y: layout.hero[1]};
+  app.state.walls = layout.walls.map((pos: [number, number]) => ({x: pos[0], y: pos[1]}));
+  app.state.enemies = layout.spawns.slice(0, data.count).map((pos: [number, number], index: number) => ({
     id: `e${Date.now()}${index}`,
-    x,
-    y,
+    x: pos[0],
+    y: pos[1],
     hp: data.hp,
     maxHp: data.hp
   }));
