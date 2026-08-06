@@ -132,7 +132,7 @@ jobs:
 
   deploy:
     name: Publicar en GitHub Pages
-    needs: [lint-js, lint-css, typecheck, unit]
+    needs: [lint-js, lint-css, typecheck, unit, e2e]
     if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
