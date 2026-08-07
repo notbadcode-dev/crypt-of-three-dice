@@ -26,34 +26,49 @@ async function closeTutorialIfOpen(page) {
     return;
   }
   
-  // Modal is visible, try to close it with retries
+  // Modal is visible. Try to close it with Escape key first (most reliable)
+  try {
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(200); // Let escape propagate
+    
+    // Verify modal is closed
+    try {
+      await helpModal.waitFor({ state: "hidden", timeout: 3000 });
+      return; // Success!
+    } catch {
+      // Escape didn't work, try clicking buttons as fallback
+    }
+  } catch (error) {
+    console.warn("⚠️  Escape key failed:", error.message);
+  }
+  
+  // Fallback: try clicking buttons (but don't fail if blocked by scrim)
   const helpNext = page.locator("#helpNext");
   const helpClose = page.locator("#helpClose");
   
   try {
-    // Click through help slides with explicit waits
+    // Try to click through slides (with individual error handling)
     for (let i = 0; i < 2; i++) {
       try {
-        await helpNext.click({ timeout: 3000 });
-        await page.waitForTimeout(100); // Small delay between clicks
-      } catch (e) {
-        console.warn(`⚠️  Could not click helpNext (${i + 1}/2):`, e.message);
+        await helpNext.click({ timeout: 2000, force: true });
+        await page.waitForTimeout(100);
+      } catch {
+        // Click failed, try again
       }
     }
     
-    // Close button
+    // Try close button (with force to bypass scrim)
     try {
-      await helpClose.click({ timeout: 3000 });
-    } catch (e) {
-      console.warn("⚠️  Could not click helpClose:", e.message);
+      await helpClose.click({ timeout: 2000, force: true });
+    } catch {
+      // Close button click failed, will try escape again
     }
     
-    // Wait for modal to be actually hidden (check aria-hidden or visibility)
-    await helpModal.waitFor({ state: "hidden", timeout: 5000 }).catch(() => {
-      console.warn("⚠️  Modal did not close via aria-hidden, proceeding anyway");
-    });
+    // Final attempt: press Escape one more time
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(200);
   } catch (error) {
-    console.warn("⚠️  Tutorial modal close attempt failed:", error.message);
+    console.warn("⚠️  Tutorial close attempt failed, proceeding:", error.message);
   }
 }
 
