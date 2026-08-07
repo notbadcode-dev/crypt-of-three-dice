@@ -311,4 +311,4 @@ git push origin feature/poison-damage
 - [Conventional Commits specification](https://www.conventionalcommits.org/)
 - `git log --oneline` to see project history
 - `git blame <file>` to see who changed what
-- [docs/convenciones.md](../../../docs/convenciones.md) for project-specific conventions
+- [docs/conventions.md](../../../docs/conventions.md) for project-specific conventions

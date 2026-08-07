@@ -39,6 +39,6 @@ Esto permite aislar un fichero sin tocar el resto del working tree.
 ## Estructura de documentación
 
 - Toda la documentación de referencia vive en [docs/](index.md), organizada
-  por tema en subcarpetas (`arquitectura/`, `testing/`).
+  por tema en subcarpetas (`architecture/`, `testing/`).
 - `AGENTS.md` en la raíz se mantiene deliberadamente corto: es el punto de
   entrada rápido para agentes IA, con enlaces a `docs/` para el detalle.

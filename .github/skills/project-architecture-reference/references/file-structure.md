@@ -118,15 +118,15 @@ Mirrors `scripts/` + `styles/` structure:
 | File | Content |
 |------|---------|
 | `docs/index.md` | Overview + command reference |
-| `docs/arquitectura/scripts.md` | Details on `build-runtime.mjs`, module imports, TS config |
-| `docs/arquitectura/css.md` | CSS barrel pattern, theme, tokens, gotchas |
-| `docs/arquitectura/estructura.md` | This file essentially |
+| `docs/architecture/scripts.md` | Details on `build-runtime.mjs`, module imports, TS config |
+| `docs/architecture/css.md` | CSS barrel pattern, theme, tokens, gotchas |
+| `docs/architecture/structure.md` | This file essentially |
 | `docs/testing/e2e.md` | Playwright setup, gotchas, snapshot regeneration |
 | `docs/testing/unit.md` | Unit test patterns + coverage targets |
 | `docs/ci-cd.md` | GitHub Actions workflow |
 | `docs/assets.md` | WebP pipeline, rembg script |
-| `docs/convenciones.md` | Code style, UX, workflow conventions |
-| `docs/deuda-tecnica.md` | Known debt (TS 5.x pinned, etc.) |
+| `docs/conventions.md` | Code style, UX, workflow conventions |
+| `docs/technical-debt.md` | Known debt (TS 5.x pinned, etc.) |
 
 ---
 

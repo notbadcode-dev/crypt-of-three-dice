@@ -25,7 +25,7 @@
     `deploy`: los tests e2e siguen corriendo como check normal en cada
     push/PR, pero no bloquean ni retrasan la publicación en GitHub Pages.
     Ejecuta `npm run build:dist` (ver
-    [arquitectura/build.md](arquitectura/build.md)) y publica `dist/` con
+    [architecture/build.md](architecture/build.md)) y publica `dist/` con
     `actions/upload-pages-artifact` + `actions/deploy-pages`. Requiere
     GitHub Pages habilitado con origen "GitHub Actions" en Settings > Pages
     del repo (ajuste manual, no automatizable desde el código).

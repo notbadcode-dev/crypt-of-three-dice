@@ -206,8 +206,8 @@ Para que este plan se considere **"Completado"**:
 
 - Constitución del Proyecto: [docs/index.md](../../../docs/index.md)
 - Especificación: `spec.md` (this feature)
-- Convencionnes: [docs/convenciones.md](../../../docs/convenciones.md)
-- Deuda Técnica: [docs/deuda-tecnica.md](../../../docs/deuda-tecnica.md)
+- Convencionnes: [docs/conventions.md](../../../docs/conventions.md)
+- Deuda Técnica: [docs/technical-debt.md](../../../docs/technical-debt.md)
 
 ---
 

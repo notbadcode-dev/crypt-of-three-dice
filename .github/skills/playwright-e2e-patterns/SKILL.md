@@ -139,7 +139,7 @@ test('arrow keys navigate combat menu', async ({ page }) => {
 
 ### Gotcha 2: `transform` CSS Breaks Layout Stability Test
 
-**Location**: `docs/arquitectura/css.md`
+**Location**: `docs/architecture/css.md`
 
 **Problem**: CSS `transform` property (translate, rotate, scale) affects how Playwright measures layout. Even subtle transforms can cause HUD geometry snapshots to mismatch.
 

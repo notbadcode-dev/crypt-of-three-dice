@@ -411,5 +411,5 @@ grep -r "rgb\|#[0-9a-f]\|linear-gradient" styles/ --exclude-dir=global
 
 - [project-architecture-reference skill](../../project-architecture-reference/SKILL.md) for file structure
 - [critical-rules.md](../../project-architecture-reference/references/critical-rules.md) for dos/don'ts
-- [docs/arquitectura/css.md](../../../docs/arquitectura/css.md) for full technical details
+- [docs/architecture/css.md](../../../docs/architecture/css.md) for full technical details
 - [`playwright-e2e-patterns` skill](../../playwright-e2e-patterns/SKILL.md) for testing CSS changes

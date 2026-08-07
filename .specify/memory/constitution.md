@@ -22,9 +22,9 @@
   - Verificación: Tests E2E en proyectos `chromium`, `webkit` y `mobile` pasan al 100%
   
 - **P-I-003**: El proyecto **NO DEBE** introducir rediseños que modifiquen la paleta, tipografía o componentes retro sin explícita aprobación.
-  - Verificación: PR documenta y justifica cambios visuales contra `docs/convenciones.md#diseño-y-ux`
+  - Verificación: PR documenta y justifica cambios visuales contra `docs/conventions.md#diseño-y-ux`
 
-**Referencia**: [Convenciones del proyecto](../../docs/convenciones.md#diseño-y-ux)
+**Referencia**: [Convenciones del proyecto](../../docs/conventions.md#diseño-y-ux)
 
 ---
 
@@ -47,7 +47,7 @@
 - **P-II-005**: El proyecto **NO DEBE** usar bundler externo (Webpack, Vite) — concatenación manual es explícita y auditable.
   - Verificación: `package.json` no contiene webpack/vite; build usa scripts propios
 
-**Referencia**: [Arquitectura de Scripts](../../docs/arquitectura/scripts.md), [Arquitectura CSS](../../docs/arquitectura/css.md)
+**Referencia**: [Arquitectura de Scripts](../../docs/architecture/scripts.md), [Arquitectura CSS](../../docs/architecture/css.md)
 
 ---
 
@@ -87,7 +87,7 @@
 - **P-IV-004**: El proyecto **DEBE** documentar todas las decisiones de "archivo único" vs "estructura modular".
   - Verificación: PR justifica explícitamente si mantiene estructura modular actual o simplifica
 
-**Referencia**: [Convenciones del proyecto](../../docs/convenciones.md#flujo-de-trabajo)
+**Referencia**: [Convenciones del proyecto](../../docs/conventions.md#flujo-de-trabajo)
 
 ---
 
@@ -96,10 +96,10 @@
 
 **Requisitos Verificables (EARS)**:
 - **P-V-001**: El proyecto **DEBE** mantener TypeScript pinneado en serie 5.x (no latest/7.x).
-  - Verificación: `package.json` especifica `typescript: "^5.x"`; razon documentada en `docs/deuda-tecnica.md`
+  - Verificación: `package.json` especifica `typescript: "^5.x"`; razon documentada en `docs/technical-debt.md`
   - Contexto: `typescript-eslint@8.66.0` declara `peerDependencies.typescript: ">=4.8.4 <6.1.0"`
   
-- **P-V-002**: El proyecto **DEBE** documentar TODAS las limitaciones técnicas conocidas en `docs/deuda-tecnica.md`.
+- **P-V-002**: El proyecto **DEBE** documentar TODAS las limitaciones técnicas conocidas en `docs/technical-debt.md`.
   - Verificación: Archivo contiene lista de limitaciones, razones y acciones pendientes
   
 - **P-V-003**: El proyecto **NO DEBE** introducir deuda técnica sin documentar en PR o issue.
@@ -107,7 +107,7 @@
 
 **Acción Pendiente**: Revisar cuando `typescript-eslint` publique soporte oficial para serie 7.x → actualizar
 
-**Referencia**: [Deuda Técnica](../../docs/deuda-tecnica.md)
+**Referencia**: [Deuda Técnica](../../docs/technical-debt.md)
 
 ---
 
@@ -153,12 +153,12 @@
 | Recurso | Contenido |
 |---------|----------|
 | [docs/index.md](../../docs/index.md) | Inicio para agentes + lista de comandos npm |
-| [docs/arquitectura/](../../docs/arquitectura/) | Estructura, scripts, CSS, build |
+| [docs/architecture/](../../docs/architecture/) | Estructura, scripts, CSS, build |
 | [docs/testing/](../../docs/testing/) | E2E (Playwright) + Unit (Node) |
 | [docs/ci-cd.md](../../docs/ci-cd.md) | GitHub Actions jobs |
 | [docs/assets.md](../../docs/assets.md) | Flujo imágenes WebP |
-| [docs/convenciones.md](../../docs/convenciones.md) | Estilo, UX, flujo de trabajo |
-| [docs/deuda-tecnica.md](../../docs/deuda-tecnica.md) | TypeScript 5.x, limitaciones conocidas |
+| [docs/conventions.md](../../docs/conventions.md) | Estilo, UX, flujo de trabajo |
+| [docs/technical-debt.md](../../docs/technical-debt.md) | TypeScript 5.x, limitaciones conocidas |
 
 ---
 

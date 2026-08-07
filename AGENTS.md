@@ -27,13 +27,13 @@ técnica) vive organizada en [docs/](docs/index.md). Empezar siempre por
   regenerar `scripts/app.js` con `npm run build:runtime`. Detalle completo
   de la mecánica de concatenación (orden de `sourceFiles`, el caso especial
   de `types.js`, por qué no añadir barrels nuevos) en
-  [docs/arquitectura/scripts.md](docs/arquitectura/scripts.md).
+  [docs/architecture/scripts.md](docs/architecture/scripts.md).
 - Antes de editar cualquier `scripts/*.ts` que no sea `app-core.ts` o
   `app-main.ts`, verificar con `file_search` en qué subcarpeta vive
   realmente (`config/`, `core/`, `state/` o `ui/`).
 - `styles/board/board-overrides.css` contiene selectores duplicados **a
   propósito** y debe seguir importándose el último — ver
-  [docs/arquitectura/css.md](docs/arquitectura/css.md).
+  [docs/architecture/css.md](docs/architecture/css.md).
 - Si la petición del usuario menciona "archivo único" o "single file",
   confirmar si quiere tocar solo `index.html` o mantener la estructura
   modular actual.
@@ -44,10 +44,10 @@ técnica) vive organizada en [docs/](docs/index.md). Empezar siempre por
 
 Mantener la estética retro sobria ya existente y la compatibilidad
 desktop/móvil. Detalle completo en
-[docs/convenciones.md](docs/convenciones.md).
+[docs/conventions.md](docs/conventions.md).
 
 ## Deuda técnica conocida
 
 TypeScript pinneado en la serie 5.x (no en 7.x/"latest") por
 incompatibilidad de `typescript-eslint` con TS 7. Detalle en
-[docs/deuda-tecnica.md](docs/deuda-tecnica.md).
+[docs/technical-debt.md](docs/technical-debt.md).

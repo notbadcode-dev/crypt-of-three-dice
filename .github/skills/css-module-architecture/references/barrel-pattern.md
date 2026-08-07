@@ -276,4 +276,4 @@ Rare, but sometimes you need a new top-level category (beyond board, sidebar, mo
 
 - [SKILL.md](../SKILL.md) for overview of tokens + cascade rules
 - [project-architecture-reference skill](../../project-architecture-reference/SKILL.md) for file structure
-- [docs/arquitectura/css.md](../../../docs/arquitectura/css.md) for full technical details
+- [docs/architecture/css.md](../../../docs/architecture/css.md) for full technical details

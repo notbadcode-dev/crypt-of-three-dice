@@ -274,4 +274,4 @@ Use a browser DevTools color picker on production to verify accessibility:
 - [SKILL.md](../SKILL.md) for quick reference
 - [_colors.css](../../../styles/global/_colors.css) (actual file)
 - [_gradients.css](../../../styles/global/_gradients.css) (actual file)
-- [docs/arquitectura/css.md](../../../docs/arquitectura/css.md) for full details
+- [docs/architecture/css.md](../../../docs/architecture/css.md) for full details

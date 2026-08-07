@@ -200,7 +200,7 @@ Para que esta funcionalidad esté definitivamente **COMPLETADA**:
 - **Plan**: `plan.md`
 - **Tareas**: `tareas.md`
 - **Constitución**: [../../docs/index.md](../../../../docs/index.md)
-- **Convenciones**: [docs/convenciones.md](../../../../docs/convenciones.md)
+- **Convenciones**: [docs/conventions.md](../../../../docs/conventions.md)
 
 ---
 

@@ -245,5 +245,5 @@ npm run test:chromium  # E2E tests (bundle + browser)
 
 - [file-structure.md](../../project-architecture-reference/references/file-structure.md) for folder organization
 - [critical-rules.md](../../project-architecture-reference/references/critical-rules.md) for do/don't summary
-- [docs/arquitectura/scripts.md](../../../docs/arquitectura/scripts.md) for full details
+- [docs/architecture/scripts.md](../../../docs/architecture/scripts.md) for full details
 - [`css-module-architecture` skill](../../css-module-architecture/SKILL.md) for CSS barrel pattern

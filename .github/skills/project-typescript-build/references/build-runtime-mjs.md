@@ -221,5 +221,5 @@ If `scripts/app.js` grows very large:
 ## See Also
 
 - [project-architecture-reference skill](../../project-architecture-reference/SKILL.md) for overview
-- [docs/arquitectura/scripts.md](../../../docs/arquitectura/scripts.md) for full technical details
+- [docs/architecture/scripts.md](../../../docs/architecture/scripts.md) for full technical details
 - `scripts/build-dist.mjs` for production bundling (separate step, uses this as input)

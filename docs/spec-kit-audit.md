@@ -56,7 +56,7 @@
 | II. Arquitectura Modular | CUMPLE | P-II-001/002/003/004/005; TS 5.x, no bundler, carpetas funcionales | Ninguno | ✓ |
 | III. Testing NON-NEGOTIABLE | CUMPLE | P-III-001/002/003/004; E2E + unit requeridos; 42 tests pasan | Ninguno | ✓ |
 | IV. Convenciones de Workflow | CUMPLE | P-IV-001/002/003/004; git stash prohibido, build:runtime explícito | Ninguno | ✓ |
-| V. Deuda Técnica Documentada | CUMPLE | P-V-001/002/003; TS 5.x pinneado; deuda en docs/deuda-tecnica.md | Ninguno | ✓ |
+| V. Deuda Técnica Documentada | CUMPLE | P-V-001/002/003; TS 5.x pinneado; deuda en docs/technical-debt.md | Ninguno | ✓ |
 | VI. CI/CD & Build | CUMPLE | P-VI-001/002/003/004; jobs independientes, deploy no bloqueado por E2E | Ninguno | ✓ |
 | VII. Assets WebP | CUMPLE | P-VII-001/002/003; imágenes en WebP, optimize:images disponible | Ninguno | ✓ |
 

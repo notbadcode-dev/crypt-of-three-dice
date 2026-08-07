@@ -68,5 +68,5 @@ los `.js` resultantes en un orden fijo (`sourceFiles`), eliminando
 - APIs modernas usadas a propósito donde aplica: `Array.prototype.toSorted`
   (ES2023), `Object.hasOwn` (ES2022), `structuredClone` (deep clone nativo).
 
-Ver también [../deuda-tecnica.md](../deuda-tecnica.md) para el motivo por el
+Ver también [../technical-debt.md](../technical-debt.md) para el motivo por el
 que TypeScript está pinneado en la serie 5.x.

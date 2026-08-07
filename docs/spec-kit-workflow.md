@@ -531,7 +531,7 @@ Código Afectado (actualizar durante Fase 8):
 | Specs activas | `.specs/[###-nombre]/` |
 | Templates | `.specify/templates/` |
 | Skills Copilot | `.github/skills/speckit-*/` |
-| Documentación Arquitectura | `docs/arquitectura/` |
+| Documentación Arquitectura | `docs/architecture/` |
 | Tests | `tests/e2e/` + `tests/unit/` |
 | Package.json (npm scripts) | `package.json` |
 
@@ -558,7 +558,7 @@ R: Ejecuta `npm run lint:fix` si los errores son automaticamente reparables. Rev
 R: No. Constitution es NON-NEGOTIABLE. 42/42 tests DEBEN pasar en master.
 
 **P: ¿Cómo documentar deuda técnica?**  
-R: Agregando sección en `plan.md` → "Deuda Técnica Introducida" + justificación. Luego en `docs/deuda-tecnica.md`.
+R: Agregando sección en `plan.md` → "Deuda Técnica Introducida" + justificación. Luego en `docs/technical-debt.md`.
 
 ---
 
