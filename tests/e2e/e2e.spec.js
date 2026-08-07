@@ -894,15 +894,19 @@ test("recorre una partida completa determinista hasta victoria @regression", asy
 
   for (let level = 1; level <= 11; level++) {
     await setGameState(page, playableState({ level }));
+    // Poll to ensure state update is reflected in DOM
+    await expect.poll(async () => (await getGameState(page)).level, { timeout: 3000 }).toBe(level);
     await page.locator(".cell[data-x='1'][data-y='4']").click();
-    await expect(page.locator("#upgradeModal")).toBeVisible();
+    await expect(page.locator("#upgradeModal")).toBeVisible({ timeout: 3000 });
     await page.locator("[data-upgrade='heal']").click();
     await expect(page.locator("#levelHud")).toHaveText(`${level + 1} / 12`);
   }
 
   await setGameState(page, playableState({ level: 12 }));
+  // Poll to ensure state update is reflected in DOM
+  await expect.poll(async () => (await getGameState(page)).level, { timeout: 3000 }).toBe(12);
   await page.locator(".cell[data-x='1'][data-y='4']").click();
-  await expect(page.locator("#endModal")).toBeVisible();
+  await expect(page.locator("#endModal")).toBeVisible({ timeout: 3000 });
   await expect(page.locator("#endTitle")).toContainText(/conquistado/i);
 
   const state = await getGameState(page);
