@@ -898,7 +898,9 @@ test("recorre una partida completa determinista hasta victoria @regression", asy
     await expect.poll(async () => (await getGameState(page)).level, { timeout: 3000 }).toBe(level);
     await page.locator(".cell[data-x='1'][data-y='4']").click();
     await expect(page.locator("#upgradeModal")).toBeVisible({ timeout: 3000 });
-    await page.locator("[data-upgrade='heal']").click();
+    // Wait for modal to stabilize (especially important on mobile with layout shifts)
+    await page.waitForTimeout(200);
+    await page.locator("[data-upgrade='heal']").click({ timeout: 5000 });
     await expect(page.locator("#levelHud")).toHaveText(`${level + 1} / 12`);
   }
 
