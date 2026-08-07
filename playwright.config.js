@@ -34,6 +34,7 @@ module.exports = defineConfig({
     timeout: process.env.CI ? 15_000 : 5_000   // 15s in CI for clicks/waits, 5s local
   },
   fullyParallel: true,
+  workers: process.env.CI ? 1 : (process.env.MAX_WORKERS ? parseInt(process.env.MAX_WORKERS) : undefined),
   reporter: [
     ["list"],
     ["html", { outputFolder: "tests/e2e/results/html-report", open: "never" }]
