@@ -26,19 +26,34 @@ async function closeTutorialIfOpen(page) {
     return;
   }
   
-  // Modal is visible, close it
+  // Modal is visible, try to close it with retries
   const helpNext = page.locator("#helpNext");
   const helpClose = page.locator("#helpClose");
   
   try {
-    // Click through help slides (with timeout for each click)
-    await helpNext.click({ timeout: 5000 });
-    await helpNext.click({ timeout: 5000 });
-    await helpClose.click({ timeout: 5000 });
-    await expect(helpModal).toBeHidden();
+    // Click through help slides with explicit waits
+    for (let i = 0; i < 2; i++) {
+      try {
+        await helpNext.click({ timeout: 3000 });
+        await page.waitForTimeout(100); // Small delay between clicks
+      } catch (e) {
+        console.warn(`⚠️  Could not click helpNext (${i + 1}/2):`, e.message);
+      }
+    }
+    
+    // Close button
+    try {
+      await helpClose.click({ timeout: 3000 });
+    } catch (e) {
+      console.warn("⚠️  Could not click helpClose:", e.message);
+    }
+    
+    // Wait for modal to be actually hidden (check aria-hidden or visibility)
+    await helpModal.waitFor({ state: "hidden", timeout: 5000 }).catch(() => {
+      console.warn("⚠️  Modal did not close via aria-hidden, proceeding anyway");
+    });
   } catch (error) {
-    // If tutorial interaction fails, log and continue (may be unavailable on some devices)
-    console.warn("⚠️  Could not close tutorial modal:", error.message);
+    console.warn("⚠️  Tutorial modal close attempt failed:", error.message);
   }
 }
 

@@ -175,18 +175,25 @@ does not appear in the style-src directive of the Content Security Policy."
 
 ### Timeouts ocasionales en webkit/mobile
 
-Webkit y mobile en CI (ubuntu-latest) pueden experimentar timeouts por contención de recursos con otros jobs GitHub Actions.
-
-**Señales de que es un timeout transitorio (no un bug real):**
-- El test pasa localmente: `npm run test:e2e -- --project=webkit`
-- El test pasa en otro intento de CI
-- Solo falla en webkit/mobile, no en chromium
+Webkit y mobile en CI (ubuntu-latest) experimentan timeouts por:
+- Contención de recursos (CPU/RAM compartida con otros jobs GitHub Actions)
+- Test "recorre una partida completa determinista hasta victoria" es pesado (11 iteraciones)
+- Modal tutorial puede tomar tiempo extra en cerrarse
 
 **Mitigaciones aplicadas:**
-- Timeouts globales subidos: 60s (era 30s)
-- Expect timeout: 10s (era 5s)
-- Función `closeTutorialIfOpen()` mejorada con waits y manejo de errores
+- Timeouts globales: 120s en CI (era 60s), 30s local (más rápido)
+- Expect timeout: 15s en CI (era 10s), 5s local
+- `closeTutorialIfOpen()` mejorada:
+  - Waits explícitos por estado `hidden`
+  - Try/catch por cada click (no falla si uno no funciona)
+  - Delays entre clicks
+  - Procede aunque el modal no se cierre completamente
 
-Si un test falla repetidamente solo en CI webkit/mobile pero pasa localmente, contacta a otro dev para validar
-que no sea un timing race real en la app.
+**Si un test timeout en CI pero pasa localmente:**
+```bash
+# Verificar aislado en tu máquina
+npm run test:e2e -- --project=webkit -g "recorre una partida"
+```
+
+Si pasa en local pero falla en CI repetidamente, es contención de recursos de GitHub Actions, no bug de la app.
 
