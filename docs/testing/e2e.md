@@ -1,5 +1,9 @@
 # Tests end-to-end (Playwright)
 
+## Guía rápida: crear un test nuevo
+
+**Lee primero:** [e2e-projects-guide.md](e2e-projects-guide.md) — documenta cómo tus tests se ejecutan en chromium, webkit y mobile, y cuándo excluir un test de ciertos proyectos.
+
 ## Configuración
 
 - `playwright.config.js`: `testDir` es `./tests/e2e`. 3 proyectos:
@@ -49,7 +53,7 @@ verificar manualmente esos tamaños también.
 
 ### `transform` y el test de estabilidad de layout
 
-Ver [../arquitectura/css.md](../arquitectura/css.md#gotcha-transform-rompe-el-test-de-estabilidad-de-layout).
+Ver [../architecture/css.md](../architecture/css.md#gotcha-transform-rompe-el-test-de-estabilidad-de-layout).
 
 ### Falso positivo de consola en WebKit
 

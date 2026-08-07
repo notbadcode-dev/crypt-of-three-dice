@@ -17,16 +17,17 @@ profundiza en cada área.
 
 | Documento | Contenido |
 |---|---|
-| [arquitectura/estructura.md](arquitectura/estructura.md) | Layout general del repo (carpetas de alto nivel) |
-| [arquitectura/scripts.md](arquitectura/scripts.md) | Organización de `scripts/` y mecánica de `build-runtime.mjs` |
-| [arquitectura/css.md](arquitectura/css.md) | Barrels CSS, theme de colores, tokens de movimiento, tooling |
-| [arquitectura/build.md](arquitectura/build.md) | Build de producción (`build:dist`), bundling CSS, optimización de imágenes |
-| [testing/e2e.md](testing/e2e.md) | Suite Playwright: proyectos, inventario de tests, gotchas conocidos |
+| [architecture/structure.md](architecture/structure.md) | Layout general del repo (carpetas de alto nivel) |
+| [architecture/scripts.md](architecture/scripts.md) | Organización de `scripts/` y mecánica de `build-runtime.mjs` |
+| [architecture/css.md](architecture/css.md) | Barrels CSS, theme de colores, tokens de movimiento, tooling |
+| [architecture/build.md](architecture/build.md) | Build de producción (`build:dist`), bundling CSS, optimización de imágenes |
+| [testing/e2e.md](testing/e2e.md) | Suite Playwright: configuración, inventario de tests, gotchas |
+| [testing/e2e-projects-guide.md](testing/e2e-projects-guide.md) | **LEER PRIMERO** si creo un test nuevo: cómo los tests se ejecutan en chromium, webkit, mobile |
 | [testing/unit.md](testing/unit.md) | Tests unitarios (Node test runner), cobertura, patrones |
 | [ci-cd.md](ci-cd.md) | Jobs de GitHub Actions |
 | [assets.md](assets.md) | Flujo de trabajo de imágenes (WebP) |
-| [convenciones.md](convenciones.md) | Convenciones de estilo/UX y de flujo de trabajo |
-| [deuda-tecnica.md](deuda-tecnica.md) | Deuda técnica conocida y pendiente |
+| [conventions.md](conventions.md) | Convenciones de estilo/UX y de flujo de trabajo |
+| [technical-debt.md](technical-debt.md) | Deuda técnica conocida y pendiente |
 
 ## Comandos útiles (`npm run ...`)
 
@@ -45,5 +46,5 @@ profundiza en cada área.
 | `test:unit` | Tests unitarios (Node test runner) sobre `tests/unit/*.test.mjs` |
 | `serve` | Servidor estático local (`tests/e2e/serve-static.mjs`) |
 
-Ver [arquitectura/scripts.md](arquitectura/scripts.md) y
+Ver [architecture/scripts.md](architecture/scripts.md) y
 [testing/e2e.md](testing/e2e.md) para detalles de cada uno.
