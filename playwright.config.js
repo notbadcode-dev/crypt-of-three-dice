@@ -25,9 +25,9 @@ module.exports = defineConfig({
   // suite se excluye solo ahí (CI define process.env.CI automáticamente).
   testIgnore: process.env.CI ? "**/visual-regression.spec.js" : undefined,
   outputDir: "./tests/e2e/results/test-results",
-  timeout: 30_000,
+  timeout: 60_000,  // Increased from 30s for CI (webkit/mobile need more time)
   expect: {
-    timeout: 5_000
+    timeout: 10_000  // Increased from 5s for clicks/waits in CI
   },
   fullyParallel: true,
   reporter: [

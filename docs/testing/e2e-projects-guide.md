@@ -158,3 +158,35 @@ Los snapshots se guardan con sufijo de SO:
 - `-linux.png` (solo si necesitas Linux)
 
 Commit los nuevos snapshots y CI validará que pasen.
+
+## Gotchas conocidos: WebKit y Mobile en CI
+
+### WebKit CSP warning (no es un error real)
+
+En CI, WebKit ocasionalmente emite:
+```
+"Refused to apply a stylesheet because its hash, its nonce, or 'unsafe-inline' 
+does not appear in the style-src directive of the Content Security Policy."
+```
+
+**No hay CSS inline en el proyecto que justifique esto.** Es un artefacto de WebKit bajo presión de recursos.
+
+**Solución**: Ya está filtrado en `test.afterEach()` de `e2e.spec.js`. El error no bloquea los tests.
+
+### Timeouts ocasionales en webkit/mobile
+
+Webkit y mobile en CI (ubuntu-latest) pueden experimentar timeouts por contención de recursos con otros jobs GitHub Actions.
+
+**Señales de que es un timeout transitorio (no un bug real):**
+- El test pasa localmente: `npm run test:e2e -- --project=webkit`
+- El test pasa en otro intento de CI
+- Solo falla en webkit/mobile, no en chromium
+
+**Mitigaciones aplicadas:**
+- Timeouts globales subidos: 60s (era 30s)
+- Expect timeout: 10s (era 5s)
+- Función `closeTutorialIfOpen()` mejorada con waits y manejo de errores
+
+Si un test falla repetidamente solo en CI webkit/mobile pero pasa localmente, contacta a otro dev para validar
+que no sea un timing race real en la app.
+

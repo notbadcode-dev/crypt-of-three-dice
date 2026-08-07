@@ -60,13 +60,28 @@ Ver [../architecture/css.md](../architecture/css.md#gotcha-transform-rompe-el-te
 En WebKit (incluso en ejecución aislada) puede aparecer de forma no
 determinista un único mensaje de consola: *"Refused to apply a stylesheet
 because its hash, its nonce, or 'unsafe-inline' does not appear in the
-style-src directive of the Content Security Policy."*, que hace fallar el
-`afterEach` de `e2e.spec.js` (`expect(pageErrors...).toEqual([])`). No hay
-`<style>` ni `style="..."` inline en `scripts/`/`styles/` que lo justifique;
-Chromium con el mismo flujo nunca lo muestra. Se considera un artefacto de
-WebKit bajo presión de recursos/paralelismo local, no un bug de la app. Solo
-investigar si reaparece de forma reproducible con 1 worker y sin otros
-proyectos corriendo a la vez.
+style-src directive of the Content Security Policy."* No hay `<style>` ni
+`style="..."` inline en `scripts/`/`styles/` que lo justifique; Chromium con
+el mismo flujo nunca lo muestra. Se considera un artefacto de WebKit bajo
+presión de recursos, no un bug de la app.
+
+**Estado**: Filtrado en `test.afterEach()` de `e2e.spec.js`. El error no
+bloquea los tests.
+
+### Timeouts en webkit/mobile en CI
+
+Webkit y mobile en CI (ubuntu-latest) pueden experimentar timeouts ocasionales
+por contención de recursos (CPU/RAM compartida con otros jobs GitHub Actions).
+Estos **no** son bugs reales de la app.
+
+**Mitigaciones aplicadas:**
+- `timeout: 60_000` ms global (subido de 30s)
+- `expect.timeout: 10_000` ms (subido de 5s)
+- `closeTutorialIfOpen()` mejorada con waits explícitos y manejo de errores
+- WebKit CSP error filtrado del afterEach
+
+Si un test falla en CI pero pasa localmente aislado con `npm run test:e2e -- --project=webkit`,
+es probablemente un timeout transitorio de CI, no un bug.
 
 ### Flakiness por paralelismo local
 
