@@ -1,3 +1,28 @@
+/**
+ * app-state.ts — Global in-memory state
+ *
+ * This file holds the application's global state that lives in memory only.
+ * Data here is LOST on page reload (except for values explicitly saved to localStorage).
+ *
+ * When to modify this file:
+ * - Adding UI state that doesn't need to persist (selectedClass, helpPage, heroDrag, etc.)
+ * - Adding gameplay state that gets discarded between sessions (currentSaveSlot, selectedDieId)
+ * - Adding hooks to the UI layer (registerUi, render, say, toast, etc.)
+ *
+ * State in 'app.state' (GameState): the active game session
+ * - Loaded from localStorage on startup (if saved)
+ * - Can be modified during play
+ * - Persisted to localStorage only when player explicitly saves
+ * - See persistence.ts for save/load logic
+ *
+ * When state is NOT persisted:
+ * - Page reload → app.state becomes null, must load or create new GameState
+ * - Use freshState() from persistence.ts to create a new game
+ * - Use loadGame() from persistence.ts to restore from localStorage
+ *
+ * Note: app.kidMode is persisted separately (see localStorage.getItem(KID_MODE_KEY))
+ */
+
 import { KID_MODE_KEY, classNames, levels } from "../config/app-config.js";
 import type { AppStore, AssignState, ClassId, GameState, LevelConfig, PointState, UiHooks } from "../config/types.js";
 

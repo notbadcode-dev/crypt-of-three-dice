@@ -50,6 +50,25 @@ los `.js` resultantes en un orden fijo (`sourceFiles`), eliminando
   invisibles para las herramientas de tipos/lint (operan sobre módulos ES
   con imports reales, no ven el bundle concatenado).
 
+## Orden de `sourceFiles` — tabla de ejecución
+
+Los archivos en `sourceFiles` dentro de `build-runtime.mjs` se concatenan
+en este orden. **Cada módulo debe estar DESPUÉS de sus dependencias.**
+
+| Orden | Archivo | Rol | Por qué aquí |
+|---|---|---|---|
+| 1 | `config/types.js` | Constantes globales (`CLASS_IDS`, `PHASES`, etc.) | Define valores de ejecución; lo usan todos |
+| 2 | `config/app-config.js` | Configuración (constantes de UI, timings) | Usado por el resto |
+| 3 | `state/app-state.js` | Estado global en memoria | Accedido por core + ui |
+| 4 | `state/persistence.js` | Guardado/carga en localStorage | Depende de app-state |
+| 5–9 | `core/*.js` (audio, combat, dice, game-flow, geometry) | Lógica pura de juego | Independientes entre sí, usados por ui |
+| 10–15 | `ui/*.js` (app-ui, board-ui, hud-ui, modal-manager, save-load-ui, ui-feedback) | Renderizado e interacciones | Usan core + state |
+| 16 | `app-main.js` | Bootstrap (inicializa listeners, llama al entry point) | Se ejecuta último |
+
+**Regla de oro:** si al editar un módulo lo compilado falla en E2E pero
+typecheck/lint pasan, probablemente falta verificar que está en la posición
+correcta de `sourceFiles`.
+
 ## Notas de TypeScript
 
 - `target`/`lib`: ES2024. `module`: `ES2022` con `moduleResolution: bundler`
