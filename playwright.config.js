@@ -7,14 +7,18 @@
  * - webkit: Desktop Safari, 1280×900 (CI: e2e-webkit job)
  * - mobile: iPhone 13 (CI: e2e-mobile job)
  *
+ * Scripts:
+ * - npm run test:e2e              → chromium only (fast, ~2 min)
+ * - npm run test:e2e:all          → chromium + webkit + mobile (full validation, ~7-8 min)
+ * - npm run test:e2e -- --headed  → chromium with UI
+ * - npm run test:e2e:all -- --headed → all projects with UI
+ *
  * CI paralleliza los 3 proyectos en jobs independientes (GitHub Actions).
- * Local: npm run test:e2e -- --project=<chromium|webkit|mobile>
+ * Cada job especifica su proyecto: --project=chromium|webkit|mobile
  *
  * Test suites:
  * - e2e.spec.js: 34 tests funcionales (@smoke, @regression, @a11y, @persistence, @integration)
- *   → Corre en todos los proyectos
- * - visual-regression.spec.js: 8 tests visuales
- *   → Corre en todos (local); excluído en CI por baseline (-darwin.png vs -linux.png)
+ * - visual-regression.spec.js: 8 tests visuales (excluidos en CI por baseline -linux.png vs -darwin.png)
  */
 const { defineConfig, devices } = require("@playwright/test");
 
