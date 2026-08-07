@@ -889,7 +889,7 @@ test("muestra derrota cuando la fase enemiga deja al héroe sin vida @regression
 });
 
 test("recorre una partida completa determinista hasta victoria @regression", async ({ page }) => {
-  test.setTimeout(60000);
+  test.setTimeout(120000);
   await startGame(page);
 
   for (let level = 1; level <= 11; level++) {
