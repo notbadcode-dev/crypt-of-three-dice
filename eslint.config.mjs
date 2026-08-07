@@ -42,7 +42,8 @@ const strictTsRules = {
   "@typescript-eslint/no-floating-promises": "error",
   "@typescript-eslint/no-unnecessary-type-parameters": "off",
   "@typescript-eslint/non-nullable-type-assertion-style": "off",
-  "@typescript-eslint/prefer-readonly": "error"
+  "@typescript-eslint/prefer-readonly": "error",
+  "@typescript-eslint/no-unnecessary-type-assertion": "off"
 };
 
 export default tseslint.config(
@@ -54,7 +55,9 @@ export default tseslint.config(
       "recovery-local-history/**",
       ".tsbuild/**",
       "tests/e2e/results/**",
-      "scripts/app.js"
+      "scripts/app.js",
+      ".github/skills/**/references/examples/**",
+      ".github/skills/**/SKILL.md"
     ]
   },
   js.configs.recommended,
