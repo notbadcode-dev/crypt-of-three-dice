@@ -151,8 +151,8 @@
 }
 
 .enemy-portrait {
-  width: 82%;
-  height: 82%;
+  width: 95%;
+  height: 95%;
   object-fit: contain;
   object-position: center bottom;
   image-rendering: pixelated;
