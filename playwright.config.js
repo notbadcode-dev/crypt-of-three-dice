@@ -1,4 +1,21 @@
 // @ts-check
+/**
+ * Playwright E2E Configuration
+ *
+ * Proyectos y ejecución:
+ * - chromium: Desktop Chrome, 1440×900 (CI: e2e-chromium job)
+ * - webkit: Desktop Safari, 1280×900 (CI: e2e-webkit job)
+ * - mobile: iPhone 13 (CI: e2e-mobile job)
+ *
+ * CI paralleliza los 3 proyectos en jobs independientes (GitHub Actions).
+ * Local: npm run test:e2e -- --project=<chromium|webkit|mobile>
+ *
+ * Test suites:
+ * - e2e.spec.js: 34 tests funcionales (@smoke, @regression, @a11y, @persistence, @integration)
+ *   → Corre en todos los proyectos
+ * - visual-regression.spec.js: 8 tests visuales
+ *   → Corre en todos (local); excluído en CI por baseline (-darwin.png vs -linux.png)
+ */
 const { defineConfig, devices } = require("@playwright/test");
 
 module.exports = defineConfig({

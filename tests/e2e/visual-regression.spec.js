@@ -1,3 +1,17 @@
+/**
+ * Visual regression tests (screenshots)
+ *
+ * Cobertura de proyectos:
+ * - @chromium: ✓ (todos los tests, localmente en mac con snapshots -darwin.png)
+ * - @webkit: ✓ (todos los tests)
+ * - @mobile: ✓ (tests Mobile: board-layout, sidebar, cascade)
+ *
+ * En CI: se excluyen en ubuntu-latest (process.env.CI) porque los snapshots
+ * son -darwin.png y la CI corre en linux. Ver playwright.config.js.
+ *
+ * Regenerar snapshots tras cambios visuales:
+ *   npx playwright test --project=chromium tests/e2e/visual-regression.spec.js --update-snapshots
+ */
 const path = require("node:path");
 const { test, expect } = require("@playwright/test");
 

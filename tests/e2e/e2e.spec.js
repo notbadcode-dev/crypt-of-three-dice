@@ -1,3 +1,13 @@
+/**
+ * Functional e2e tests
+ *
+ * Ejecución en proyectos (de .github/workflows/ci.yml):
+ * - @chromium: todos estos tests (via e2e-chromium job)
+ * - @webkit: todos estos tests (via e2e-webkit job)
+ * - @mobile: todos estos tests (via e2e-mobile job)
+ *
+ * En paralelo en CI. Localmente: npm run test:e2e -- --project=chromium
+ */
 const path = require("node:path");
 const { test, expect } = require("@playwright/test");
 
