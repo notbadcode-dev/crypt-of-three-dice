@@ -68,8 +68,46 @@ jobs:
           path: tests/unit/results
           retention-days: 7
 
-  e2e:
-    name: Tests e2e
+  e2e-chromium:
+    name: Tests e2e (Chromium)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e -- --project=chromium
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report-chromium
+          path: tests/e2e/results/html-report
+          retention-days: 7
+
+  e2e-webkit:
+    name: Tests e2e (WebKit)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps webkit
+      - run: npm run test:e2e -- --project=webkit
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-report-webkit
+          path: tests/e2e/results/html-report
+          retention-days: 7
+
+  e2e-mobile:
+    name: Tests e2e (Mobile)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -79,11 +117,11 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium webkit
-      - run: npm run test:e2e
+      - run: npm run test:e2e -- --project=mobile
       - uses: actions/upload-artifact@v4
         if: failure()
         with:
-          name: playwright-report
+          name: playwright-report-mobile
           path: tests/e2e/results/html-report
           retention-days: 7
 
