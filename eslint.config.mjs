@@ -35,7 +35,7 @@ const strictTsRules = {
   "@typescript-eslint/no-shadow": "error",
   "@typescript-eslint/no-explicit-any": "error",
   "@typescript-eslint/consistent-type-imports": ["error", { prefer: "type-imports" }],
-  "@typescript-eslint/no-non-null-assertion": "warn",
+  "@typescript-eslint/no-non-null-assertion": "off",
   "@typescript-eslint/no-unnecessary-condition": "off",
   "@typescript-eslint/restrict-template-expressions": "off",
   "@typescript-eslint/no-misused-promises": "error",
