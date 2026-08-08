@@ -419,11 +419,10 @@
 /* Enemy stats panel positioned below the board */
 .enemy-stats-panel {
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -140px;
-  width: 87.3%;
-  max-width: 660px;
+  left: 5%;
+  right: 5%;
+  bottom: 0.5%;
+  width: auto;
   height: auto;
   z-index: 3;
   display: grid;
