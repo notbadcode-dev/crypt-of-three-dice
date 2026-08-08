@@ -19,8 +19,11 @@
    en el repo.
 4. Regenerar los snapshots de Playwright si la imagen aparece en capturas
    de regresión visual:
-   `npx playwright test --project=chromium tests/e2e/visual-regression.spec.js --update-snapshots`
-   (repetir para `webkit`/`mobile` si aplica).
+   ```bash
+   npm run test:e2e -- tests/e2e/visual-regression.spec.js --update-snapshots
+   npm run test:e2e:webkit -- tests/e2e/visual-regression.spec.js --update-snapshots
+   npm run test:e2e:mobile -- tests/e2e/visual-regression.spec.js --update-snapshots
+   ```
 
 ## Referencias actuales notables
 

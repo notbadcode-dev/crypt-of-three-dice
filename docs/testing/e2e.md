@@ -80,7 +80,7 @@ Estos **no** son bugs reales de la app.
 - `closeTutorialIfOpen()` mejorada con waits explícitos y manejo de errores
 - WebKit CSP error filtrado del afterEach
 
-Si un test falla en CI pero pasa localmente aislado con `npm run test:e2e -- --project=webkit`,
+Si un test falla en CI pero pasa localmente aislado con `npm run test:e2e:webkit`,
 es probablemente un timeout transitorio de CI, no un bug.
 
 ### Flakiness por paralelismo local

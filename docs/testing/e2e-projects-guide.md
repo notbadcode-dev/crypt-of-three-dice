@@ -28,13 +28,18 @@ e2e-mobile:    # Instala chromium+webkit, corre --project=mobile
 ## Proyectos locales
 
 ```bash
-# Correr un proyecto específico
-npm run test:e2e -- --project=chromium
-npm run test:e2e -- --project=webkit
-npm run test:e2e -- --project=mobile
+# Correr un proyecto específico (explicit scripts avoid argument confusion)
+npm run test:e2e              # chromium only (rápido, ~40s, default para dev)
+npm run test:e2e:webkit       # webkit only (~5-7 min, desktop Safari)
+npm run test:e2e:mobile       # mobile only (~5-7 min, iPhone 13)
 
-# Correr todos (corre los 3 secuencialmente)
-npm run test:e2e
+# Correr todos los proyectos en secuencia
+npm run test:e2e:all          # 3 proyectos, ~7-8 min
+
+# Pasar flags adicionales (grep, debug, etc.)
+npm run test:e2e -- --grep @smoke      # chromium + grep filter
+npm run test:e2e:webkit -- --grep @smoke  # webkit + grep filter
+npm run test:e2e -- --debug            # chromium + debug mode
 ```
 
 ## Cuándo excluir un test de un proyecto
@@ -123,11 +128,13 @@ Razones:
    - No → Usa `test.skip(testInfo.project.name !== "...")` 
 
 2. ¿Necesitas debugging?
-   - `npm run test:e2e -- --project=chromium -g "nombre del test"`
+   - `npm run test:e2e -- -g "nombre del test"` (chromium, fast)
+   - `npm run test:e2e:webkit -- -g "nombre del test"` (webkit)
    - Esto corre **solo 1 test, 1 proyecto**
 
 3. ¿Antes de mergear?
-   - Verifica que pasa localmente: `npm run test:e2e -- --project=chromium`
+   - Verifica que pasa localmente: `npm run test:e2e` (chromium rápido)
+   - `npm run test:e2e:all` para validar todos los proyectos
    - En CI, los 3 jobs lo validarán
 
 ## Validación en CI
@@ -148,16 +155,17 @@ Si e2e falla, se notifica en la PR pero **no bloquea deploy**.
 
 ```bash
 # Regenerar snapshots en chromium local
-npx playwright test --project=chromium \
-  tests/e2e/visual-regression.spec.js \
-  --update-snapshots
+npm run test:e2e -- tests/e2e/visual-regression.spec.js --update-snapshots
+
+# O específicamente en webkit
+npm run test:e2e:webkit -- tests/e2e/visual-regression.spec.js --update-snapshots
 ```
 
 Los snapshots se guardan con sufijo de SO:
 - `-darwin.png` (macOS, tu máquina)
 - `-linux.png` (solo si necesitas Linux)
 
-Commit los nuevos snapshots y CI validará que pasen.
+Commit los nuevos snapshots y CI validará que pasen en todos los proyectos.
 
 ## Gotchas conocidos: WebKit y Mobile en CI
 
@@ -192,7 +200,7 @@ Webkit y mobile en CI (ubuntu-latest) experimentan timeouts por:
 **Si un test timeout en CI pero pasa localmente:**
 ```bash
 # Verificar aislado en tu máquina
-npm run test:e2e -- --project=webkit -g "recorre una partida"
+npm run test:e2e:webkit -- -g "recorre una partida"
 ```
 
 Si pasa en local pero falla en CI repetidamente, es contención de recursos de GitHub Actions, no bug de la app.
